@@ -8,3 +8,6 @@ pluginManagement {
 }
 
 rootProject.name = "android-hilt"
+
+include(":hilt:extensions")
+include(":hilt:processor")
