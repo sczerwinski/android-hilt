@@ -1,0 +1,11 @@
+# IntelliJ:
+/.idea
+*.iml
+
+# Gradle:
+.gradle
+/build
+/local.properties
+
+# Mac OS:
+.DS_Store
