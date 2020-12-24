@@ -18,7 +18,7 @@
 package it.czerwinski.android.hilt.processor
 
 import com.squareup.javapoet.ClassName
-import it.czerwinski.android.hilt.Primary
+import it.czerwinski.android.hilt.annotations.Primary
 import javax.annotation.processing.AbstractProcessor
 import javax.annotation.processing.RoundEnvironment
 import javax.lang.model.element.Element

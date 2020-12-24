@@ -15,7 +15,7 @@
  *
  */
 
-package it.czerwinski.android.hilt
+package it.czerwinski.android.hilt.annotations
 
 import kotlin.reflect.KClass
 

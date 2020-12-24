@@ -18,7 +18,7 @@
 package it.czerwinski.android.hilt.processor
 
 import dagger.hilt.components.SingletonComponent
-import it.czerwinski.android.hilt.Primary
+import it.czerwinski.android.hilt.annotations.Primary
 import javax.inject.Inject
 import javax.inject.Qualifier
 import javax.inject.Singleton

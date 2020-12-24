@@ -1,15 +1,38 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm")
-    id("io.gitlab.arturbosch.detekt") version "1.14.2"
+    id("com.android.library")
+    kotlin("android")
+    id("io.gitlab.arturbosch.detekt") version "1.15.0"
     id("org.jetbrains.dokka")
     `maven-publish`
     signing
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+android {
+
+    compileSdkVersion(30)
+
+    defaultConfig {
+        minSdkVersion(14)
+        targetSdkVersion(30)
+        versionCode = 1
+        versionName = "${project.version}"
+    }
+
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = false
+        }
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    api(project(":hilt:annotations"))
 }
 
 tasks {
@@ -18,13 +41,13 @@ tasks {
 
     artifacts {
         archives(createJavadocJar(dokkaJavadoc))
-        archives(createSourcesJar(sourceSets.named("main").get().java.srcDirs))
+        archives(createSourcesJar(android.sourceSets.named("main").get().java.srcDirs))
     }
 }
 
 afterEvaluate {
     publishing {
-        publications { registerJarPublication(project) }
+        publications { registerAarPublication(project) }
         repositories { sonatype(project) }
     }
     signing { signAllMavenPublications(project, publishing) }
