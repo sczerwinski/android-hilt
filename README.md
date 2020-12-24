@@ -29,6 +29,26 @@
   ```
 </details>
 
+### Property Delegation
+
+With this library, it is possible to delegate properties to additional objects.
+
+#### `dagger.Lazy`
+
+```kotlin
+val lazy: dagger.Lazy<String>
+
+val property: String by lazy
+```
+
+#### `javax.inject.Provider`
+
+```kotlin
+val intProvider: Provider<Int>
+
+val property: Int by intProvider
+```
+
 ### Generating Modules With Primary Implementations
 
 #### `@Primary`

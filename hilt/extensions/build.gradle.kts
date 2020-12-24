@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("com.android.library")
     kotlin("android")
+    id("de.mannodermaus.android-junit5")
     id("io.gitlab.arturbosch.detekt") version "1.15.0"
     id("org.jetbrains.dokka")
     `maven-publish`
@@ -33,6 +34,12 @@ android {
 
 dependencies {
     api(project(":hilt:annotations"))
+
+    implementation("com.google.dagger:hilt-android:2.30.1-alpha")
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.0")
+    testImplementation("io.mockk:mockk:1.10.3-jdk8")
 }
 
 tasks {
