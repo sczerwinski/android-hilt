@@ -2,6 +2,18 @@
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+## [1.0.0-ALPHA2]
+### Added
 - Annotation processor generating Hilt modules providing instances from annotated factory methods.
 
 ### Changed
