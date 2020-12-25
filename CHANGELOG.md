@@ -1,17 +1,9 @@
 # Changelog
 
 ## [Unreleased]
-### Added
-
 ### Changed
+- **BREAKING CHANGE:** Rename `superclass` to `supertype`.
 
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
 ## [1.0.0-ALPHA1]
 ### Added
 - Property delegation to:

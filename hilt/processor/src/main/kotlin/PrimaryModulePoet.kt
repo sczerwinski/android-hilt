@@ -69,6 +69,6 @@ object PrimaryModulePoet {
             }
             .addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT)
             .addParameter(binding.annotatedClassName, "implementation")
-            .returns(binding.superclassClassName)
+            .returns(binding.supertypeClassName)
             .build()
 }

@@ -21,7 +21,7 @@ import com.squareup.javapoet.ClassName
 
 data class PrimaryBinding(
     val annotatedClassName: ClassName,
-    val superclassClassName: ClassName,
+    val supertypeClassName: ClassName,
     val componentClassName: ClassName,
     val scopeClassName: ClassName?,
     val qualifierClassName: ClassName?

@@ -52,7 +52,7 @@ val property: Int by intProvider
 ### Generating Modules With Primary Implementations
 
 #### `@Primary`
-Marks primary implementation of the given superclass.
+Marks primary implementation of the given supertype.
 
 For example:
 ```kotlin
@@ -62,20 +62,20 @@ annotation class Offline
 interface Repository
 
 @Primary(
-    superclass = Repository::class,
+    supertype = Repository::class,
     component = SingletonComponent::class
 )
 class RepositoryA @Inject constructor() : Repository
 
 @Primary(
-    superclass = Repository::class,
+    supertype = Repository::class,
     component = SingletonComponent::class,
     scope = Singleton::class
 )
 class RepositoryB @Inject constructor() : Repository
 
 @Primary(
-    superclass = Repository::class,
+    supertype = Repository::class,
     component = SingletonComponent::class,
     qualifier = Offline::class
 )

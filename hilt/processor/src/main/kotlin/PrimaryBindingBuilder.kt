@@ -26,7 +26,7 @@ class PrimaryBindingBuilder(
     private val annotatedClassName: ClassName
 ) : SimpleAnnotationValueVisitor7<Unit, String>() {
 
-    private var superclassClassName: TypeName? = null
+    private var supertypeClassName: TypeName? = null
     private var componentClassName: TypeName? = null
     private var scopeClassName: TypeName? = null
     private var qualifierClassName: TypeName? = null
@@ -34,7 +34,7 @@ class PrimaryBindingBuilder(
     override fun visitType(typeMirror: TypeMirror, key: String) {
         val className = TypeName.get(typeMirror)
         when (key) {
-            "superclass" -> superclassClassName = className
+            "supertype" -> supertypeClassName = className
             "component" -> componentClassName = className
             "scope" -> scopeClassName = className
             "qualifier" -> qualifierClassName = className
@@ -43,7 +43,7 @@ class PrimaryBindingBuilder(
 
     fun build(): PrimaryBinding = PrimaryBinding(
         annotatedClassName = annotatedClassName,
-        superclassClassName = requireNotNull(superclassClassName as? ClassName),
+        supertypeClassName = requireNotNull(supertypeClassName as? ClassName),
         componentClassName = requireNotNull(componentClassName as? ClassName),
         scopeClassName = scopeClassName as? ClassName,
         qualifierClassName = qualifierClassName as? ClassName,
