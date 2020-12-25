@@ -40,7 +40,7 @@ class HiltModulesGenerator : AbstractProcessor() {
             .groupBy { primaryBinding -> primaryBinding.packageName to primaryBinding.componentClassName }
             .forEach { (groupingKey, bindings) ->
                 val (packageName, componentClassName) = groupingKey
-                PrimaryModulePoet.generatePrimaryModule(packageName, componentClassName, bindings, processingEnv.filer)
+                PrimaryModulePoet.generateModule(packageName, componentClassName, bindings, filer)
             }
         return true
     }

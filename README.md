@@ -73,7 +73,7 @@ will generate module:
 ```java
 @Module
 @InstallIn(SingletonComponent.class)
-public interface SingletonComponentPrimaryBindingsModule {
+public interface SingletonComponent_PrimaryModule {
 
     @Binds
     Repository bindRepositoryA(RepositoryA implementation);

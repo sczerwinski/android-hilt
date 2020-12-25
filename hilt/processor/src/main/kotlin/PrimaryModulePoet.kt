@@ -30,7 +30,7 @@ import javax.lang.model.element.Modifier
 
 object PrimaryModulePoet {
 
-    fun generatePrimaryModule(
+    fun generateModule(
         packageName: String,
         componentClassName: ClassName,
         bindings: List<PrimaryBinding>,
@@ -49,7 +49,7 @@ object PrimaryModulePoet {
         componentClassName: ClassName,
         bindings: List<PrimaryBinding>
     ): TypeSpec =
-        TypeSpec.interfaceBuilder(ClassName.get(packageName, "${componentClassName.simpleName()}PrimaryBindingsModule"))
+        TypeSpec.interfaceBuilder(ClassName.get(packageName, "${componentClassName.simpleName()}_PrimaryModule"))
             .addAnnotation(Module::class.java)
             .addAnnotation(
                 AnnotationSpec.builder(InstallIn::class.java)
