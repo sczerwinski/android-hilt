@@ -19,13 +19,19 @@ package it.czerwinski.android.hilt.processor
 
 import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
+import com.squareup.javapoet.ParameterSpec
+import com.squareup.javapoet.TypeName
 
-data class PrimaryBinding(
-    val annotatedClassName: ClassName,
-    val supertypeClassName: ClassName,
+data class FactoryMethodModel(
+    val methodName: String,
+    val isStatic: Boolean,
+    val parameters: List<ParameterSpec>,
+    val returnTypeName: TypeName,
+    val enclosingClassName: ClassName,
+    val enclosingElementKind: KotlinElementKind,
     val componentClassName: ClassName,
     val annotations: List<AnnotationSpec>
 ) {
 
-    val packageName: String = annotatedClassName.packageName()
+    val packageName: String = enclosingClassName.packageName()
 }

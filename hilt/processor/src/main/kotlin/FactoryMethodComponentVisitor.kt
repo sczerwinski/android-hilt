@@ -17,15 +17,17 @@
 
 package it.czerwinski.android.hilt.processor
 
-import com.squareup.javapoet.AnnotationSpec
-import com.squareup.javapoet.ClassName
+import com.squareup.javapoet.TypeName
+import javax.lang.model.type.TypeMirror
+import javax.lang.model.util.SimpleAnnotationValueVisitor7
 
-data class PrimaryBinding(
-    val annotatedClassName: ClassName,
-    val supertypeClassName: ClassName,
-    val componentClassName: ClassName,
-    val annotations: List<AnnotationSpec>
-) {
+class FactoryMethodComponentVisitor : SimpleAnnotationValueVisitor7<Unit, String>() {
 
-    val packageName: String = annotatedClassName.packageName()
+    var componentClassName: TypeName? = null
+        private set
+
+    override fun visitType(typeMirror: TypeMirror, key: String) {
+        val className = TypeName.get(typeMirror)
+        if (key == "component") componentClassName = className
+    }
 }
