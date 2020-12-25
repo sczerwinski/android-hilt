@@ -63,12 +63,9 @@ object PrimaryModulePoet {
     private fun generateBindingMethod(binding: PrimaryBinding): MethodSpec =
         MethodSpec.methodBuilder("bind${binding.annotatedClassName.simpleName()}")
             .addAnnotation(Binds::class.java)
-            .apply {
-                if (binding.scopeClassName != null) addAnnotation(binding.scopeClassName)
-                if (binding.qualifierClassName != null) addAnnotation(binding.qualifierClassName)
-            }
+            .addAnnotations(binding.annotations.map(AnnotationSpec::get))
             .addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT)
             .addParameter(binding.annotatedClassName, "implementation")
-            .returns(binding.superclassClassName)
+            .returns(binding.supertypeClassName)
             .build()
 }

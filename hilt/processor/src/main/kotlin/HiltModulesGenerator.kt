@@ -21,6 +21,8 @@ import com.squareup.javapoet.ClassName
 import it.czerwinski.android.hilt.annotations.Primary
 import javax.annotation.processing.AbstractProcessor
 import javax.annotation.processing.RoundEnvironment
+import javax.inject.Qualifier
+import javax.inject.Scope
 import javax.lang.model.element.Element
 import javax.lang.model.element.TypeElement
 
@@ -46,17 +48,23 @@ class HiltModulesGenerator : AbstractProcessor() {
     private fun createPrimaryBindings(element: Element): PrimaryBinding {
         val elementClassName = ClassName.get(element.packageName(), element.simpleName())
         val primaryAnnotationMirror = element.annotationMirrors.find { annotationMirror ->
-            val annotationElement = annotationMirror.annotationType.asElement()
-            val annotationPackage = annotationElement.packageName()
-            val annotationName = annotationElement.simpleName()
-            annotationPackage == primaryAnnotationPackageName && annotationName == primaryAnnotationName
+            annotationMirror.annotationType.asElement().isOfType(primaryAnnotationClass)
+        }
+        val annotationsToCopy = element.annotationMirrors.filter { annotationMirror ->
+            annotationMirror.annotationType.asElement().annotationMirrors.any {
+                val annotationElement = it.annotationType.asElement()
+                annotationElement.isOfType(scopeAnnotationClass) || annotationElement.isOfType(qualifierAnnotationClass)
+            }
         }
         val builder = PrimaryBindingBuilder(elementClassName)
         primaryAnnotationMirror?.elementValues?.forEach { (element, value) ->
             value.accept(builder, element.simpleName.toString())
         }
-        return builder.build()
+        return builder.build(annotations = annotationsToCopy)
     }
+
+    private fun Element.isOfType(type: Class<*>): Boolean =
+        packageName() == type.`package`.name && simpleName() == type.simpleName
 
     private fun Element.packageName(): String = processingEnv.elementUtils.getPackageOf(this).toString()
 
@@ -64,7 +72,7 @@ class HiltModulesGenerator : AbstractProcessor() {
 
     companion object {
         private val primaryAnnotationClass = Primary::class.java
-        private val primaryAnnotationPackageName = primaryAnnotationClass.`package`.name
-        private val primaryAnnotationName = primaryAnnotationClass.simpleName
+        private val scopeAnnotationClass = Scope::class.java
+        private val qualifierAnnotationClass = Qualifier::class.java
     }
 }

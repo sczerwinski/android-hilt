@@ -20,10 +20,11 @@ package it.czerwinski.android.hilt.annotations
 import kotlin.reflect.KClass
 
 /**
- * Marks primary implementation of the given [superclass].
+ * Marks primary implementation of the given [supertype].
  *
- * The implementation will be bound to the given superclass in the given [component]. Optionally, it will be annotated
- * with the given [scope] and/or [qualifier].
+ * The implementation will be bound to the given supertype in the given [component].
+ *
+ * Any annotations annotated with `@Scope` or `@Qualifier` will also annotate the resulting `@Binds` method.
  */
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.SOURCE)
@@ -31,30 +32,16 @@ import kotlin.reflect.KClass
 annotation class Primary(
 
     /**
-     * Superclass for which the primary implementation should be bound.
+     * Supertype for which the primary implementation should be bound.
      *
      * Must be assignable from the class annotated with [Primary].
      */
-    val superclass: KClass<*>,
+    val supertype: KClass<*>,
 
     /**
      * Hilt component in which the binding should be installed.
      *
      * Must be a type annotated with `@DefineComponent`.
      */
-    val component: KClass<*>,
-
-    /**
-     * Scope for which the primary implementation is provided.
-     *
-     * Must be an annotation class annotated with `@Scope`.
-     */
-    val scope: KClass<*> = Unscoped::class,
-
-    /**
-     * Scope for which the primary implementation is provided.
-     *
-     * Must be an annotation class annotated with `@Qualifier`.
-     */
-    val qualifier: KClass<*> = Unqualified::class
+    val component: KClass<*>
 )
