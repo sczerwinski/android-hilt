@@ -19,6 +19,7 @@ package it.czerwinski.android.hilt.processor
 
 import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.TypeName
+import javax.lang.model.element.AnnotationMirror
 import javax.lang.model.type.TypeMirror
 import javax.lang.model.util.SimpleAnnotationValueVisitor7
 
@@ -28,24 +29,19 @@ class PrimaryBindingBuilder(
 
     private var supertypeClassName: TypeName? = null
     private var componentClassName: TypeName? = null
-    private var scopeClassName: TypeName? = null
-    private var qualifierClassName: TypeName? = null
 
     override fun visitType(typeMirror: TypeMirror, key: String) {
         val className = TypeName.get(typeMirror)
         when (key) {
             "supertype" -> supertypeClassName = className
             "component" -> componentClassName = className
-            "scope" -> scopeClassName = className
-            "qualifier" -> qualifierClassName = className
         }
     }
 
-    fun build(): PrimaryBinding = PrimaryBinding(
+    fun build(annotations: List<AnnotationMirror>): PrimaryBinding = PrimaryBinding(
         annotatedClassName = annotatedClassName,
         supertypeClassName = requireNotNull(supertypeClassName as? ClassName),
         componentClassName = requireNotNull(componentClassName as? ClassName),
-        scopeClassName = scopeClassName as? ClassName,
-        qualifierClassName = qualifierClassName as? ClassName,
+        annotations = annotations
     )
 }

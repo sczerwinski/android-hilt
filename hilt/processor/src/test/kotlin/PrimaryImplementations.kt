@@ -20,30 +20,18 @@ package it.czerwinski.android.hilt.processor
 import dagger.hilt.components.SingletonComponent
 import it.czerwinski.android.hilt.annotations.Primary
 import javax.inject.Inject
-import javax.inject.Qualifier
+import javax.inject.Named
 import javax.inject.Singleton
-
-@Qualifier
-annotation class Offline
 
 interface Repository
 
-@Primary(
-    supertype = Repository::class,
-    component = SingletonComponent::class
-)
+@Primary(supertype = Repository::class, component = SingletonComponent::class)
 class RepositoryA @Inject constructor() : Repository
 
-@Primary(
-    supertype = Repository::class,
-    component = SingletonComponent::class,
-    scope = Singleton::class
-)
+@Primary(supertype = Repository::class, component = SingletonComponent::class)
+@Singleton
 class RepositoryB @Inject constructor() : Repository
 
-@Primary(
-    supertype = Repository::class,
-    component = SingletonComponent::class,
-    qualifier = Offline::class
-)
+@Primary(supertype = Repository::class, component = SingletonComponent::class)
+@Named("offline")
 class RepositoryC @Inject constructor() : Repository
