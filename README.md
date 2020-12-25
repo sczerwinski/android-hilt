@@ -49,7 +49,7 @@ val intProvider: Provider<Int>
 val property: Int by intProvider
 ```
 
-### Generating Modules With Primary Implementations
+### Generating Hilt Modules
 
 #### `@Primary`
 Marks primary implementation of the given supertype.
@@ -85,6 +85,71 @@ public interface SingletonComponent_PrimaryModule {
     @Binds
     @Named("offline")
     Repository bindRepositoryC(RepositoryC implementation);
+}
+```
+
+#### `@FactoryMethod`
+Marks factory method for the class returned by the annotated function.
+
+For example, for a Room database:
+```kotlin
+@Database(
+    entities = [
+        User::class
+    ],
+    version = 1
+)
+abstract class AppDatabase : RoomDatabase() {
+
+    @FactoryMethod(component = SingletonComponent::class)
+    @Singleton
+    abstract fun usersDao(): UsersDao
+}
+```
+and a database factory:
+```kotlin
+interface DatabaseFactory {
+
+    @FactoryMethod(component = SingletonComponent::class)
+    @Singleton
+    fun createDatabase(): AppDatabase
+}
+```
+and a database factory provider:
+```kotlin
+object DatabaseFactoryProvider {
+
+    @FactoryMethod(component = SingletonComponent::class)
+    fun createDatabaseFactory(
+        @ApplicationContext context: Context
+    ): DatabaseFactory =
+        if (BuildConfig.DEBUG) TestDatabaseFactory(context)
+        else ProductionDatabaseFactory(context)
+}
+```
+annotation processor will generate module:
+```java
+@Module
+@InstallIn(SingletonComponent.class)
+public class SingletonComponent_FactoryMethodsModule {
+
+    @Provides
+    public DatabaseFactory databaseFactoryProviderCreateDatabaseFactory(
+            @ApplicationContext Context context) {
+        return DatabaseFactoryProvider.INSTANCE.createDatabaseFactory(context);
+    }
+
+    @Provides
+    @Singleton
+    public AppDatabase databaseFactoryCreateDatabase(DatabaseFactory $receiver) {
+        return $receiver.createDatabase();
+    }
+
+    @Provides
+    @Singleton
+    public UsersDao appDatabaseUsersDao(AppDatabase $receiver) {
+        return $receiver.usersDao();
+    }
 }
 ```
 

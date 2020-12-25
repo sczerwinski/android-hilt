@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### Added
+- Annotation processor generating Hilt modules providing instances from annotated factory methods.
+
 ### Changed
 - **BREAKING CHANGE:** Rename `superclass` to `supertype`.
 - **BREAKING CHANGE:** Copy `@Scope` and `@Qualifier` annotations from the `@Primary`-annotated type
