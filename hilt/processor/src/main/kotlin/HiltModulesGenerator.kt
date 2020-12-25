@@ -27,6 +27,7 @@ import javax.annotation.processing.AbstractProcessor
 import javax.annotation.processing.RoundEnvironment
 import javax.inject.Qualifier
 import javax.inject.Scope
+import javax.lang.model.element.AnnotationMirror
 import javax.lang.model.element.Element
 import javax.lang.model.element.ElementKind
 import javax.lang.model.element.ExecutableElement
@@ -63,20 +64,13 @@ class HiltModulesGenerator : AbstractProcessor() {
 
     private fun createPrimaryBindings(element: Element): PrimaryBinding {
         val elementClassName = element.className()
-        val primaryAnnotationMirror = element.annotationMirrors.find { annotationMirror ->
-            annotationMirror.annotationType.asElement().isOfType(primaryAnnotationClass)
-        }
-        val annotationsToCopy = element.annotationMirrors.filter { annotationMirror ->
-            annotationMirror.annotationType.asElement().annotationMirrors.any {
-                val annotationElement = it.annotationType.asElement()
-                annotationElement.isOfType(scopeAnnotationClass) || annotationElement.isOfType(qualifierAnnotationClass)
-            }
-        }
+        val primaryAnnotationMirror = element.findAnnotationOfType<Primary>()
+        val annotationsToCopy = element.scopesAndQualifiers()
         val builder = PrimaryBindingBuilder(elementClassName)
         primaryAnnotationMirror?.elementValues?.forEach { (element, value) ->
             value.accept(builder, element.simpleName.toString())
         }
-        return builder.build(annotations = annotationsToCopy)
+        return builder.build(annotations = annotationsToCopy.map(AnnotationSpec::get))
     }
 
     private fun Element.className(): ClassName = ClassName.get(packageName(), simpleName())
@@ -85,21 +79,25 @@ class HiltModulesGenerator : AbstractProcessor() {
 
     private fun Element.simpleName(): String = simpleName.toString()
 
+    private inline fun <reified T> Element.findAnnotationOfType() = annotationMirrors.find { annotationMirror ->
+        annotationMirror.annotationType.asElement().isOfType(T::class.java)
+    }
+
     private fun Element.isOfType(type: Class<*>): Boolean =
         packageName() == type.`package`.name && simpleName() == type.simpleName
+
+    private fun Element.scopesAndQualifiers(): List<AnnotationMirror> = annotationMirrors.filter { annotationMirror ->
+        annotationMirror.annotationType.asElement().annotationMirrors.any {
+            val annotationElement = it.annotationType.asElement()
+            annotationElement.isOfType(scopeAnnotationClass) || annotationElement.isOfType(qualifierAnnotationClass)
+        }
+    }
 
     private fun createFactoryMethods(element: Element): FactoryMethodModel {
         require(value = element.kind == ElementKind.METHOD) { "@FactoryMethod is not a method" }
         val annotatedMethodElement = element as ExecutableElement
-        val factoryMethodAnnotationMirror = element.annotationMirrors.find { annotationMirror ->
-            annotationMirror.annotationType.asElement().isOfType(factoryMethodAnnotationClass)
-        }
-        val annotationsToCopy = element.annotationMirrors.filter { annotationMirror ->
-            annotationMirror.annotationType.asElement().annotationMirrors.any {
-                val annotationElement = it.annotationType.asElement()
-                annotationElement.isOfType(scopeAnnotationClass) || annotationElement.isOfType(qualifierAnnotationClass)
-            }
-        }
+        val factoryMethodAnnotationMirror = element.findAnnotationOfType<FactoryMethod>()
+        val annotationsToCopy = element.scopesAndQualifiers()
         val visitor = FactoryMethodComponentVisitor()
         factoryMethodAnnotationMirror?.elementValues?.forEach { (element, value) ->
             value.accept(visitor, element.simpleName.toString())
@@ -109,22 +107,16 @@ class HiltModulesGenerator : AbstractProcessor() {
             methodName = element.simpleName.toString(),
             isStatic = Modifier.STATIC in element.modifiers,
             parameters = annotatedMethodElement.parameters.map { parameter ->
-                val paramAnnotationsToCopy = parameter.annotationMirrors.filter { annotationMirror ->
-                    annotationMirror.annotationType.asElement().annotationMirrors.any {
-                        val annotationElement = it.annotationType.asElement()
-                        annotationElement.isOfType(scopeAnnotationClass) ||
-                            annotationElement.isOfType(qualifierAnnotationClass)
-                    }
-                }
+                val paramAnnotationsToCopy = parameter.scopesAndQualifiers()
                 ParameterSpec.builder(TypeName.get(parameter.asType()), parameter.simpleName())
-                    .addAnnotations(paramAnnotationsToCopy.map { AnnotationSpec.get(it) })
+                    .addAnnotations(paramAnnotationsToCopy.map(AnnotationSpec::get))
                     .build()
             },
             returnTypeName = TypeName.get(annotatedMethodElement.returnType),
             enclosingClassName = enclosingElement.className(),
             enclosingElementKind = KotlinElementKind.forElement(enclosingElement),
             componentClassName = visitor.componentClassName as ClassName,
-            annotations = annotationsToCopy
+            annotations = annotationsToCopy.map(AnnotationSpec::get)
         )
     }
 

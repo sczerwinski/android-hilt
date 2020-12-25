@@ -66,7 +66,7 @@ object FactoryMethodsModulePoet {
                 factoryMethod.methodName.capitalize(Locale.getDefault())
         )
             .addAnnotation(Provides::class.java)
-            .addAnnotations(factoryMethod.annotations.map(AnnotationSpec::get))
+            .addAnnotations(factoryMethod.annotations)
             .addModifiers(Modifier.PUBLIC)
             .apply {
                 if (factoryMethod.enclosingElementKind == KotlinElementKind.CLASS) {

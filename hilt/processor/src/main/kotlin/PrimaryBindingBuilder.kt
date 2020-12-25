@@ -17,9 +17,9 @@
 
 package it.czerwinski.android.hilt.processor
 
+import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.TypeName
-import javax.lang.model.element.AnnotationMirror
 import javax.lang.model.type.TypeMirror
 import javax.lang.model.util.SimpleAnnotationValueVisitor7
 
@@ -38,7 +38,7 @@ class PrimaryBindingBuilder(
         }
     }
 
-    fun build(annotations: List<AnnotationMirror>): PrimaryBinding = PrimaryBinding(
+    fun build(annotations: List<AnnotationSpec>): PrimaryBinding = PrimaryBinding(
         annotatedClassName = annotatedClassName,
         supertypeClassName = requireNotNull(supertypeClassName as? ClassName),
         componentClassName = requireNotNull(componentClassName as? ClassName),

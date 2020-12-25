@@ -28,8 +28,6 @@ class FactoryMethodComponentVisitor : SimpleAnnotationValueVisitor7<Unit, String
 
     override fun visitType(typeMirror: TypeMirror, key: String) {
         val className = TypeName.get(typeMirror)
-        when (key) {
-            "component" -> componentClassName = className
-        }
+        if (key == "component") componentClassName = className
     }
 }

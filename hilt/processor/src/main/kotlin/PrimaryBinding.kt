@@ -17,14 +17,14 @@
 
 package it.czerwinski.android.hilt.processor
 
+import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
-import javax.lang.model.element.AnnotationMirror
 
 data class PrimaryBinding(
     val annotatedClassName: ClassName,
     val supertypeClassName: ClassName,
     val componentClassName: ClassName,
-    val annotations: List<AnnotationMirror>
+    val annotations: List<AnnotationSpec>
 ) {
 
     val packageName: String = annotatedClassName.packageName()
