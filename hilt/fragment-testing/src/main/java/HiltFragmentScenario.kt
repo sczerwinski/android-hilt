@@ -31,7 +31,6 @@ import androidx.annotation.StyleRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentFactory
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -165,7 +164,7 @@ class HiltFragmentScenario<F : Fragment, A : FragmentActivity> private construct
     /**
      * A ViewModel to hold a fragment factory.
      */
-    class FragmentFactoryViewModel @ViewModelInject constructor() : ViewModel() {
+    class FragmentFactoryViewModel : ViewModel() {
 
         var fragmentFactory: FragmentFactory? = null
 
