@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### Added
+- `HiltFragmentScenario`
+
 ### Fixed
 - Support for annotated nested classes
 - `@NonNull` annotations in generated code
