@@ -73,11 +73,7 @@ class HiltModulesGenerator : AbstractProcessor() {
         return builder.build(annotations = annotationsToCopy.map(AnnotationSpec::get))
     }
 
-    private fun Element.className(): ClassName = ClassName.get(packageName(), simpleName())
-
-    private fun Element.packageName(): String = processingEnv.elementUtils.getPackageOf(this).toString()
-
-    private fun Element.simpleName(): String = simpleName.toString()
+    private fun Element.className(): ClassName = TypeName.get(asType()) as ClassName
 
     private inline fun <reified T> Element.findAnnotationOfType() = annotationMirrors.find { annotationMirror ->
         annotationMirror.annotationType.asElement().isOfType(T::class.java)
@@ -85,6 +81,10 @@ class HiltModulesGenerator : AbstractProcessor() {
 
     private fun Element.isOfType(type: Class<*>): Boolean =
         packageName() == type.`package`.name && simpleName() == type.simpleName
+
+    private fun Element.packageName(): String = processingEnv.elementUtils.getPackageOf(this).toString()
+
+    private fun Element.simpleName(): String = simpleName.toString()
 
     private fun Element.scopesAndQualifiers(): List<AnnotationMirror> = annotationMirrors.filter { annotationMirror ->
         annotationMirror.annotationType.asElement().annotationMirrors.any {

@@ -26,6 +26,20 @@ class FactoryMethodsTest {
 
     @Test
     @DisplayName(
+        value = "GIVEN a factory method in companion object, " +
+            "WHEN generate factory methods module, " +
+            "THEN generated method returns result for the method in companion object"
+    )
+    fun factoryMethodInCompanionObject() {
+        val module = SingletonComponent_FactoryMethodsModule()
+
+        val result = module.factoryCreate()
+
+        assertEquals(Result.Factory.create(), result)
+    }
+
+    @Test
+    @DisplayName(
         value = "GIVEN a factory method in file, " +
             "WHEN generate factory methods module, " +
             "THEN generated method returns result for the method in file"

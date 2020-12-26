@@ -25,7 +25,15 @@ import javax.inject.Singleton
 data class Result(
     val number: Int,
     val text: String
-)
+) {
+
+    object Factory {
+
+        @FactoryMethod(component = SingletonComponent::class)
+        @Singleton
+        fun create(): Result = Result(number = 0, text = "In companion object")
+    }
+}
 
 @FactoryMethod(component = SingletonComponent::class)
 @Singleton
