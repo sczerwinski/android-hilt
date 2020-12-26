@@ -1,7 +1,7 @@
-# Module hilt-extensions
+# Module hilt-annotations
 
-Extensions for Dagger Hilt
+Additional annotations for Dagger Hilt
 
-# Package it.czerwinski.android.hilt
+# Package it.czerwinski.android.hilt.annotations
 
-Extensions for Dagger Hilt
+Additional annotations for Dagger Hilt

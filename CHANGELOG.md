@@ -1,17 +1,9 @@
 # Changelog
 
 ## [Unreleased]
-### Added
-
-### Changed
-
-### Deprecated
-
-### Removed
-
 ### Fixed
+- Fix module names, package names and descriptions in documentation
 
-### Security
 ## [1.0.0-ALPHA3]
 ### Added
 - `HiltFragmentScenario`

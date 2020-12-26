@@ -1,4 +1,4 @@
-# Module hilt-extensions
+# Module hilt-fragment-testing
 
 Hilt Fragment scenario
 
