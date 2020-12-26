@@ -1,3 +1,5 @@
+[![Build](https://github.com/sczerwinski/android-hilt/workflows/Build/badge.svg)][ci-build]
+
 # Extensions for Dagger Hilt
 
 ## Hilt Extensions
@@ -51,21 +53,21 @@ val property: Int by intProvider
 
 ### Generating Hilt Modules
 
-#### `@Primary`
-Marks primary implementation of the given supertype.
+#### `@BoundTo`
+Marks implementation bound to the given supertype in the given component.
 
 For example:
 ```kotlin
 interface Repository
 
-@Primary(supertype = Repository::class, component = SingletonComponent::class)
+@BoundTo(supertype = Repository::class, component = SingletonComponent::class)
 class RepositoryA @Inject constructor() : Repository
 
-@Primary(supertype = Repository::class, component = SingletonComponent::class)
+@BoundTo(supertype = Repository::class, component = SingletonComponent::class)
 @Singleton
 class RepositoryB @Inject constructor() : Repository
 
-@Primary(supertype = Repository::class, component = SingletonComponent::class)
+@BoundTo(supertype = Repository::class, component = SingletonComponent::class)
 @Named("offline")
 class RepositoryC @Inject constructor() : Repository
 ```
@@ -73,7 +75,7 @@ will generate module:
 ```java
 @Module
 @InstallIn(SingletonComponent.class)
-public interface SingletonComponent_PrimaryModule {
+public interface SingletonComponent_BindingsModule {
 
     @Binds
     Repository bindRepositoryA(RepositoryA implementation);

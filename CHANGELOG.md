@@ -4,6 +4,9 @@
 ### Added
 - `HiltFragmentScenario`
 
+### Changed
+- **BREAKING CHANGE:** Rename `@Primary` to `@BoundTo`.
+
 ### Fixed
 - Support for annotated nested classes
 - `@NonNull` annotations in generated code

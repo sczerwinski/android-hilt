@@ -20,21 +20,19 @@ package it.czerwinski.android.hilt.annotations
 import kotlin.reflect.KClass
 
 /**
- * Marks primary implementation of the given [supertype].
- *
- * The implementation will be bound to the given supertype in the given [component].
+ * Marks implementation bound to the given [supertype] in the given [component].
  *
  * Any annotations annotated with `@Scope` or `@Qualifier` will also annotate the resulting `@Binds` method.
  */
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.SOURCE)
 @MustBeDocumented
-annotation class Primary(
+annotation class BoundTo(
 
     /**
-     * Supertype for which the primary implementation should be bound.
+     * Supertype to which the implementation should be bound.
      *
-     * Must be assignable from the class annotated with [Primary].
+     * Must be assignable from the class annotated with [BoundTo].
      */
     val supertype: KClass<*>,
 

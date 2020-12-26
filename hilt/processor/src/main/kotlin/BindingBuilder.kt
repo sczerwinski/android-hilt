@@ -23,7 +23,7 @@ import com.squareup.javapoet.TypeName
 import javax.lang.model.type.TypeMirror
 import javax.lang.model.util.SimpleAnnotationValueVisitor7
 
-class PrimaryBindingBuilder(
+class BindingBuilder(
     private val annotatedClassName: ClassName
 ) : SimpleAnnotationValueVisitor7<Unit, String>() {
 
@@ -38,7 +38,7 @@ class PrimaryBindingBuilder(
         }
     }
 
-    fun build(annotations: List<AnnotationSpec>): PrimaryBinding = PrimaryBinding(
+    fun build(annotations: List<AnnotationSpec>): Binding = Binding(
         annotatedClassName = annotatedClassName,
         supertypeClassName = requireNotNull(supertypeClassName as? ClassName),
         componentClassName = requireNotNull(componentClassName as? ClassName),
