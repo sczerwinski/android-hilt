@@ -17,10 +17,12 @@
 
 package it.czerwinski.android.hilt.processor
 
+import androidx.annotation.NonNull
 import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.JavaFile
 import com.squareup.javapoet.MethodSpec
+import com.squareup.javapoet.ParameterSpec
 import com.squareup.javapoet.TypeSpec
 import dagger.Binds
 import dagger.Module
@@ -64,8 +66,13 @@ object PrimaryModulePoet {
         MethodSpec.methodBuilder("bind${binding.annotatedClassName.simpleName()}")
             .addAnnotation(Binds::class.java)
             .addAnnotations(binding.annotations)
+            .addAnnotation(NonNull::class.java)
             .addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT)
-            .addParameter(binding.annotatedClassName, "implementation")
+            .addParameter(
+                ParameterSpec.builder(binding.annotatedClassName, "implementation")
+                    .addAnnotation(NonNull::class.java)
+                    .build()
+            )
             .returns(binding.supertypeClassName)
             .build()
 }

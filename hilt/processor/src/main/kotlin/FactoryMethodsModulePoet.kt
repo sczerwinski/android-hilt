@@ -17,10 +17,12 @@
 
 package it.czerwinski.android.hilt.processor
 
+import androidx.annotation.NonNull
 import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.JavaFile
 import com.squareup.javapoet.MethodSpec
+import com.squareup.javapoet.ParameterSpec
 import com.squareup.javapoet.TypeSpec
 import dagger.Module
 import dagger.Provides
@@ -67,10 +69,15 @@ object FactoryMethodsModulePoet {
         )
             .addAnnotation(Provides::class.java)
             .addAnnotations(factoryMethod.annotations)
+            .addAnnotation(NonNull::class.java)
             .addModifiers(Modifier.PUBLIC)
             .apply {
                 if (factoryMethod.enclosingElementKind == KotlinElementKind.CLASS) {
-                    addParameter(factoryMethod.enclosingClassName, "\$receiver")
+                    addParameter(
+                        ParameterSpec.builder(factoryMethod.enclosingClassName, "\$receiver")
+                            .addAnnotation(NonNull::class.java)
+                            .build()
+                    )
                 }
             }
             .addParameters(factoryMethod.parameters)

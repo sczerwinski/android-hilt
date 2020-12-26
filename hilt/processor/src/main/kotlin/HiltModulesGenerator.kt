@@ -17,6 +17,7 @@
 
 package it.czerwinski.android.hilt.processor
 
+import androidx.annotation.NonNull
 import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.ParameterSpec
@@ -110,6 +111,11 @@ class HiltModulesGenerator : AbstractProcessor() {
                 val paramAnnotationsToCopy = parameter.scopesAndQualifiers()
                 ParameterSpec.builder(TypeName.get(parameter.asType()), parameter.simpleName())
                     .addAnnotations(paramAnnotationsToCopy.map(AnnotationSpec::get))
+                    .apply {
+                        if (!parameter.asType().kind.isPrimitive) {
+                            addAnnotation(NonNull::class.java)
+                        }
+                    }
                     .build()
             },
             returnTypeName = TypeName.get(annotatedMethodElement.returnType),
