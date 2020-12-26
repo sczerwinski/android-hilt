@@ -160,13 +160,17 @@ public class SingletonComponent_FactoryMethodsModule {
 [![Maven Central](https://img.shields.io/maven-central/v/it.czerwinski.android.hilt/hilt-fragment-testing)][hilt-fragment-testing-release]
 [![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/it.czerwinski.android.hilt/hilt-fragment-testing?server=https%3A%2F%2Foss.sonatype.org)][hilt-fragment-testing-snapshot]
 
+Must be used as `debugImplementation` dependency to properly register `EmptyFragmentActivity` in manifest.
+
 <details>
   <summary>Kotlin</summary>
 
   ```kotlin
   dependencies {
       implementation("com.google.dagger:hilt-android:2.30.1-alpha")
-      androidTestImplementation("it.czerwinski.android.hilt:hilt-fragment-testing:[VERSION]")
+
+      androidTestImplementation("androidx.test:runner:1.3.0")
+      debugImplementation("it.czerwinski.android.hilt:hilt-fragment-testing:[VERSION]")
   }
   ```
 </details>
@@ -177,7 +181,9 @@ public class SingletonComponent_FactoryMethodsModule {
   ```groovy
   dependencies {
       implementation 'com.google.dagger:hilt-android:2.30.1-alpha'
-      androidTestImplementation 'it.czerwinski.android.hilt:hilt-fragment-testing:[VERSION]'
+
+      androidTestImplementation 'androidx.test:runner:1.3.0'
+      debugImplementation 'it.czerwinski.android.hilt:hilt-fragment-testing:[VERSION]'
   }
   ```
 </details>
