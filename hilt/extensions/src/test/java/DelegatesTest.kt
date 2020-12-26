@@ -24,7 +24,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import javax.inject.Provider
 
-@DisplayName("Tests for generated primary implementations module")
+@DisplayName("Tests for delegated properties")
 class DelegatesTest {
 
     @Test
