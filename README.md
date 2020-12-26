@@ -1,3 +1,5 @@
+[![Build](https://github.com/sczerwinski/android-hilt/workflows/Build/badge.svg)][ci-build]
+
 # Extensions for Dagger Hilt
 
 ## Hilt Extensions
