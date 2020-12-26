@@ -30,32 +30,32 @@ data class Result(
     object Factory {
 
         @FactoryMethod(component = SingletonComponent::class)
-        @Singleton
-        fun create(): Result = Result(number = 0, text = "In companion object")
+        @Named(value = "nested")
+        fun create(): Result = Result(number = 0, text = "In nested object")
     }
 }
 
 @FactoryMethod(component = SingletonComponent::class)
 @Singleton
-fun createResult(): Result = Result(number = 1, text = "In file")
+fun createResult(): Result = Result(number = 2, text = "In file")
 
 object FactoryObject {
 
     @FactoryMethod(component = SingletonComponent::class)
     @Named(value = "object")
-    fun createResult(): Result = Result(number = 2, text = "In object")
+    fun createResult(): Result = Result(number = 3, text = "In object")
 
     @FactoryMethod(component = SingletonComponent::class)
     @Named(value = "static")
     @JvmStatic
-    fun createResultStatic(): Result = Result(number = 3, text = "In object (static)")
+    fun createResultStatic(): Result = Result(number = 4, text = "In object (static)")
 }
 
 class Factory {
 
     @FactoryMethod(component = SingletonComponent::class)
     @Named(value = "class")
-    fun createResult(): Result = Result(number = 2, text = "In class")
+    fun createResult(): Result = Result(number = 5, text = "In class")
 
     @FactoryMethod(component = SingletonComponent::class)
     @Named(value = "params")
