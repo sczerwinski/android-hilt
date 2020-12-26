@@ -2,16 +2,12 @@
 
 ## [Unreleased]
 ### Added
-
-### Changed
-
-### Deprecated
-
-### Removed
+- `HiltFragmentScenario`
 
 ### Fixed
+- Support for annotated nested classes
+- `@NonNull` annotations in generated code
 
-### Security
 ## [1.0.0-ALPHA2]
 ### Added
 - Annotation processor generating Hilt modules providing instances from annotated factory methods.

@@ -153,7 +153,43 @@ public class SingletonComponent_FactoryMethodsModule {
 }
 ```
 
+## Hilt Testing Extensions
+
+[![Maven Central](https://img.shields.io/maven-central/v/it.czerwinski.android.hilt/hilt-fragment-testing)][hilt-fragment-testing-release]
+[![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/it.czerwinski.android.hilt/hilt-fragment-testing?server=https%3A%2F%2Foss.sonatype.org)][hilt-fragment-testing-snapshot]
+
+<details>
+  <summary>Kotlin</summary>
+
+  ```kotlin
+  dependencies {
+      implementation("com.google.dagger:hilt-android:2.30.1-alpha")
+      androidTestImplementation("it.czerwinski.android.hilt:hilt-fragment-testing:[VERSION]")
+  }
+  ```
+</details>
+
+<details>
+  <summary>Groovy</summary>
+
+  ```groovy
+  dependencies {
+      implementation 'com.google.dagger:hilt-android:2.30.1-alpha'
+      androidTestImplementation 'it.czerwinski.android.hilt:hilt-fragment-testing:[VERSION]'
+  }
+  ```
+</details>
+
+### Testing Fragments With Hilt
+
+#### `HiltFragmentScenario`
+Works exactly like [FragmentScenario], but supports Hilt dependency injection in fragments.
+
 
 [ci-build]: https://github.com/sczerwinski/android-hilt/actions?query=workflow%3ABuild
 [hilt-extensions-release]: https://repo1.maven.org/maven2/it/czerwinski/android/hilt/hilt-extensions/
 [hilt-extensions-snapshot]: https://oss.sonatype.org/content/repositories/snapshots/it/czerwinski/android/hilt/hilt-extensions/
+[hilt-fragment-testing-release]: https://repo1.maven.org/maven2/it/czerwinski/android/hilt/hilt-fragment-testing/
+[hilt-fragment-testing-snapshot]: https://oss.sonatype.org/content/repositories/snapshots/it/czerwinski/android/hilt/hilt-fragment-testing/
+
+[FragmentScenario]: https://developer.android.com/guide/fragments/test
