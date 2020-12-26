@@ -23,10 +23,11 @@ import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
 
-interface Repository
+interface Repository {
 
-@Primary(supertype = Repository::class, component = SingletonComponent::class)
-class RepositoryA @Inject constructor() : Repository
+    @Primary(supertype = Repository::class, component = SingletonComponent::class)
+    class RepositoryA @Inject constructor() : Repository
+}
 
 @Primary(supertype = Repository::class, component = SingletonComponent::class)
 @Singleton

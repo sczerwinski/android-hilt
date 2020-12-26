@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test
 @DisplayName("Tests for generated primary implementations module")
 class PrimaryImplementationsTest {
 
-    private val repositoryA = RepositoryA()
+    private val repositoryA = Repository.RepositoryA()
     private val repositoryB = RepositoryB()
     private val repositoryC = RepositoryC()
 

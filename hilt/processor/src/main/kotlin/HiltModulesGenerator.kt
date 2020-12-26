@@ -17,6 +17,7 @@
 
 package it.czerwinski.android.hilt.processor
 
+import androidx.annotation.NonNull
 import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.ParameterSpec
@@ -73,11 +74,7 @@ class HiltModulesGenerator : AbstractProcessor() {
         return builder.build(annotations = annotationsToCopy.map(AnnotationSpec::get))
     }
 
-    private fun Element.className(): ClassName = ClassName.get(packageName(), simpleName())
-
-    private fun Element.packageName(): String = processingEnv.elementUtils.getPackageOf(this).toString()
-
-    private fun Element.simpleName(): String = simpleName.toString()
+    private fun Element.className(): ClassName = TypeName.get(asType()) as ClassName
 
     private inline fun <reified T> Element.findAnnotationOfType() = annotationMirrors.find { annotationMirror ->
         annotationMirror.annotationType.asElement().isOfType(T::class.java)
@@ -85,6 +82,10 @@ class HiltModulesGenerator : AbstractProcessor() {
 
     private fun Element.isOfType(type: Class<*>): Boolean =
         packageName() == type.`package`.name && simpleName() == type.simpleName
+
+    private fun Element.packageName(): String = processingEnv.elementUtils.getPackageOf(this).toString()
+
+    private fun Element.simpleName(): String = simpleName.toString()
 
     private fun Element.scopesAndQualifiers(): List<AnnotationMirror> = annotationMirrors.filter { annotationMirror ->
         annotationMirror.annotationType.asElement().annotationMirrors.any {
@@ -110,6 +111,11 @@ class HiltModulesGenerator : AbstractProcessor() {
                 val paramAnnotationsToCopy = parameter.scopesAndQualifiers()
                 ParameterSpec.builder(TypeName.get(parameter.asType()), parameter.simpleName())
                     .addAnnotations(paramAnnotationsToCopy.map(AnnotationSpec::get))
+                    .apply {
+                        if (!parameter.asType().kind.isPrimitive) {
+                            addAnnotation(NonNull::class.java)
+                        }
+                    }
                     .build()
             },
             returnTypeName = TypeName.get(annotatedMethodElement.returnType),
