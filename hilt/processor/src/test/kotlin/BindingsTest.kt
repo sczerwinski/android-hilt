@@ -23,8 +23,8 @@ import org.junit.jupiter.api.Assertions.assertSame
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
-@DisplayName("Tests for generated primary implementations module")
-class PrimaryImplementationsTest {
+@DisplayName("Tests for generated bindings module")
+class BindingsTest {
 
     private val repositoryA = Repository.RepositoryA()
     private val repositoryB = RepositoryB()
@@ -32,12 +32,12 @@ class PrimaryImplementationsTest {
 
     @Test
     @DisplayName(
-        value = "GIVEN interface with primary implementations for different scopes and qualifiers, " +
-            "WHEN generate primary implementations module, " +
+        value = "GIVEN interface with bindings for different scopes and qualifiers, " +
+            "WHEN generate bindings module, " +
             "THEN generated module should contain bindings for all implementations"
     )
-    fun singletonComponentPrimaryBindingsModule() {
-        val module = mockk<SingletonComponent_PrimaryModule>()
+    fun singletonComponentBindingsModule() {
+        val module = mockk<SingletonComponent_BindingsModule>()
 
         every { module.bindRepositoryA(any()) } returnsArgument 0
         every { module.bindRepositoryB(any()) } returnsArgument 0

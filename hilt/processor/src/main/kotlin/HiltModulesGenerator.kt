@@ -23,7 +23,7 @@ import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.ParameterSpec
 import com.squareup.javapoet.TypeName
 import it.czerwinski.android.hilt.annotations.FactoryMethod
-import it.czerwinski.android.hilt.annotations.Primary
+import it.czerwinski.android.hilt.annotations.BoundTo
 import javax.annotation.processing.AbstractProcessor
 import javax.annotation.processing.RoundEnvironment
 import javax.inject.Qualifier
@@ -40,18 +40,18 @@ class HiltModulesGenerator : AbstractProcessor() {
     private val filer get() = processingEnv.filer
 
     override fun getSupportedAnnotationTypes(): MutableSet<String> =
-        mutableSetOf(primaryAnnotationClass.canonicalName, factoryMethodAnnotationClass.canonicalName)
+        mutableSetOf(boundToAnnotationClass.canonicalName, factoryMethodAnnotationClass.canonicalName)
 
     override fun process(
         annotations: MutableSet<out TypeElement>,
         roundEnvironment: RoundEnvironment
     ): Boolean {
-        roundEnvironment.getElementsAnnotatedWith(primaryAnnotationClass)
-            .map { element -> createPrimaryBindings(element) }
-            .groupBy { primaryBinding -> primaryBinding.packageName to primaryBinding.componentClassName }
+        roundEnvironment.getElementsAnnotatedWith(boundToAnnotationClass)
+            .map { element -> createBindings(element) }
+            .groupBy { binding -> binding.packageName to binding.componentClassName }
             .forEach { (groupingKey, bindings) ->
                 val (packageName, componentClassName) = groupingKey
-                PrimaryModulePoet.generateModule(packageName, componentClassName, bindings, filer)
+                BindingsModulePoet.generateModule(packageName, componentClassName, bindings, filer)
             }
         roundEnvironment.getElementsAnnotatedWith(factoryMethodAnnotationClass)
             .map { element -> createFactoryMethods(element) }
@@ -63,12 +63,12 @@ class HiltModulesGenerator : AbstractProcessor() {
         return true
     }
 
-    private fun createPrimaryBindings(element: Element): PrimaryBinding {
+    private fun createBindings(element: Element): Binding {
         val elementClassName = element.className()
-        val primaryAnnotationMirror = element.findAnnotationOfType<Primary>()
+        val boundToAnnotationMirror = element.findAnnotationOfType<BoundTo>()
         val annotationsToCopy = element.scopesAndQualifiers()
-        val builder = PrimaryBindingBuilder(elementClassName)
-        primaryAnnotationMirror?.elementValues?.forEach { (element, value) ->
+        val builder = BindingBuilder(elementClassName)
+        boundToAnnotationMirror?.elementValues?.forEach { (element, value) ->
             value.accept(builder, element.simpleName.toString())
         }
         return builder.build(annotations = annotationsToCopy.map(AnnotationSpec::get))
@@ -127,7 +127,7 @@ class HiltModulesGenerator : AbstractProcessor() {
     }
 
     companion object {
-        private val primaryAnnotationClass = Primary::class.java
+        private val boundToAnnotationClass = BoundTo::class.java
         private val factoryMethodAnnotationClass = FactoryMethod::class.java
         private val scopeAnnotationClass = Scope::class.java
         private val qualifierAnnotationClass = Qualifier::class.java

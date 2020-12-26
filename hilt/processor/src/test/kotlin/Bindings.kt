@@ -17,15 +17,22 @@
 
 package it.czerwinski.android.hilt.processor
 
-import com.squareup.javapoet.AnnotationSpec
-import com.squareup.javapoet.ClassName
+import dagger.hilt.components.SingletonComponent
+import it.czerwinski.android.hilt.annotations.BoundTo
+import javax.inject.Inject
+import javax.inject.Named
+import javax.inject.Singleton
 
-data class PrimaryBinding(
-    val annotatedClassName: ClassName,
-    val supertypeClassName: ClassName,
-    val componentClassName: ClassName,
-    val annotations: List<AnnotationSpec>
-) {
+interface Repository {
 
-    val packageName: String = annotatedClassName.packageName()
+    @BoundTo(supertype = Repository::class, component = SingletonComponent::class)
+    class RepositoryA @Inject constructor() : Repository
 }
+
+@BoundTo(supertype = Repository::class, component = SingletonComponent::class)
+@Singleton
+class RepositoryB @Inject constructor() : Repository
+
+@BoundTo(supertype = Repository::class, component = SingletonComponent::class)
+@Named("offline")
+class RepositoryC @Inject constructor() : Repository

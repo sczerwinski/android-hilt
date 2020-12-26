@@ -30,28 +30,28 @@ import dagger.hilt.InstallIn
 import javax.annotation.processing.Filer
 import javax.lang.model.element.Modifier
 
-object PrimaryModulePoet {
+object BindingsModulePoet {
 
     fun generateModule(
         packageName: String,
         componentClassName: ClassName,
-        bindings: List<PrimaryBinding>,
+        bindings: List<Binding>,
         filer: Filer
     ) {
         JavaFile.builder(
             packageName,
-            generatePrimaryModuleInterface(packageName, componentClassName, bindings)
+            generateBindingsModuleInterface(packageName, componentClassName, bindings)
         )
             .build()
             .writeTo(filer)
     }
 
-    private fun generatePrimaryModuleInterface(
+    private fun generateBindingsModuleInterface(
         packageName: String,
         componentClassName: ClassName,
-        bindings: List<PrimaryBinding>
+        bindings: List<Binding>
     ): TypeSpec =
-        TypeSpec.interfaceBuilder(ClassName.get(packageName, "${componentClassName.simpleName()}_PrimaryModule"))
+        TypeSpec.interfaceBuilder(ClassName.get(packageName, "${componentClassName.simpleName()}_BindingsModule"))
             .addAnnotation(Module::class.java)
             .addAnnotation(
                 AnnotationSpec.builder(InstallIn::class.java)
@@ -62,7 +62,7 @@ object PrimaryModulePoet {
             .addMethods(bindings.map { binding -> generateBindingMethod(binding) })
             .build()
 
-    private fun generateBindingMethod(binding: PrimaryBinding): MethodSpec =
+    private fun generateBindingMethod(binding: Binding): MethodSpec =
         MethodSpec.methodBuilder("bind${binding.annotatedClassName.simpleName()}")
             .addAnnotation(Binds::class.java)
             .addAnnotations(binding.annotations)
