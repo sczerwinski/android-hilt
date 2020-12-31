@@ -1,17 +1,8 @@
 # Changelog
 
 ## [Unreleased]
-### Added
+No changes since 1.0.0-BETA1
 
-### Changed
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
 ## [1.0.0-BETA1]
 ### Fixed
 - Fix module names, package names and descriptions in documentation
