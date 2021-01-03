@@ -1,17 +1,8 @@
 # Changelog
 
 ## [Unreleased]
-### Added
+No changes since 1.0.0-RC1
 
-### Changed
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
 ## [1.0.0-RC1]
 No changes since 1.0.0-BETA1
 
