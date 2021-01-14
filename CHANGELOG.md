@@ -1,17 +1,11 @@
 # Changelog
 
 ## [Unreleased]
-### Added
-
 ### Changed
+- Dependencies:
+  - Upgrade `org.jetbrains.changelog` to `1.0.1`
+  - Upgrade `io.mockk:mockk` to `1.10.5`
 
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
 ## [1.0.0]
 No changes since 1.0.0-RC1
 
