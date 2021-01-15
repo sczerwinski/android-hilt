@@ -25,10 +25,10 @@ import javax.lang.model.type.TypeMirror
 import javax.lang.model.util.SimpleAnnotationValueVisitor7
 
 class BindingBuilder(
-    private val annotatedClassName: ClassName
+    private val annotatedClassName: ClassName,
+    private var supertypeClassName: TypeName?
 ) : SimpleAnnotationValueVisitor7<Unit, String>() {
 
-    private var supertypeClassName: TypeName? = null
     private var componentClassName: TypeName? = null
 
     override fun visitType(typeMirror: TypeMirror, key: String) {

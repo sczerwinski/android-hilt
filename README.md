@@ -53,8 +53,12 @@ val property: Int by intProvider
 
 ### Generating Hilt Modules
 
-#### `@BoundTo`
+#### `@Bound` and `@BoundTo`
 Marks implementation bound to the given supertype in the given component.
+
+`@Bound` annotation (added in v1.1.0) works exactly like `@BoundTo` annotation,
+but it implicitly uses the direct supertype of the annotated class. It may only
+annotate classes having exactly one direct supertype, excluding `java.lang.Object`. 
 
 For example:
 ```kotlin
@@ -67,7 +71,7 @@ class RepositoryA @Inject constructor() : Repository
 @Singleton
 class RepositoryB @Inject constructor() : Repository
 
-@BoundTo(supertype = Repository::class, component = SingletonComponent::class)
+@Bound(component = SingletonComponent::class)
 @Named("offline")
 class RepositoryC @Inject constructor() : Repository
 ```

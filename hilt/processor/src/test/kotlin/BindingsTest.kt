@@ -29,6 +29,7 @@ class BindingsTest {
     private val repositoryA = Repository.RepositoryA()
     private val repositoryB = RepositoryB()
     private val repositoryC = RepositoryC()
+    private val repositoryD = RepositoryD()
 
     @Test
     @DisplayName(
@@ -42,9 +43,11 @@ class BindingsTest {
         every { module.bindRepositoryA(any()) } returnsArgument 0
         every { module.bindRepositoryB(any()) } returnsArgument 0
         every { module.bindRepositoryC(any()) } returnsArgument 0
+        every { module.bindRepositoryD(any()) } returnsArgument 0
 
         assertSame(repositoryA, module.bindRepositoryA(repositoryA))
         assertSame(repositoryB, module.bindRepositoryB(repositoryB))
         assertSame(repositoryC, module.bindRepositoryC(repositoryC))
+        assertSame(repositoryD, module.bindRepositoryD(repositoryD))
     }
 }

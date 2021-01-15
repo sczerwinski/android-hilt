@@ -23,8 +23,9 @@ import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.ParameterSpec
 import com.squareup.javapoet.TypeName
 import dagger.hilt.components.SingletonComponent
-import it.czerwinski.android.hilt.annotations.FactoryMethod
+import it.czerwinski.android.hilt.annotations.Bound
 import it.czerwinski.android.hilt.annotations.BoundTo
+import it.czerwinski.android.hilt.annotations.FactoryMethod
 import javax.annotation.processing.AbstractProcessor
 import javax.annotation.processing.RoundEnvironment
 import javax.inject.Qualifier
@@ -35,20 +36,30 @@ import javax.lang.model.element.ElementKind
 import javax.lang.model.element.ExecutableElement
 import javax.lang.model.element.Modifier
 import javax.lang.model.element.TypeElement
+import javax.lang.model.type.TypeMirror
+import javax.tools.Diagnostic
 
+@Suppress("TooManyFunctions")
 class HiltModulesGenerator : AbstractProcessor() {
 
     private val filer get() = processingEnv.filer
 
     override fun getSupportedAnnotationTypes(): MutableSet<String> =
-        mutableSetOf(boundToAnnotationClass.canonicalName, factoryMethodAnnotationClass.canonicalName)
+        mutableSetOf(
+            boundAnnotationClass.canonicalName,
+            boundToAnnotationClass.canonicalName,
+            factoryMethodAnnotationClass.canonicalName
+        )
 
     override fun process(
         annotations: MutableSet<out TypeElement>,
         roundEnvironment: RoundEnvironment
     ): Boolean {
-        roundEnvironment.getElementsAnnotatedWith(boundToAnnotationClass)
+        val bound = roundEnvironment.getElementsAnnotatedWith(boundAnnotationClass)
+            .map { element -> createBindings(element, TypeName.get(supertypeOf(element))) }
+        val boundTo = roundEnvironment.getElementsAnnotatedWith(boundToAnnotationClass)
             .map { element -> createBindings(element) }
+        (bound + boundTo)
             .groupBy { binding -> binding.packageName to binding.componentClassName }
             .forEach { (groupingKey, bindings) ->
                 val (packageName, componentClassName) = groupingKey
@@ -64,11 +75,24 @@ class HiltModulesGenerator : AbstractProcessor() {
         return true
     }
 
-    private fun createBindings(element: Element): Binding {
+    private fun supertypeOf(element: Element): TypeMirror {
+        val supertypes = processingEnv.typeUtils.directSupertypes(element.asType())
+            .filterNot { TypeName.get(it) == TypeName.get(Object::class.java) }
+        if (supertypes.size != 1) {
+            val errorMessage = "Class $element annotated with @Bound has ${supertypes.size} direct " +
+                "supertypes: $supertypes, but exactly 1 required"
+            processingEnv.messager.printMessage(Diagnostic.Kind.ERROR, errorMessage)
+        }
+        return supertypes.first()
+    }
+
+    private fun createBindings(element: Element, supertypeName: TypeName? = null): Binding {
         val elementClassName = element.className()
-        val boundToAnnotationMirror = element.findAnnotationOfType<BoundTo>()
+        val boundToAnnotationMirror =
+            if (supertypeName == null) element.findAnnotationOfType<BoundTo>()
+            else element.findAnnotationOfType<Bound>()
         val annotationsToCopy = element.scopesAndQualifiers()
-        val builder = BindingBuilder(elementClassName)
+        val builder = BindingBuilder(elementClassName, supertypeName)
         boundToAnnotationMirror?.elementValues?.forEach { (element, value) ->
             value.accept(builder, element.simpleName.toString())
         }
@@ -128,6 +152,7 @@ class HiltModulesGenerator : AbstractProcessor() {
     }
 
     companion object {
+        private val boundAnnotationClass = Bound::class.java
         private val boundToAnnotationClass = BoundTo::class.java
         private val factoryMethodAnnotationClass = FactoryMethod::class.java
         private val scopeAnnotationClass = Scope::class.java
