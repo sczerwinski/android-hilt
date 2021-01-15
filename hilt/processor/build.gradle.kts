@@ -20,7 +20,7 @@ tasks.withType<Test> {
 dependencies {
     implementation(project(":hilt:annotations"))
 
-    implementation("com.google.dagger:hilt-android:2.30.1-alpha")
+    implementation("com.google.dagger:hilt-android:2.31-alpha")
     implementation("com.squareup:javapoet:1.13.0")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
