@@ -2,6 +2,18 @@
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+## [unspecified]
+### Added
 - `@Bound` annotation (works like `@BoundTo`, but implicitly uses the direct supertype of the annotated class)
 
 ### Changed
