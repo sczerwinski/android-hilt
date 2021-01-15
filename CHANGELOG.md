@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### Changed
 - Dependencies:
+  - Upgrade Hilt to `2.31-alpha`
   - Upgrade `org.jetbrains.changelog` to `1.0.1`
   - Upgrade `io.mockk:mockk` to `1.10.5`
 
