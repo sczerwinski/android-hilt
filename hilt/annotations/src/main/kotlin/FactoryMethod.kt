@@ -17,6 +17,7 @@
 
 package it.czerwinski.android.hilt.annotations
 
+import dagger.hilt.components.SingletonComponent
 import kotlin.reflect.KClass
 
 /**
@@ -38,6 +39,8 @@ annotation class FactoryMethod(
      * Hilt component in which the provider should be installed.
      *
      * Must be a type annotated with `@DefineComponent`.
+     *
+     * If not defined, the provider will be installed in [SingletonComponent].
      */
-    val component: KClass<*>
+    val component: KClass<*> = SingletonComponent::class
 )

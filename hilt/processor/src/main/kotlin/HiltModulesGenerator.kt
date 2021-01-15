@@ -22,6 +22,7 @@ import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.ParameterSpec
 import com.squareup.javapoet.TypeName
+import dagger.hilt.components.SingletonComponent
 import it.czerwinski.android.hilt.annotations.FactoryMethod
 import it.czerwinski.android.hilt.annotations.BoundTo
 import javax.annotation.processing.AbstractProcessor
@@ -121,7 +122,7 @@ class HiltModulesGenerator : AbstractProcessor() {
             returnTypeName = TypeName.get(annotatedMethodElement.returnType),
             enclosingClassName = enclosingElement.className(),
             enclosingElementKind = KotlinElementKind.forElement(enclosingElement),
-            componentClassName = visitor.componentClassName as ClassName,
+            componentClassName = visitor.componentClassName as? ClassName ?: defaultComponentClassName,
             annotations = annotationsToCopy.map(AnnotationSpec::get)
         )
     }
@@ -131,5 +132,7 @@ class HiltModulesGenerator : AbstractProcessor() {
         private val factoryMethodAnnotationClass = FactoryMethod::class.java
         private val scopeAnnotationClass = Scope::class.java
         private val qualifierAnnotationClass = Qualifier::class.java
+
+        private val defaultComponentClassName = ClassName.get(SingletonComponent::class.java)
     }
 }

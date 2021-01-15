@@ -90,6 +90,8 @@ public interface SingletonComponent_BindingsModule {
 }
 ```
 
+Since release 1.1.0, component property is optional, and set to `SingletonComponent` by default.
+
 #### `@FactoryMethod`
 Marks factory method for the class returned by the annotated function.
 
@@ -154,6 +156,8 @@ public class SingletonComponent_FactoryMethodsModule {
     }
 }
 ```
+
+Since release 1.1.0, component property is optional, and set to `SingletonComponent` by default.
 
 ## Hilt Testing Extensions
 

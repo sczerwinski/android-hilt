@@ -25,7 +25,7 @@ import javax.inject.Singleton
 
 interface Repository {
 
-    @BoundTo(supertype = Repository::class, component = SingletonComponent::class)
+    @BoundTo(supertype = Repository::class)
     class RepositoryA @Inject constructor() : Repository
 }
 

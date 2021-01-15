@@ -20,6 +20,7 @@ package it.czerwinski.android.hilt.processor
 import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.TypeName
+import dagger.hilt.components.SingletonComponent
 import javax.lang.model.type.TypeMirror
 import javax.lang.model.util.SimpleAnnotationValueVisitor7
 
@@ -41,7 +42,11 @@ class BindingBuilder(
     fun build(annotations: List<AnnotationSpec>): Binding = Binding(
         annotatedClassName = annotatedClassName,
         supertypeClassName = requireNotNull(supertypeClassName as? ClassName),
-        componentClassName = requireNotNull(componentClassName as? ClassName),
+        componentClassName = componentClassName as? ClassName ?: defaultComponentClassName,
         annotations = annotations
     )
+
+    companion object {
+        private val defaultComponentClassName = ClassName.get(SingletonComponent::class.java)
+    }
 }

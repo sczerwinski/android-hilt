@@ -17,6 +17,7 @@
 
 package it.czerwinski.android.hilt.annotations
 
+import dagger.hilt.components.SingletonComponent
 import kotlin.reflect.KClass
 
 /**
@@ -40,6 +41,8 @@ annotation class BoundTo(
      * Hilt component in which the binding should be installed.
      *
      * Must be a type annotated with `@DefineComponent`.
+     *
+     * If not defined, the binding will be installed in [SingletonComponent].
      */
-    val component: KClass<*>
+    val component: KClass<*> = SingletonComponent::class
 )

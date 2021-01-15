@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Changed
+- Make `component` in annotations optional and set to `SingletonComponent` by default.
 - Dependencies:
   - Upgrade Hilt to `2.31-alpha`
   - Upgrade `org.jetbrains.changelog` to `1.0.1`
