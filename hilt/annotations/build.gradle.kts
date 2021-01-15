@@ -8,6 +8,10 @@ plugins {
     signing
 }
 
+dependencies {
+    implementation("com.google.dagger:hilt-core:2.31-alpha")
+}
+
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }

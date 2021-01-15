@@ -29,7 +29,7 @@ data class Result(
 
     object Factory {
 
-        @FactoryMethod(component = SingletonComponent::class)
+        @FactoryMethod
         @Named(value = "nested")
         fun create(): Result = Result(number = 0, text = "In nested object")
     }

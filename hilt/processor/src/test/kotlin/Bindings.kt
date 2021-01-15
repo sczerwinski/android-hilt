@@ -18,6 +18,7 @@
 package it.czerwinski.android.hilt.processor
 
 import dagger.hilt.components.SingletonComponent
+import it.czerwinski.android.hilt.annotations.Bound
 import it.czerwinski.android.hilt.annotations.BoundTo
 import javax.inject.Inject
 import javax.inject.Named
@@ -25,7 +26,7 @@ import javax.inject.Singleton
 
 interface Repository {
 
-    @BoundTo(supertype = Repository::class, component = SingletonComponent::class)
+    @BoundTo(supertype = Repository::class)
     class RepositoryA @Inject constructor() : Repository
 }
 
@@ -33,6 +34,10 @@ interface Repository {
 @Singleton
 class RepositoryB @Inject constructor() : Repository
 
-@BoundTo(supertype = Repository::class, component = SingletonComponent::class)
+@Bound
 @Named("offline")
 class RepositoryC @Inject constructor() : Repository
+
+@Bound(component = SingletonComponent::class)
+@Named("debug")
+class RepositoryD @Inject constructor() : Repository

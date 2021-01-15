@@ -21,26 +21,25 @@ import dagger.hilt.components.SingletonComponent
 import kotlin.reflect.KClass
 
 /**
- * Marks factory method for the class returned by the annotated function.
+ * Marks implementation bound to the supertype of the annotated class in the given [component].
  *
- * The implementation will be provided in the given [component].
+ * Annotated implementation must have **exactly** one direct supertype (excluding [java.lang.Object]).
  *
- * Any annotations annotated with `@Scope` or `@Qualifier` will also annotate the resulting `@Provides` method.
+ * Any annotations annotated with `@Scope` or `@Qualifier` will also annotate the resulting `@Binds` method.
  *
- * If the annotated function is neither static nor a member of an object, the enclosing class will become
- * the first parameter of the generated provide function.
+ * @since 1.1.0
  */
-@Target(AnnotationTarget.FUNCTION)
+@Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.SOURCE)
 @MustBeDocumented
-annotation class FactoryMethod(
+annotation class Bound(
 
     /**
-     * Hilt component in which the provider should be installed.
+     * Hilt component in which the binding should be installed.
      *
      * Must be a type annotated with `@DefineComponent`.
      *
-     * If not defined, the provider will be installed in [SingletonComponent].
+     * If not defined, the binding will be installed in [SingletonComponent].
      */
     val component: KClass<*> = SingletonComponent::class
 )
