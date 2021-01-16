@@ -19,12 +19,16 @@ package it.czerwinski.android.hilt.processor.poet
 
 import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
+import com.squareup.javapoet.TypeName
 import com.squareup.javapoet.TypeSpec
 import dagger.Module
 import dagger.hilt.InstallIn
 import javax.lang.model.element.Modifier
 
 open class BaseModulePoet {
+
+    protected fun TypeName.toModuleNamePrefix(): String =
+        (box() as ClassName).simpleNames().joinToString(SIMPLE_NAME_SEPARATOR)
 
     protected fun TypeSpec.Builder.addCommonModuleSetup(componentClassName: ClassName): TypeSpec.Builder = this
         .addAnnotation(moduleClassName)
@@ -37,6 +41,8 @@ open class BaseModulePoet {
             .build()
 
     companion object {
+
+        private const val SIMPLE_NAME_SEPARATOR = "_"
 
         private const val COMPONENT_MEMBER_NAME = "value"
         private const val COMPONENT_MEMBER_FORMAT = "\$T.class"

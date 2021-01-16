@@ -27,5 +27,6 @@ data class Binding(
     val annotations: List<AnnotationSpec>
 ) {
 
-    val groupingKey: ModuleGroupingKey = ModuleGroupingKey(annotatedClassName.packageName(), componentClassName)
+    val groupingKey: ModuleGroupingKey =
+        ModuleGroupingKey(annotatedClassName.packageName(), supertypeClassName, componentClassName)
 }

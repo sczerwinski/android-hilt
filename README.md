@@ -79,7 +79,7 @@ will generate module:
 ```java
 @Module
 @InstallIn(SingletonComponent.class)
-public interface SingletonComponent_BindingsModule {
+public interface Repository_SingletonComponent_BindingsModule {
 
     @Binds
     Repository bindRepositoryA(RepositoryA implementation);
@@ -135,28 +135,37 @@ object DatabaseFactoryProvider {
         else ProductionDatabaseFactory(context)
 }
 ```
-annotation processor will generate module:
+annotation processor will generate modules:
 ```java
 @Module
 @InstallIn(SingletonComponent.class)
-public class SingletonComponent_FactoryMethodsModule {
-
-    @Provides
-    public DatabaseFactory databaseFactoryProviderCreateDatabaseFactory(
-            @ApplicationContext Context context) {
-        return DatabaseFactoryProvider.INSTANCE.createDatabaseFactory(context);
-    }
-
+public class UsersDao_SingletonComponent_FactoryMethodsModule {
     @Provides
     @Singleton
-    public AppDatabase databaseFactoryCreateDatabase(DatabaseFactory $receiver) {
+    public UsersDao appDatabase_usersDao(AppDatabase $receiver) {
+        return $receiver.usersDao();
+    }
+}
+```
+```java
+@Module
+@InstallIn(SingletonComponent.class)
+public class AppDatabase_SingletonComponent_FactoryMethodsModule {
+    @Provides
+    @Singleton
+    public AppDatabase databaseFactory_createDatabase(DatabaseFactory $receiver) {
         return $receiver.createDatabase();
     }
-
+}
+```
+```java
+@Module
+@InstallIn(SingletonComponent.class)
+public class DatabaseFactory_SingletonComponent_FactoryMethodsModule {
     @Provides
-    @Singleton
-    public UsersDao appDatabaseUsersDao(AppDatabase $receiver) {
-        return $receiver.usersDao();
+    public DatabaseFactory databaseFactoryProvider_createDatabaseFactory(
+            @ApplicationContext Context context) {
+        return DatabaseFactoryProvider.INSTANCE.createDatabaseFactory(context);
     }
 }
 ```

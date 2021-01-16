@@ -31,9 +31,9 @@ class FactoryMethodsTest {
             "THEN generated method returns result for the method in companion object"
     )
     fun factoryMethodInCompanionObject() {
-        val module = SingletonComponent_FactoryMethodsModule()
+        val module = Result_SingletonComponent_FactoryMethodsModule()
 
-        val result = module.factoryCreate()
+        val result = module.result_factory_create()
 
         assertEquals(Result.Factory.create(), result)
     }
@@ -45,9 +45,9 @@ class FactoryMethodsTest {
             "THEN generated method returns result for the method in file"
     )
     fun factoryMethodInFile() {
-        val module = SingletonComponent_FactoryMethodsModule()
+        val module = Result_SingletonComponent_FactoryMethodsModule()
 
-        val result = module.factoryMethodsKtCreateResult()
+        val result = module.factoryMethodsKt_createResult()
 
         assertEquals(createResult(), result)
     }
@@ -59,9 +59,9 @@ class FactoryMethodsTest {
             "THEN generated method returns result for the method in object"
     )
     fun factoryMethodInObject() {
-        val module = SingletonComponent_FactoryMethodsModule()
+        val module = Result_SingletonComponent_FactoryMethodsModule()
 
-        val result = module.factoryObjectCreateResult()
+        val result = module.factoryObject_createResult()
 
         assertEquals(FactoryObject.createResult(), result)
     }
@@ -73,9 +73,9 @@ class FactoryMethodsTest {
             "THEN generated method returns result for the static method in object"
     )
     fun staticFactoryMethodInObject() {
-        val module = SingletonComponent_FactoryMethodsModule()
+        val module = Result_SingletonComponent_FactoryMethodsModule()
 
-        val result = module.factoryObjectCreateResultStatic()
+        val result = module.factoryObject_createResultStatic()
 
         assertEquals(FactoryObject.createResultStatic(), result)
     }
@@ -87,10 +87,10 @@ class FactoryMethodsTest {
             "THEN generated method returns result for the method in class"
     )
     fun factoryMethodInClass() {
-        val module = SingletonComponent_FactoryMethodsModule()
+        val module = Result_SingletonComponent_FactoryMethodsModule()
         val instance = Factory()
 
-        val result = module.factoryCreateResult(instance)
+        val result = module.factory_createResult(instance)
 
         assertEquals(instance.createResult(), result)
     }
@@ -102,10 +102,10 @@ class FactoryMethodsTest {
             "THEN generated method returns result for the method in class with parameters"
     )
     fun factoryMethodInClassWithParams() {
-        val module = SingletonComponent_FactoryMethodsModule()
+        val module = Result_SingletonComponent_FactoryMethodsModule()
         val instance = Factory()
 
-        val result = module.factoryCreateResult(instance, 123, "test")
+        val result = module.factory_createResult(instance, 123, "test")
 
         assertEquals(Result(123, "test"), result)
     }

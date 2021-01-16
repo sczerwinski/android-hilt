@@ -1,17 +1,11 @@
 # Changelog
 
 ## [Unreleased]
-### Added
-
 ### Changed
+- More specific grouping of generated methods into dagger modules:
+  - `@Bound` and `@BoundTo` – grouped by supertype.
+  - `@FactoryMethod` – grouped by returned type.
 
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
 ## [1.1.0-ALPHA1]
 ### Added
 - `@Bound` annotation (works like `@BoundTo`, but implicitly uses the direct supertype of the annotated class)

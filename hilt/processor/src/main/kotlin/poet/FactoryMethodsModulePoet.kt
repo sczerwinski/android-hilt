@@ -26,7 +26,7 @@ import javax.annotation.processing.Filer
 
 object FactoryMethodsModulePoet : BaseModulePoet() {
 
-    private const val MODULE_NAME_FORMAT = "%s_FactoryMethodsModule"
+    private const val MODULE_NAME_FORMAT = "%s_%s_FactoryMethodsModule"
 
     fun generateModule(
         groupingKey: ModuleGroupingKey,
@@ -51,5 +51,11 @@ object FactoryMethodsModulePoet : BaseModulePoet() {
             .build()
 
     private fun createModuleClassName(groupingKey: ModuleGroupingKey): ClassName =
-        ClassName.get(groupingKey.packageName, MODULE_NAME_FORMAT.format(groupingKey.componentClassName.simpleName()))
+        ClassName.get(
+            groupingKey.packageName,
+            MODULE_NAME_FORMAT.format(
+                groupingKey.returnedTypeName.toModuleNamePrefix(),
+                groupingKey.componentClassName.simpleName()
+            )
+        )
 }

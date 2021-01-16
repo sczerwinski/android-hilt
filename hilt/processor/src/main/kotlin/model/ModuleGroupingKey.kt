@@ -18,8 +18,10 @@
 package it.czerwinski.android.hilt.processor.model
 
 import com.squareup.javapoet.ClassName
+import com.squareup.javapoet.TypeName
 
 data class ModuleGroupingKey(
     val packageName: String,
+    val returnedTypeName: TypeName,
     val componentClassName: ClassName
 )

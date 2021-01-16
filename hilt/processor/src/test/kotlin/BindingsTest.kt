@@ -38,7 +38,7 @@ class BindingsTest {
             "THEN generated module should contain bindings for all implementations"
     )
     fun singletonComponentBindingsModule() {
-        val module = mockk<SingletonComponent_BindingsModule>()
+        val module = mockk<Repository_SingletonComponent_BindingsModule>()
 
         every { module.bindRepositoryA(any()) } returnsArgument 0
         every { module.bindRepositoryB(any()) } returnsArgument 0

@@ -27,6 +27,8 @@ import javax.lang.model.element.Modifier
 
 object FactoryMethodPoet {
 
+    private const val SIMPLE_NAME_SEPARATOR = "_"
+
     private const val PROVIDES_RETURN_FORMAT_STATIC = "return \$T.\$N(\$L);"
     private const val PROVIDES_RETURN_FORMAT_OBJECT = "return \$T.INSTANCE.\$N(\$L);"
     private const val PROVIDES_RETURN_FORMAT_INSTANCE = "return \$\$receiver.\$N(\$L);"
@@ -44,8 +46,9 @@ object FactoryMethodPoet {
             .build()
 
     private fun createProvidesMethodName(factoryMethod: FactoryMethodModel) =
-        factoryMethod.enclosingClassName.simpleName().decapitalize(Locale.ENGLISH) +
-            factoryMethod.methodName.capitalize(Locale.ENGLISH)
+        (factoryMethod.enclosingClassName.simpleNames() + factoryMethod.methodName)
+            .joinToString(SIMPLE_NAME_SEPARATOR) { it.decapitalize(Locale.ENGLISH) }
+
 
     private fun MethodSpec.Builder.addReceiverParameterIfClass(factoryMethod: FactoryMethodModel): MethodSpec.Builder =
         if (factoryMethod.enclosingElementKind.isClass) addReceiverParameter(factoryMethod)
