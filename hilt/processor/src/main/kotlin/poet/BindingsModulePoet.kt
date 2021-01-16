@@ -15,7 +15,7 @@
  *
  */
 
-package it.czerwinski.android.hilt.processor
+package it.czerwinski.android.hilt.processor.poet
 
 import androidx.annotation.NonNull
 import com.squareup.javapoet.AnnotationSpec
@@ -27,6 +27,7 @@ import com.squareup.javapoet.TypeSpec
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
+import it.czerwinski.android.hilt.processor.model.Binding
 import javax.annotation.processing.Filer
 import javax.lang.model.element.Modifier
 

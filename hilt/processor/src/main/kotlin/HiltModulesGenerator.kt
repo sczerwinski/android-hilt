@@ -26,6 +26,13 @@ import dagger.hilt.components.SingletonComponent
 import it.czerwinski.android.hilt.annotations.Bound
 import it.czerwinski.android.hilt.annotations.BoundTo
 import it.czerwinski.android.hilt.annotations.FactoryMethod
+import it.czerwinski.android.hilt.processor.model.Binding
+import it.czerwinski.android.hilt.processor.model.BindingBuilder
+import it.czerwinski.android.hilt.processor.model.FactoryMethodComponentVisitor
+import it.czerwinski.android.hilt.processor.model.FactoryMethodModel
+import it.czerwinski.android.hilt.processor.model.KotlinElementKind
+import it.czerwinski.android.hilt.processor.poet.BindingsModulePoet
+import it.czerwinski.android.hilt.processor.poet.FactoryMethodsModulePoet
 import javax.annotation.processing.AbstractProcessor
 import javax.annotation.processing.RoundEnvironment
 import javax.inject.Qualifier

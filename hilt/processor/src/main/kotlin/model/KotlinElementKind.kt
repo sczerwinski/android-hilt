@@ -15,7 +15,7 @@
  *
  */
 
-package it.czerwinski.android.hilt.processor
+package it.czerwinski.android.hilt.processor.model
 
 import javax.lang.model.element.Element
 import javax.lang.model.element.ElementKind
@@ -28,7 +28,7 @@ enum class KotlinElementKind {
 
         fun forElement(element: Element): KotlinElementKind = when {
             element.getAnnotation(Metadata::class.java).kind == 2 -> FILE
-            element.enclosedElements.any(::isObjectSingletonInstance) -> OBJECT
+            element.enclosedElements.any(Companion::isObjectSingletonInstance) -> OBJECT
             else -> CLASS
         }
 

@@ -15,7 +15,7 @@
  *
  */
 
-package it.czerwinski.android.hilt.processor
+package it.czerwinski.android.hilt.processor.model
 
 import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
