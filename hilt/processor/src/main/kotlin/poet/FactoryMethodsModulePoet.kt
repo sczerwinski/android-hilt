@@ -17,99 +17,39 @@
 
 package it.czerwinski.android.hilt.processor.poet
 
-import androidx.annotation.NonNull
-import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.JavaFile
-import com.squareup.javapoet.MethodSpec
-import com.squareup.javapoet.ParameterSpec
 import com.squareup.javapoet.TypeSpec
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
 import it.czerwinski.android.hilt.processor.model.FactoryMethodModel
-import it.czerwinski.android.hilt.processor.model.KotlinElementKind
-import java.util.Locale
+import it.czerwinski.android.hilt.processor.model.ModuleGroupingKey
 import javax.annotation.processing.Filer
-import javax.lang.model.element.Modifier
 
-object FactoryMethodsModulePoet {
+object FactoryMethodsModulePoet : BaseModulePoet() {
+
+    private const val MODULE_NAME_FORMAT = "%s_FactoryMethodsModule"
+
     fun generateModule(
-        packageName: String,
-        componentClassName: ClassName,
+        groupingKey: ModuleGroupingKey,
         factoryMethods: List<FactoryMethodModel>,
         filer: Filer?
     ) {
         JavaFile.builder(
-            packageName,
-            generateFactoryMethodModuleClass(packageName, componentClassName, factoryMethods)
+            groupingKey.packageName,
+            generateFactoryMethodModuleClass(groupingKey, factoryMethods)
         )
             .build()
             .writeTo(filer)
     }
 
     private fun generateFactoryMethodModuleClass(
-        packageName: String,
-        componentClassName: ClassName,
+        groupingKey: ModuleGroupingKey,
         factoryMethods: List<FactoryMethodModel>
     ): TypeSpec =
-        TypeSpec.classBuilder(ClassName.get(packageName, "${componentClassName.simpleName()}_FactoryMethodsModule"))
-            .addAnnotation(Module::class.java)
-            .addAnnotation(
-                AnnotationSpec.builder(InstallIn::class.java)
-                    .addMember("value", "\$T.class", componentClassName)
-                    .build()
-            )
-            .addMethods(factoryMethods.map { binding -> generateProvideMethod(binding) })
-            .addModifiers(Modifier.PUBLIC)
+        TypeSpec.classBuilder(createModuleClassName(groupingKey))
+            .addCommonModuleSetup(groupingKey.componentClassName)
+            .addMethods(factoryMethods.map { binding -> FactoryMethodPoet.generateProvidesMethodSpec(binding) })
             .build()
 
-    private fun generateProvideMethod(factoryMethod: FactoryMethodModel): MethodSpec =
-        MethodSpec.methodBuilder(
-            factoryMethod.enclosingClassName.simpleName().decapitalize(Locale.getDefault()) +
-                factoryMethod.methodName.capitalize(Locale.getDefault())
-        )
-            .addAnnotation(Provides::class.java)
-            .addAnnotations(factoryMethod.annotations)
-            .addAnnotation(NonNull::class.java)
-            .addModifiers(Modifier.PUBLIC)
-            .apply {
-                if (factoryMethod.enclosingElementKind == KotlinElementKind.CLASS) {
-                    addParameter(
-                        ParameterSpec.builder(factoryMethod.enclosingClassName, "\$receiver")
-                            .addAnnotation(NonNull::class.java)
-                            .build()
-                    )
-                }
-            }
-            .addParameters(factoryMethod.parameters)
-            .returns(factoryMethod.returnTypeName)
-            .apply {
-                when {
-                    factoryMethod.isStatic -> {
-                        addCode(
-                            "return \$T.\$N(\$L);",
-                            factoryMethod.enclosingClassName,
-                            factoryMethod.methodName,
-                            factoryMethod.parameters.joinToString { it.name }
-                        )
-                    }
-                    factoryMethod.enclosingElementKind == KotlinElementKind.OBJECT -> {
-                        addCode(
-                            "return \$T.INSTANCE.\$N(\$L);",
-                            factoryMethod.enclosingClassName,
-                            factoryMethod.methodName,
-                            factoryMethod.parameters.joinToString { it.name }
-                        )
-                    }
-                    else -> {
-                        addCode(
-                            "return \$\$receiver.\$N(\$L);",
-                            factoryMethod.methodName,
-                            factoryMethod.parameters.joinToString { it.name }
-                        )
-                    }
-                }
-            }
-            .build()
+    private fun createModuleClassName(groupingKey: ModuleGroupingKey): ClassName =
+        ClassName.get(groupingKey.packageName, MODULE_NAME_FORMAT.format(groupingKey.componentClassName.simpleName()))
 }

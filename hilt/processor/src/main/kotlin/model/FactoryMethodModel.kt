@@ -33,5 +33,7 @@ data class FactoryMethodModel(
     val annotations: List<AnnotationSpec>
 ) {
 
-    val packageName: String = enclosingClassName.packageName()
+    val groupingKey: ModuleGroupingKey = ModuleGroupingKey(enclosingClassName.packageName(), componentClassName)
+
+    fun formatCallParameters(): String = parameters.joinToString { it.name }
 }

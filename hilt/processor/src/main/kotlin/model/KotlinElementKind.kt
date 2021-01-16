@@ -24,10 +24,17 @@ import javax.lang.model.element.Modifier
 enum class KotlinElementKind {
     CLASS, OBJECT, FILE;
 
+    val isClass: Boolean get() = this === CLASS
+    val isObject: Boolean get() = this === OBJECT
+
     companion object {
 
+        private const val OBJECT_INSTANCE_FIELD_NAME = "INSTANCE"
+
+        private val metadataAnnotationClass = Metadata::class.java
+
         fun forElement(element: Element): KotlinElementKind = when {
-            element.getAnnotation(Metadata::class.java).kind == 2 -> FILE
+            element.getAnnotation(metadataAnnotationClass).kind == 2 -> FILE
             element.enclosedElements.any(Companion::isObjectSingletonInstance) -> OBJECT
             else -> CLASS
         }
@@ -35,6 +42,6 @@ enum class KotlinElementKind {
         private fun isObjectSingletonInstance(element: Element) =
             element.kind == ElementKind.FIELD &&
                 Modifier.STATIC in element.modifiers &&
-                element.simpleName.contentEquals("INSTANCE")
+                element.simpleName.contentEquals(OBJECT_INSTANCE_FIELD_NAME)
     }
 }

@@ -18,62 +18,63 @@
 package it.czerwinski.android.hilt.processor.poet
 
 import androidx.annotation.NonNull
-import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.JavaFile
 import com.squareup.javapoet.MethodSpec
 import com.squareup.javapoet.ParameterSpec
 import com.squareup.javapoet.TypeSpec
 import dagger.Binds
-import dagger.Module
-import dagger.hilt.InstallIn
 import it.czerwinski.android.hilt.processor.model.Binding
+import it.czerwinski.android.hilt.processor.model.ModuleGroupingKey
 import javax.annotation.processing.Filer
 import javax.lang.model.element.Modifier
 
-object BindingsModulePoet {
+object BindingsModulePoet : BaseModulePoet() {
+
+    private const val MODULE_NAME_FORMAT = "%s_BindingsModule"
+    private const val BINDS_METHOD_NAME_FORMAT = "bind%s"
+    private const val BINDS_METHOD_PARAM_NAME = "implementation"
 
     fun generateModule(
-        packageName: String,
-        componentClassName: ClassName,
+        groupingKey: ModuleGroupingKey,
         bindings: List<Binding>,
         filer: Filer
     ) {
         JavaFile.builder(
-            packageName,
-            generateBindingsModuleInterface(packageName, componentClassName, bindings)
+            groupingKey.packageName,
+            generateBindingsModuleInterface(groupingKey, bindings)
         )
             .build()
             .writeTo(filer)
     }
 
     private fun generateBindingsModuleInterface(
-        packageName: String,
-        componentClassName: ClassName,
+        groupingKey: ModuleGroupingKey,
         bindings: List<Binding>
     ): TypeSpec =
-        TypeSpec.interfaceBuilder(ClassName.get(packageName, "${componentClassName.simpleName()}_BindingsModule"))
-            .addAnnotation(Module::class.java)
-            .addAnnotation(
-                AnnotationSpec.builder(InstallIn::class.java)
-                    .addMember("value", "\$T.class", componentClassName)
-                    .build()
-            )
-            .addModifiers(Modifier.PUBLIC)
-            .addMethods(bindings.map { binding -> generateBindingMethod(binding) })
+        TypeSpec.interfaceBuilder(createModuleClassName(groupingKey))
+            .addCommonModuleSetup(groupingKey.componentClassName)
+            .addMethods(bindings.map { binding -> generateBindsMethodSpec(binding) })
             .build()
 
-    private fun generateBindingMethod(binding: Binding): MethodSpec =
-        MethodSpec.methodBuilder("bind${binding.annotatedClassName.simpleName()}")
+    private fun createModuleClassName(groupingKey: ModuleGroupingKey): ClassName =
+        ClassName.get(groupingKey.packageName, MODULE_NAME_FORMAT.format(groupingKey.componentClassName.simpleName()))
+
+    private fun generateBindsMethodSpec(binding: Binding): MethodSpec =
+        MethodSpec.methodBuilder(createBindsMethodName(binding.annotatedClassName))
             .addAnnotation(Binds::class.java)
             .addAnnotations(binding.annotations)
             .addAnnotation(NonNull::class.java)
             .addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT)
-            .addParameter(
-                ParameterSpec.builder(binding.annotatedClassName, "implementation")
-                    .addAnnotation(NonNull::class.java)
-                    .build()
-            )
+            .addParameter(generateBindsMethodParamSpec(binding))
             .returns(binding.supertypeClassName)
+            .build()
+
+    private fun createBindsMethodName(annotatedClassName: ClassName): String =
+        BINDS_METHOD_NAME_FORMAT.format(annotatedClassName.simpleName())
+
+    private fun generateBindsMethodParamSpec(binding: Binding): ParameterSpec =
+        ParameterSpec.builder(binding.annotatedClassName, BINDS_METHOD_PARAM_NAME)
+            .addAnnotation(NonNull::class.java)
             .build()
 }

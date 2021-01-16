@@ -17,64 +17,72 @@
 
 package it.czerwinski.android.hilt.processor.model
 
+import androidx.annotation.NonNull
 import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
+import com.squareup.javapoet.ParameterSpec
 import com.squareup.javapoet.TypeName
 import dagger.hilt.components.SingletonComponent
 import it.czerwinski.android.hilt.processor.className
 import it.czerwinski.android.hilt.processor.findAnnotationOfType
 import it.czerwinski.android.hilt.processor.scopesAndQualifiers
-import javax.annotation.processing.ProcessingEnvironment
+import it.czerwinski.android.hilt.processor.simpleName
 import javax.lang.model.element.Element
-import javax.lang.model.type.TypeMirror
-import javax.tools.Diagnostic
+import javax.lang.model.element.ElementKind
+import javax.lang.model.element.ExecutableElement
+import javax.lang.model.element.Modifier
+import javax.lang.model.element.VariableElement
 
-class BindingBuilder(private val processingEnv: ProcessingEnvironment) {
+class FactoryMethodModelBuilder {
 
     private var element: Element? = null
     private var annotationType: Class<*>? = null
 
-    fun forElement(element: Element): BindingBuilder {
+    fun forElement(element: Element): FactoryMethodModelBuilder {
         this.element = element
         return this
     }
 
-    fun annotatedWith(annotationType: Class<*>): BindingBuilder {
+    fun annotatedWith(annotationType: Class<*>): FactoryMethodModelBuilder {
         this.annotationType = annotationType
         return this
     }
 
-    fun build(): Binding {
+    fun build(): FactoryMethodModel {
         val element = requireNotNull(element) { "No element was set" }
+        require(value = element.kind == ElementKind.METHOD) { "Factory method is not a method" }
         val annotationType = requireNotNull(annotationType) { "No annotation was set" }
 
-        val visitor = BoundComponentVisitor()
+        val annotatedMethodElement = element as ExecutableElement
+        val enclosingElement = element.enclosingElement
+
+        val visitor = FactoryMethodComponentVisitor()
 
         element.findAnnotationOfType(annotationType)?.elementValues?.forEach { (element, value) ->
             value.accept(visitor, element.simpleName.toString())
         }
 
-        return Binding(
-            annotatedClassName = element.className(),
-            supertypeClassName = (visitor.supertypeClassName ?: getSupertypeClassName(element)) as ClassName,
+        return FactoryMethodModel(
+            methodName = element.simpleName.toString(),
+            isStatic = Modifier.STATIC in element.modifiers,
+            parameters = annotatedMethodElement.parameters.map(::createParameterSpec),
+            returnTypeName = TypeName.get(annotatedMethodElement.returnType),
+            enclosingClassName = enclosingElement.className(),
+            enclosingElementKind = KotlinElementKind.forElement(enclosingElement),
             componentClassName = visitor.componentClassName as? ClassName ?: defaultComponentClassName,
             annotations = element.scopesAndQualifiers().map(AnnotationSpec::get)
         )
     }
 
-    private fun getSupertypeClassName(element: Element): TypeName =
-        TypeName.get(getSupertype(element))
-
-    private fun getSupertype(element: Element): TypeMirror {
-        val supertypes = processingEnv.typeUtils.directSupertypes(element.asType())
-            .filterNot { TypeName.get(it) == TypeName.get(Object::class.java) }
-        if (supertypes.size != 1) {
-            val errorMessage =
-                "Class $element has ${supertypes.size} direct supertypes: $supertypes, but exactly 1 required"
-            processingEnv.messager.printMessage(Diagnostic.Kind.ERROR, errorMessage)
-        }
-        return supertypes.first()
-    }
+    private fun createParameterSpec(parameter: VariableElement) =
+        ParameterSpec.builder(TypeName.get(parameter.asType()), parameter.simpleName())
+            .addAnnotations(parameter.scopesAndQualifiers().map(AnnotationSpec::get))
+            .apply {
+                if (!parameter.asType().kind.isPrimitive) {
+                    addAnnotation(NonNull::class.java)
+                }
+            }
+            .build()
 
     companion object {
         private val defaultComponentClassName = ClassName.get(SingletonComponent::class.java)
