@@ -34,3 +34,7 @@ allprojects {
 plugins {
     id("org.jetbrains.changelog") version "1.0.1"
 }
+
+changelog {
+    version = "${project.version}"
+}

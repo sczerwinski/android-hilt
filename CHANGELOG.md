@@ -12,7 +12,7 @@
 ### Fixed
 
 ### Security
-## [unspecified]
+## [1.1.0-ALPHA1]
 ### Added
 - `@Bound` annotation (works like `@BoundTo`, but implicitly uses the direct supertype of the annotated class)
 
