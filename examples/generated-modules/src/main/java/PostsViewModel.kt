@@ -19,6 +19,7 @@ package it.czerwinski.android.hilt.examples.generated
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import it.czerwinski.android.hilt.examples.generated.model.Post
 import it.czerwinski.android.hilt.examples.generated.repositories.PostsRepository
@@ -29,5 +30,8 @@ class PostsViewModel @Inject constructor(
     repository: PostsRepository
 ) : ViewModel() {
 
-    val posts: LiveData<List<Post>> = repository.findAll()
+    val posts: LiveData<List<Post>> = liveData {
+        val posts = repository.findAll()
+        emit(posts)
+    }
 }

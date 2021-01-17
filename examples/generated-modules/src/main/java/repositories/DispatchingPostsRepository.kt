@@ -35,11 +35,14 @@ class DispatchingPostsRepository @Inject constructor(
     private val dao: PostsDao
 ) : PostsRepository {
 
-    override fun findAll(): LiveData<List<Post>> = liveData {
-        emitSource(localRepository.findAll())
-        val remoteLiveData = remoteRepository.findAll()
-        val remoteObserver = RemoteLiveDataObserver(remoteLiveData)
-        remoteLiveData.observeForever(remoteObserver)
+    override suspend fun findAll(): List<Post> {
+        try {
+            val remotePosts = remoteRepository.findAll()
+            dao.replace(remotePosts)
+        } catch (ignored: Exception) {
+        } finally {
+            return localRepository.findAll()
+        }
     }
 
     private inner class RemoteLiveDataObserver(

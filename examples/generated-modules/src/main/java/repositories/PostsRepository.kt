@@ -17,10 +17,9 @@
 
 package it.czerwinski.android.hilt.examples.generated.repositories
 
-import androidx.lifecycle.LiveData
 import it.czerwinski.android.hilt.examples.generated.model.Post
 
 interface PostsRepository {
 
-    fun findAll(): LiveData<List<Post>>
+    suspend fun findAll(): List<Post>
 }
