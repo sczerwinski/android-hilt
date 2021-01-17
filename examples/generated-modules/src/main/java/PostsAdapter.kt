@@ -64,7 +64,7 @@ class PostsAdapter(
             post.image?.let { imageUrl ->
                 Picasso.get()
                     .load(Uri.parse(imageUrl))
-                    .noPlaceholder()
+                    .placeholder(R.drawable.image_placeholder)
                     .into(image)
             } ?: image.setImageDrawable(null)
             title.text = post.title

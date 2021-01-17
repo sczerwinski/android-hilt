@@ -20,8 +20,6 @@ package it.czerwinski.android.hilt.examples.generated
 import android.widget.TextView
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
-import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.uiautomator.UiDevice
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import it.czerwinski.android.xpresso.launchTestActivity
@@ -38,7 +36,7 @@ class PostsActivityTest {
     @Test
     fun testPostsList() {
         launchTestActivity<PostsActivity>()
-        waitForIdle()
+
         onRecyclerView(withId(R.id.posts_list))
             .onItem<PostsAdapter.ViewHolder>(position = 0) {
                 on<TextView>(withId(R.id.title))
@@ -46,9 +44,5 @@ class PostsActivityTest {
                 on<TextView>(withId(R.id.brief))
                     .check(withText("Test post"))
             }
-    }
-
-    private fun waitForIdle() {
-        UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()).waitForIdle()
     }
 }

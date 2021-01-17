@@ -30,5 +30,5 @@ class LocalPostsRepository @Inject constructor(
     private val dao: PostsDao
 ) : PostsRepository {
 
-    override fun findAll(): LiveData<List<Post>> = dao.findAll()
+    override suspend fun findAll(): List<Post> = dao.findAll()
 }

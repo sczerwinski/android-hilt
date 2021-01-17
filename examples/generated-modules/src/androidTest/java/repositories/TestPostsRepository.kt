@@ -17,13 +17,10 @@
 
 package it.czerwinski.android.hilt.examples.generated.repositories
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.liveData
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import it.czerwinski.android.hilt.annotations.TestBound
 import it.czerwinski.android.hilt.examples.generated.model.Post
-import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
 @TestBound
@@ -31,10 +28,7 @@ class TestPostsRepository @Inject constructor(
     private val client: HttpClient,
 ) : PostsRepository {
 
-    override fun findAll(): LiveData<List<Post>> = liveData(Dispatchers.IO) {
-        val posts: List<Post> = client.get(POSTS_URL)
-        emit(posts)
-    }
+    override suspend fun findAll(): List<Post> = client.get(POSTS_URL)
 
     companion object {
         private const val BASE_URL = "https://czerwinski.it/api"

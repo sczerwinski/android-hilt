@@ -12,9 +12,7 @@ android {
     compileSdkVersion(30)
 
     defaultConfig {
-        // AndroidX Browser requires minSdk 16
-        // UI Automator requires minSdk 18
-        minSdkVersion(18)
+        minSdkVersion(16) // AndroidX Browser requires minSdk 16
         targetSdkVersion(30)
 
         applicationId = "it.czerwinski.android.hilt.examples.generated"
@@ -84,7 +82,6 @@ dependencies {
 
     implementation("io.ktor:ktor-client-mock:1.5.0")
 
-    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
     androidTestImplementation("it.czerwinski.android:xpresso-core:1.0")
     androidTestImplementation("it.czerwinski.android:xpresso-recyclerview:1.0")
 }

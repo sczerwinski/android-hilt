@@ -6,6 +6,7 @@
         <item name="colorPrimaryDark">@color/primaryColorDark</item>
         <item name="colorSecondary">@color/secondaryColor</item>
         <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="indeterminateProgressStyle">@style/Widget.AppCompat.ProgressBar</item>
     </style>
 
 </resources>

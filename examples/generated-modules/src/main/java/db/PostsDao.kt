@@ -17,7 +17,6 @@
 
 package it.czerwinski.android.hilt.examples.generated.db
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -28,7 +27,7 @@ import it.czerwinski.android.hilt.examples.generated.model.Post
 abstract class PostsDao {
 
     @Query(value = "SELECT * FROM posts")
-    abstract fun findAll(): LiveData<List<Post>>
+    abstract suspend fun findAll(): List<Post>
 
     @Transaction
     open suspend fun replace(posts: List<Post>) {

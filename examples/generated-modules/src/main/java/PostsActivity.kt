@@ -24,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
+import androidx.core.widget.ContentLoadingProgressBar
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,7 +41,11 @@ class PostsActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        setUpPostsList()
+        setUpProgressBar()
+    }
 
+    private fun setUpPostsList() {
         val postsList = findViewById<RecyclerView>(R.id.posts_list)
         val adapter = PostsAdapter { post ->
             CustomTabsIntent.Builder()
@@ -56,6 +61,15 @@ class PostsActivity : AppCompatActivity() {
 
         viewModel.posts.observe(this) { posts ->
             adapter.posts = posts
+        }
+    }
+
+    private fun setUpProgressBar() {
+        val progressBar = findViewById<ContentLoadingProgressBar>(R.id.progress_bar)
+
+        viewModel.isLoading.observe(this) { isLoading ->
+            if (isLoading) progressBar.show()
+            else progressBar.hide()
         }
     }
 }

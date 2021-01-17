@@ -17,14 +17,9 @@
 
 package it.czerwinski.android.hilt.examples.generated.repositories
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.liveData
 import it.czerwinski.android.hilt.annotations.Bound
 import it.czerwinski.android.hilt.examples.generated.db.PostsDao
 import it.czerwinski.android.hilt.examples.generated.model.Post
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -35,22 +30,13 @@ class DispatchingPostsRepository @Inject constructor(
     private val dao: PostsDao
 ) : PostsRepository {
 
-    override fun findAll(): LiveData<List<Post>> = liveData {
-        emitSource(localRepository.findAll())
-        val remoteLiveData = remoteRepository.findAll()
-        val remoteObserver = RemoteLiveDataObserver(remoteLiveData)
-        remoteLiveData.observeForever(remoteObserver)
-    }
-
-    private inner class RemoteLiveDataObserver(
-        private val remoteLiveData: LiveData<List<Post>>
-    ): Observer<List<Post>> {
-
-        override fun onChanged(posts: List<Post>) {
-            runBlocking(Dispatchers.IO) {
-                dao.replace(posts)
-            }
-            remoteLiveData.removeObserver(this)
+    override suspend fun findAll(): List<Post> {
+        try {
+            val remotePosts = remoteRepository.findAll()
+            dao.replace(remotePosts)
+        } catch (ignored: Exception) {
+        } finally {
+            return localRepository.findAll()
         }
     }
 }
