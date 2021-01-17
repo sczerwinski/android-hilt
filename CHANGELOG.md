@@ -2,16 +2,16 @@
 
 ## [Unreleased]
 ### Added
+- Annotations for testing:
+  - `@TestBound` – works like `@Bound`, but generates modules annotated with `@TestInstallIn`
+  - `@TestBoundTo` – works like `@BoundTo`, but generates modules annotated with `@TestInstallIn`
+  - `@TestFactoryMethod` – works like `@TestFactoryMethod`, but generates modules annotated with `@TestInstallIn`
 
 ### Changed
+- More specific grouping of generated methods into dagger modules:
+  - `@Bound` and `@BoundTo` – grouped by supertype.
+  - `@FactoryMethod` – grouped by returned type.
 
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
 ## [1.1.0-ALPHA1]
 ### Added
 - `@Bound` annotation (works like `@BoundTo`, but implicitly uses the direct supertype of the annotated class)

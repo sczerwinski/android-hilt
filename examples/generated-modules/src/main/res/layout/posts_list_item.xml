@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/list_margin"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/card_content_margin"
+            android:layout_marginEnd="@dimen/card_content_margin"
+            android:layout_marginTop="@dimen/card_content_margin"
+            tools:text="Title"
+            style="?attr/textAppearanceHeadline5" />
+
+        <TextView
+            android:id="@+id/brief"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/card_content_margin"
+            android:layout_marginEnd="@dimen/card_content_margin"
+            android:layout_marginBottom="@dimen/card_content_margin"
+            tools:text="Brief"
+            style="?attr/textAppearanceBody1" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

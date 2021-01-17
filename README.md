@@ -79,7 +79,7 @@ will generate module:
 ```java
 @Module
 @InstallIn(SingletonComponent.class)
-public interface SingletonComponent_BindingsModule {
+public interface Repository_SingletonComponent_BindingsModule {
 
     @Binds
     Repository bindRepositoryA(RepositoryA implementation);
@@ -135,33 +135,55 @@ object DatabaseFactoryProvider {
         else ProductionDatabaseFactory(context)
 }
 ```
-annotation processor will generate module:
+annotation processor will generate modules:
 ```java
 @Module
 @InstallIn(SingletonComponent.class)
-public class SingletonComponent_FactoryMethodsModule {
-
-    @Provides
-    public DatabaseFactory databaseFactoryProviderCreateDatabaseFactory(
-            @ApplicationContext Context context) {
-        return DatabaseFactoryProvider.INSTANCE.createDatabaseFactory(context);
-    }
-
+public class UsersDao_SingletonComponent_FactoryMethodsModule {
     @Provides
     @Singleton
-    public AppDatabase databaseFactoryCreateDatabase(DatabaseFactory $receiver) {
+    public UsersDao appDatabase_usersDao(AppDatabase $receiver) {
+        return $receiver.usersDao();
+    }
+}
+```
+```java
+@Module
+@InstallIn(SingletonComponent.class)
+public class AppDatabase_SingletonComponent_FactoryMethodsModule {
+    @Provides
+    @Singleton
+    public AppDatabase databaseFactory_createDatabase(DatabaseFactory $receiver) {
         return $receiver.createDatabase();
     }
-
+}
+```
+```java
+@Module
+@InstallIn(SingletonComponent.class)
+public class DatabaseFactory_SingletonComponent_FactoryMethodsModule {
     @Provides
-    @Singleton
-    public UsersDao appDatabaseUsersDao(AppDatabase $receiver) {
-        return $receiver.usersDao();
+    public DatabaseFactory databaseFactoryProvider_createDatabaseFactory(
+            @ApplicationContext Context context) {
+        return DatabaseFactoryProvider.INSTANCE.createDatabaseFactory(context);
     }
 }
 ```
 
 Since release 1.1.0, component property is optional, and set to `SingletonComponent` by default.
+
+#### `@TestBound`, `@TestBoundTo` and `@TestFactoryMethod`
+
+Version 1.1.0 introduces additional test annotations that can be used to generate modules
+annotated with [`@TestInstallIn`][TestInstallIn], instead of `@InstallIn`:
+- `@TestBound` (instead of `@Bound`)
+- `@TestBoundTo` (instead of `@BoundTo`)
+- `@TestFactoryMethod` (instead of `@FactoryMethod`)
+
+Test module generated using `@TestBound` and/or `@TestBoundTo` will replace the module generated using
+`@Bound` and/or `@BoundTo`.
+
+Test module generated using `@TestFactoryMethod` will replace the module generated with `@FactoryMethod`.
 
 ## Hilt Testing Extensions
 
@@ -209,3 +231,4 @@ Works exactly like [FragmentScenario], but supports Hilt dependency injection in
 [hilt-fragment-testing-snapshot]: https://oss.sonatype.org/content/repositories/snapshots/it/czerwinski/android/hilt/hilt-fragment-testing/
 
 [FragmentScenario]: https://developer.android.com/guide/fragments/test
+[TestInstallIn]: https://dagger.dev/hilt/testing#testinstallin
