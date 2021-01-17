@@ -18,6 +18,7 @@
 package it.czerwinski.android.hilt.examples.generated
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,8 +31,12 @@ class PostsViewModel @Inject constructor(
     repository: PostsRepository
 ) : ViewModel() {
 
+    private val _isLoading = MutableLiveData(true)
+    val isLoading: LiveData<Boolean> get() = _isLoading
+
     val posts: LiveData<List<Post>> = liveData {
         val posts = repository.findAll()
         emit(posts)
+        _isLoading.postValue(false)
     }
 }
