@@ -2,6 +2,18 @@
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+## [1.1.0-ALPHA2]
+### Added
 - Annotations for testing:
   - `@TestBound` – works like `@Bound`, but generates modules annotated with `@TestInstallIn`
   - `@TestBoundTo` – works like `@BoundTo`, but generates modules annotated with `@TestInstallIn`
