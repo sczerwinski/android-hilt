@@ -12,7 +12,9 @@ android {
     compileSdkVersion(30)
 
     defaultConfig {
-        minSdkVersion(16) // AndroidX Browser requires minSdk 16
+        // AndroidX Browser requires minSdk 16
+        // UI Automator requires minSdk 18
+        minSdkVersion(18)
         targetSdkVersion(30)
 
         applicationId = "it.czerwinski.android.hilt.examples.generated"
@@ -22,7 +24,7 @@ android {
 
         multiDexEnabled = true
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "it.czerwinski.android.hilt.examples.generated.HiltAndroidJUnitRunner"
     }
 
     buildTypes {
@@ -76,4 +78,13 @@ dependencies {
     implementation("joda-time:joda-time:2.10.9")
 
     implementation("com.squareup.picasso:picasso:2.8")
+
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.31-alpha")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.31-alpha")
+
+    implementation("io.ktor:ktor-client-mock:1.5.0")
+
+    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
+    androidTestImplementation("it.czerwinski.android:xpresso-core:1.0")
+    androidTestImplementation("it.czerwinski.android:xpresso-recyclerview:1.0")
 }

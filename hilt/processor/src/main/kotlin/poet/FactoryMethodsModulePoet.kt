@@ -27,6 +27,7 @@ import javax.annotation.processing.Filer
 object FactoryMethodsModulePoet : BaseModulePoet() {
 
     private const val MODULE_NAME_FORMAT = "%s_%s_FactoryMethodsModule"
+    private const val TEST_MODULE_NAME_FORMAT = "%s_%s_FactoryMethodsModule_Test"
 
     fun generateModule(
         groupingKey: ModuleGroupingKey,
@@ -46,14 +47,14 @@ object FactoryMethodsModulePoet : BaseModulePoet() {
         factoryMethods: List<FactoryMethodModel>
     ): TypeSpec =
         TypeSpec.classBuilder(createModuleClassName(groupingKey))
-            .addCommonModuleSetup(groupingKey.componentClassName)
+            .addCommonModuleSetup(groupingKey, createModuleClassName(groupingKey.copy(isTest = false)))
             .addMethods(factoryMethods.map { binding -> FactoryMethodPoet.generateProvidesMethodSpec(binding) })
             .build()
 
     private fun createModuleClassName(groupingKey: ModuleGroupingKey): ClassName =
         ClassName.get(
             groupingKey.packageName,
-            MODULE_NAME_FORMAT.format(
+            (if (groupingKey.isTest) TEST_MODULE_NAME_FORMAT else MODULE_NAME_FORMAT).format(
                 groupingKey.returnedTypeName.toModuleNamePrefix(),
                 groupingKey.componentClassName.simpleName()
             )

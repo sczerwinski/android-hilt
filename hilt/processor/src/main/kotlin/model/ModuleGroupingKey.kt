@@ -23,5 +23,6 @@ import com.squareup.javapoet.TypeName
 data class ModuleGroupingKey(
     val packageName: String,
     val returnedTypeName: TypeName,
-    val componentClassName: ClassName
+    val componentClassName: ClassName,
+    val isTest: Boolean
 )

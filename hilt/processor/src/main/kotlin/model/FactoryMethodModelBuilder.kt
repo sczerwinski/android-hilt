@@ -70,7 +70,8 @@ class FactoryMethodModelBuilder {
             enclosingClassName = enclosingElement.className(),
             enclosingElementKind = KotlinElementKind.forElement(enclosingElement),
             componentClassName = visitor.componentClassName as? ClassName ?: defaultComponentClassName,
-            annotations = element.scopesAndQualifiers().map(AnnotationSpec::get)
+            annotations = element.scopesAndQualifiers().map(AnnotationSpec::get),
+            isTest = annotationType.simpleName.startsWith(TEST_ANNOTATION_PREFIX)
         )
     }
 
@@ -85,6 +86,8 @@ class FactoryMethodModelBuilder {
             .build()
 
     companion object {
+        private const val TEST_ANNOTATION_PREFIX = "Test"
+
         private val defaultComponentClassName = ClassName.get(SingletonComponent::class.java)
     }
 }

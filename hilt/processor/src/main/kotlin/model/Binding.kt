@@ -24,9 +24,10 @@ data class Binding(
     val annotatedClassName: ClassName,
     val supertypeClassName: ClassName,
     val componentClassName: ClassName,
-    val annotations: List<AnnotationSpec>
+    val annotations: List<AnnotationSpec>,
+    val isTest: Boolean
 ) {
 
     val groupingKey: ModuleGroupingKey =
-        ModuleGroupingKey(annotatedClassName.packageName(), supertypeClassName, componentClassName)
+        ModuleGroupingKey(annotatedClassName.packageName(), supertypeClassName, componentClassName, isTest)
 }

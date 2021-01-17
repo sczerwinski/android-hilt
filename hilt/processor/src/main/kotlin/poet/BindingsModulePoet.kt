@@ -32,6 +32,7 @@ import javax.lang.model.element.Modifier
 object BindingsModulePoet : BaseModulePoet() {
 
     private const val MODULE_NAME_FORMAT = "%s_%s_BindingsModule"
+    private const val TEST_MODULE_NAME_FORMAT = "%s_%s_BindingsModule_Test"
     private const val BINDS_METHOD_NAME_FORMAT = "bind%s"
     private const val BINDS_METHOD_PARAM_NAME = "implementation"
 
@@ -53,14 +54,14 @@ object BindingsModulePoet : BaseModulePoet() {
         bindings: List<Binding>
     ): TypeSpec =
         TypeSpec.interfaceBuilder(createModuleClassName(groupingKey))
-            .addCommonModuleSetup(groupingKey.componentClassName)
+            .addCommonModuleSetup(groupingKey, createModuleClassName(groupingKey.copy(isTest = false)))
             .addMethods(bindings.map { binding -> generateBindsMethodSpec(binding) })
             .build()
 
     private fun createModuleClassName(groupingKey: ModuleGroupingKey): ClassName =
         ClassName.get(
             groupingKey.packageName,
-            MODULE_NAME_FORMAT.format(
+            (if (groupingKey.isTest) TEST_MODULE_NAME_FORMAT else MODULE_NAME_FORMAT).format(
                 groupingKey.returnedTypeName.toModuleNamePrefix(),
                 groupingKey.componentClassName.simpleName()
             )

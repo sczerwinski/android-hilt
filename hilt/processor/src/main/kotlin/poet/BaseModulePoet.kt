@@ -23,6 +23,7 @@ import com.squareup.javapoet.TypeName
 import com.squareup.javapoet.TypeSpec
 import dagger.Module
 import dagger.hilt.InstallIn
+import it.czerwinski.android.hilt.processor.model.ModuleGroupingKey
 import javax.lang.model.element.Modifier
 
 open class BaseModulePoet {
@@ -30,9 +31,15 @@ open class BaseModulePoet {
     protected fun TypeName.toModuleNamePrefix(): String =
         (box() as ClassName).simpleNames().joinToString(SIMPLE_NAME_SEPARATOR)
 
-    protected fun TypeSpec.Builder.addCommonModuleSetup(componentClassName: ClassName): TypeSpec.Builder = this
+    protected fun TypeSpec.Builder.addCommonModuleSetup(
+        groupingKey: ModuleGroupingKey,
+        replacesClassName: ClassName
+    ): TypeSpec.Builder = this
         .addAnnotation(moduleClassName)
-        .addAnnotation(createInstallInAnnotationSpec(componentClassName))
+        .addAnnotation(
+            if (groupingKey.isTest) createTestInstallInAnnotationSpec(groupingKey.componentClassName, replacesClassName)
+            else createInstallInAnnotationSpec(groupingKey.componentClassName)
+        )
         .addModifiers(Modifier.PUBLIC)
 
     private fun createInstallInAnnotationSpec(componentClassName: ClassName): AnnotationSpec =
@@ -40,14 +47,28 @@ open class BaseModulePoet {
             .addMember(COMPONENT_MEMBER_NAME, COMPONENT_MEMBER_FORMAT, componentClassName)
             .build()
 
+    private fun createTestInstallInAnnotationSpec(
+        componentClassName: ClassName,
+        replacesClassName: ClassName
+    ): AnnotationSpec =
+        AnnotationSpec.builder(testInstallInClassName)
+            .addMember(TEST_COMPONENT_MEMBER_NAME, COMPONENT_MEMBER_FORMAT, componentClassName)
+            .addMember(TEST_REPLACES_MEMBER_NAME, REPLACES_MEMBER_FORMAT, replacesClassName)
+            .build()
+
     companion object {
 
         private const val SIMPLE_NAME_SEPARATOR = "_"
 
         private const val COMPONENT_MEMBER_NAME = "value"
+        private const val TEST_COMPONENT_MEMBER_NAME = "components"
+        private const val TEST_REPLACES_MEMBER_NAME = "replaces"
         private const val COMPONENT_MEMBER_FORMAT = "\$T.class"
+        private const val REPLACES_MEMBER_FORMAT = "\$T.class"
 
         private val moduleClassName = ClassName.get(Module::class.java)
         private val installInClassName = ClassName.get(InstallIn::class.java)
+        private val testInstallInClassName =
+            ClassName.get("dagger.hilt.testing", "TestInstallIn")
     }
 }

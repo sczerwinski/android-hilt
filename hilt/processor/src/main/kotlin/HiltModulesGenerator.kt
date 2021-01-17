@@ -20,6 +20,9 @@ package it.czerwinski.android.hilt.processor
 import it.czerwinski.android.hilt.annotations.Bound
 import it.czerwinski.android.hilt.annotations.BoundTo
 import it.czerwinski.android.hilt.annotations.FactoryMethod
+import it.czerwinski.android.hilt.annotations.TestBound
+import it.czerwinski.android.hilt.annotations.TestBoundTo
+import it.czerwinski.android.hilt.annotations.TestFactoryMethod
 import it.czerwinski.android.hilt.processor.model.Binding
 import it.czerwinski.android.hilt.processor.model.BindingBuilder
 import it.czerwinski.android.hilt.processor.model.FactoryMethodModel
@@ -86,7 +89,11 @@ class HiltModulesGenerator : AbstractProcessor() {
             .build()
 
     companion object {
-        private val boundAnnotationTypes = listOf(Bound::class.java, BoundTo::class.java)
-        private val factoryMethodAnnotationTypes = listOf(FactoryMethod::class.java)
+        private val boundAnnotationTypes = listOf(
+            Bound::class.java, BoundTo::class.java, TestBound::class.java, TestBoundTo::class.java
+        )
+        private val factoryMethodAnnotationTypes = listOf(
+            FactoryMethod::class.java, TestFactoryMethod::class.java
+        )
     }
 }

@@ -30,11 +30,12 @@ data class FactoryMethodModel(
     val enclosingClassName: ClassName,
     val enclosingElementKind: KotlinElementKind,
     val componentClassName: ClassName,
-    val annotations: List<AnnotationSpec>
+    val annotations: List<AnnotationSpec>,
+    val isTest: Boolean
 ) {
 
     val groupingKey: ModuleGroupingKey =
-        ModuleGroupingKey(enclosingClassName.packageName(), returnTypeName, componentClassName)
+        ModuleGroupingKey(enclosingClassName.packageName(), returnTypeName, componentClassName, isTest)
 
     fun formatCallParameters(): String = parameters.joinToString { it.name }
 }

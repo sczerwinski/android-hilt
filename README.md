@@ -172,6 +172,19 @@ public class DatabaseFactory_SingletonComponent_FactoryMethodsModule {
 
 Since release 1.1.0, component property is optional, and set to `SingletonComponent` by default.
 
+#### `@TestBound`, `@TestBoundTo` and `@TestFactoryMethod`
+
+Version 1.1.0 introduces additional test annotations that can be used to generate modules
+annotated with [`@TestInstallIn`][TestInstallIn], instead of `@InstallIn`:
+- `@TestBound` (instead of `@Bound`)
+- `@TestBoundTo` (instead of `@BoundTo`)
+- `@TestFactoryMethod` (instead of `@FactoryMethod`)
+
+Test module generated using `@TestBound` and/or `@TestBoundTo` will replace the module generated using
+`@Bound` and/or `@BoundTo`.
+
+Test module generated using `@TestFactoryMethod` will replace the module generated with `@FactoryMethod`.
+
 ## Hilt Testing Extensions
 
 [![Maven Central](https://img.shields.io/maven-central/v/it.czerwinski.android.hilt/hilt-fragment-testing)][hilt-fragment-testing-release]
@@ -218,3 +231,4 @@ Works exactly like [FragmentScenario], but supports Hilt dependency injection in
 [hilt-fragment-testing-snapshot]: https://oss.sonatype.org/content/repositories/snapshots/it/czerwinski/android/hilt/hilt-fragment-testing/
 
 [FragmentScenario]: https://developer.android.com/guide/fragments/test
+[TestInstallIn]: https://dagger.dev/hilt/testing#testinstallin
