@@ -1,6 +1,18 @@
 # Changelog
 
 ## [Unreleased]
+### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+## [1.1.0-BETA1]
 ### Changed
 - Dependencies:
   - Upgrade `kotlin-serialization` to `1.4.21-2` in "Generated Modules" example
