@@ -75,7 +75,7 @@ dependencies {
 
     implementation("joda-time:joda-time:2.10.9")
 
-    implementation("com.squareup.picasso:picasso:2.8")
+    implementation("com.squareup.picasso:picasso:2.71828")
 
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.31-alpha")
     kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.31-alpha")
