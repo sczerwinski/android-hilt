@@ -16,7 +16,8 @@ tasks.withType<KotlinCompile> {
 dependencies {
     implementation(project(":hilt:annotations"))
 
-    implementation("com.google.dagger:hilt-android:2.31.1-alpha")
+    implementation("androidx.annotation:annotation:1.1.0")
+    implementation("com.google.dagger:hilt-core:2.31.1-alpha")
     implementation("com.squareup:javapoet:1.13.0")
 }
 
