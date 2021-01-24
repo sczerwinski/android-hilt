@@ -5,7 +5,7 @@
 - Upgrade Gradle to `6.8`
 - Dependencies:
   - Upgrade Android Gradle Plugin to `4.1.2`
-  - Upgrade Hilt to `2.31.1-alpha`
+  - Upgrade Hilt to `2.31.2-alpha`
 
 ## [1.1.0-BETA1]
 ### Changed

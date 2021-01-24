@@ -33,7 +33,7 @@ android {
 dependencies {
     api(project(":hilt:annotations"))
 
-    implementation("com.google.dagger:hilt-android:2.31.1-alpha")
+    implementation("com.google.dagger:hilt-android:2.31.2-alpha")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.0")
