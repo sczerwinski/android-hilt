@@ -17,12 +17,14 @@
 
 package it.czerwinski.android.hilt.fragment.testing.test
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class TestViewModel @ViewModelInject constructor(
+@HiltViewModel
+class TestViewModel @Inject constructor(
     repository: TestRepository
 ) : ViewModel() {
 
