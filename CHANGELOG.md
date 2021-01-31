@@ -6,6 +6,7 @@
 - Dependencies:
   - Upgrade Android Gradle Plugin to `4.1.2`
   - Upgrade Hilt to `2.31.2-alpha`
+  - Upgrade Ktor Client to `1.5.1` (example only)
 
 ## [1.1.0-BETA1]
 ### Changed
