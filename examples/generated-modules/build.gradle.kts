@@ -71,7 +71,7 @@ dependencies {
     kapt("androidx.room:room-compiler:2.2.6")
     implementation("androidx.room:room-ktx:2.2.6")
     implementation("androidx.sqlite:sqlite-ktx:2.1.0")
-    implementation("it.czerwinski.android.room:room-extensions:1.0.0")
+    implementation("it.czerwinski.android.room:room-extensions:1.0.1")
 
     implementation("joda-time:joda-time:2.10.9")
 
