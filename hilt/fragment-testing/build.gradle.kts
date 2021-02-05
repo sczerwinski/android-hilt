@@ -53,7 +53,7 @@ dependencies {
         exclude(group = "androidx.text", module = "monitor")
     }
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
-    androidTestImplementation("com.google.android.material:material:1.2.1")
+    androidTestImplementation("com.google.android.material:material:1.3.0")
     androidTestImplementation("androidx.activity:activity-ktx:1.1.0")
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.31.2-alpha")
     kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.31.2-alpha")
