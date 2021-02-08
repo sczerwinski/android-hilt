@@ -73,7 +73,7 @@ dependencies {
     implementation("androidx.sqlite:sqlite-ktx:2.1.0")
     implementation("it.czerwinski.android.room:room-extensions:1.0.1")
 
-    implementation("joda-time:joda-time:2.10.9")
+    implementation("joda-time:joda-time:2.10.10")
 
     implementation("com.squareup.picasso:picasso:2.8")
 
