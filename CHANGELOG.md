@@ -1,17 +1,10 @@
 # Changelog
 
 ## [Unreleased]
-### Added
-
 ### Changed
+- Dependencies:
+  - Upgrade `joda-time` to `2.10.10` (example only)
 
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
 ## [1.1.0-RC1]
 ### Changed
 - Upgrade Gradle to `6.8`
