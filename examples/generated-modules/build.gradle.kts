@@ -77,7 +77,7 @@ dependencies {
 
     implementation("com.squareup.picasso:picasso:2.8")
 
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.31.2-alpha")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.32-alpha")
     kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.31.2-alpha")
 
     androidTestImplementation("io.ktor:ktor-client-mock:1.5.1")
