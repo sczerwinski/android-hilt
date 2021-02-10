@@ -3,7 +3,7 @@
 ## [Unreleased]
 ### Changed
 - Dependencies:
-  - Upgrade `joda-time` to `2.10.10` (example only)
+  - Upgrade Hilt to `2.32-alpha`
 
 ## [1.1.0-RC1]
 ### Changed
