@@ -46,8 +46,8 @@ kapt {
 }
 
 dependencies {
-    implementation("com.google.dagger:hilt-android:2.31.2-alpha")
-    kapt("com.google.dagger:hilt-android-compiler:2.31.2-alpha")
+    implementation("com.google.dagger:hilt-android:2.32-alpha")
+    kapt("com.google.dagger:hilt-android-compiler:2.32-alpha")
 
     implementation(project(":hilt:extensions"))
     kapt(project(":hilt:processor"))
@@ -60,7 +60,7 @@ dependencies {
 
     implementation("androidx.browser:browser:1.3.0")
 
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
 
     implementation("io.ktor:ktor-client-android:1.5.1")
@@ -77,8 +77,8 @@ dependencies {
 
     implementation("com.squareup.picasso:picasso:2.8")
 
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.31.2-alpha")
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.31.2-alpha")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.32-alpha")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.32-alpha")
 
     androidTestImplementation("io.ktor:ktor-client-mock:1.5.1")
 
