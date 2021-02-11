@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Changed
+- Upgrade Gradle to `6.8.2`
 - Dependencies:
   - Upgrade Hilt to `2.32-alpha`
 
