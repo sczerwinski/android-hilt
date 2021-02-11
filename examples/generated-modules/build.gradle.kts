@@ -61,7 +61,7 @@ dependencies {
     implementation("androidx.browser:browser:1.3.0")
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.0")
 
     implementation("io.ktor:ktor-client-android:1.5.1")
     implementation("io.ktor:ktor-client-serialization:1.5.1")
