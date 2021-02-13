@@ -18,7 +18,7 @@ jobs:
         uses: gradle/wrapper-validation-action@v1
 
   release:
-    name: Publish To OSSRH Snapshot Repository
+    name: Publish To Maven Central
     needs: gradleValidation
     runs-on: ubuntu-latest
     steps:
@@ -34,7 +34,7 @@ jobs:
         env:
           FILE_PASSPHRASE: ${{ secrets.FILE_PASSPHRASE }}
         run: gpg --quiet --batch --yes --decrypt --passphrase="${FILE_PASSPHRASE}" --output secring.gpg secring.gpg.gpg
-      - name: Publish To OSSRH Repository
+      - name: Publish To Maven Central
         env:
           SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
           SIGNING_PASS: ${{ secrets.SIGNING_PASS }}
