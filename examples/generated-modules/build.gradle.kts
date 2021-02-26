@@ -47,7 +47,7 @@ kapt {
 
 dependencies {
     implementation("com.google.dagger:hilt-android:2.32-alpha")
-    kapt("com.google.dagger:hilt-android-compiler:2.32-alpha")
+    kapt("com.google.dagger:hilt-android-compiler:2.33-beta")
 
     implementation(project(":hilt:extensions"))
     kapt(project(":hilt:processor"))
