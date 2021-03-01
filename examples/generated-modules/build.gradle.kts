@@ -65,7 +65,7 @@ dependencies {
 
     implementation("io.ktor:ktor-client-android:1.5.1")
     implementation("io.ktor:ktor-client-serialization:1.5.1")
-    implementation("io.ktor:ktor-client-logging:1.5.1")
+    implementation("io.ktor:ktor-client-logging:1.5.2")
 
     implementation("androidx.room:room-runtime:2.2.6")
     kapt("androidx.room:room-compiler:2.2.6")
