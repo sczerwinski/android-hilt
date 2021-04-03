@@ -2,7 +2,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
     id("de.mannodermaus.android-junit5")
-    id("io.gitlab.arturbosch.detekt") version "1.15.0"
+    id("io.gitlab.arturbosch.detekt") version "1.16.0"
     id("org.jetbrains.dokka")
     `maven-publish`
     signing
@@ -37,7 +37,7 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.1")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.1")
-    testImplementation("io.mockk:mockk:1.10.6")
+    testImplementation("io.mockk:mockk:1.11.0")
 }
 
 tasks {

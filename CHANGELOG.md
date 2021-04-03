@@ -3,7 +3,7 @@
 ## [Unreleased]
 ### Changed
 - Dependencies:
-  - Upgrade Kotlin to `1.4.31`
+  - Upgrade Kotlin to `1.4.32`
   - Upgrade Hilt to `2.33-beta`
 
 ## [1.1.0]
