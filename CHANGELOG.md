@@ -2,9 +2,12 @@
 
 ## [Unreleased]
 ### Changed
+- Upgrade Gradle to `6.8.3`
 - Dependencies:
   - Upgrade Kotlin to `1.4.32`
+  - Upgrade Android Gradle Plugin to `4.1.3`
   - Upgrade Hilt to `2.33-beta`
+  - Upgrade Ktor Client to `1.5.3` (example only)
 
 ## [1.1.0]
 ### Changed

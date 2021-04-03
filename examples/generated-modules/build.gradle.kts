@@ -63,9 +63,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
 
-    implementation("io.ktor:ktor-client-android:1.5.2")
-    implementation("io.ktor:ktor-client-serialization:1.5.2")
-    implementation("io.ktor:ktor-client-logging:1.5.2")
+    implementation("io.ktor:ktor-client-android:1.5.3")
+    implementation("io.ktor:ktor-client-serialization:1.5.3")
+    implementation("io.ktor:ktor-client-logging:1.5.3")
 
     implementation("androidx.room:room-runtime:2.2.6")
     kapt("androidx.room:room-compiler:2.2.6")
@@ -80,7 +80,7 @@ dependencies {
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.33-beta")
     kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.33-beta")
 
-    androidTestImplementation("io.ktor:ktor-client-mock:1.5.2")
+    androidTestImplementation("io.ktor:ktor-client-mock:1.5.3")
 
     androidTestImplementation("it.czerwinski.android:xpresso-core:1.0")
     androidTestImplementation("it.czerwinski.android:xpresso-recyclerview:1.0")
