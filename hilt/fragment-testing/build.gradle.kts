@@ -49,7 +49,7 @@ dependencies {
     api("androidx.test:core:1.3.0")
 
     androidTestImplementation("androidx.test:runner:1.3.0")
-    debugImplementation("androidx.fragment:fragment-testing:1.3.0") {
+    debugImplementation("androidx.fragment:fragment-testing:1.3.2") {
         exclude(group = "androidx.text", module = "monitor")
     }
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
