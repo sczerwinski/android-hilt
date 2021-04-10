@@ -46,15 +46,15 @@ kapt {
 }
 
 dependencies {
-    implementation("com.google.dagger:hilt-android:2.33-beta")
-    kapt("com.google.dagger:hilt-android-compiler:2.33-beta")
+    implementation("com.google.dagger:hilt-android:2.34-beta")
+    kapt("com.google.dagger:hilt-android-compiler:2.34-beta")
 
     implementation(project(":hilt:extensions"))
     kapt(project(":hilt:processor"))
 
     implementation("com.google.android.material:material:1.3.0")
 
-    implementation("androidx.activity:activity-ktx:1.2.0")
+    implementation("androidx.activity:activity-ktx:1.2.2")
 
     implementation("androidx.multidex:multidex:2.0.1")
 
@@ -77,8 +77,8 @@ dependencies {
 
     implementation("com.squareup.picasso:picasso:2.8")
 
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.33-beta")
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.33-beta")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.34-beta")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.34-beta")
 
     androidTestImplementation("io.ktor:ktor-client-mock:1.5.3")
 

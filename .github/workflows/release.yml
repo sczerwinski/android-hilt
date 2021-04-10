@@ -27,9 +27,10 @@ jobs:
         with:
           ref: ${{ github.event.release.tag_name }}
       - name: Setup Java
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with:
-          java-version: 1.8
+          distribution: zulu
+          java-version: 8
       - name: Decrypt Key Ring File
         env:
           FILE_PASSPHRASE: ${{ secrets.FILE_PASSPHRASE }}
@@ -52,9 +53,10 @@ jobs:
         with:
           ref: ${{ github.event.release.tag_name }}
       - name: Setup Java
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with:
-          java-version: 1.8
+          distribution: zulu
+          java-version: 8
       - name: Patch Changelog
         run: ./gradlew patchChangelog
       - name: Commit files
