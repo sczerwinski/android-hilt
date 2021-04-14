@@ -17,7 +17,7 @@ dependencies {
     implementation(project(":hilt:annotations"))
 
     implementation("androidx.annotation:annotation:1.2.0")
-    implementation("com.google.dagger:hilt-core:2.34-beta")
+    implementation("com.google.dagger:hilt-core:2.34.1-beta")
     implementation("com.squareup:javapoet:1.13.0")
 }
 
