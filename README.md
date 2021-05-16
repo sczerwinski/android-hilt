@@ -12,7 +12,7 @@
 
   ```kotlin
   dependencies {
-      implementation("com.google.dagger:hilt-android:2.34.1-beta")
+      implementation("com.google.dagger:hilt-android:2.35.1")
       implementation("it.czerwinski.android.hilt:hilt-extensions:[VERSION]")
       kapt("it.czerwinski.android.hilt:hilt-processor:[VERSION]")
   }
@@ -24,7 +24,7 @@
 
   ```groovy
   dependencies {
-      implementation 'com.google.dagger:hilt-android:2.34.1-beta'
+      implementation 'com.google.dagger:hilt-android:2.35.1'
       implementation 'it.czerwinski.android.hilt:hilt-extensions:[VERSION]'
       kapt 'it.czerwinski.android.hilt:hilt-processor:[VERSION]'
   }
@@ -197,7 +197,7 @@ Must be used as `debugImplementation` dependency to properly register `EmptyFrag
 
   ```kotlin
   dependencies {
-      implementation("com.google.dagger:hilt-android:2.34.1-beta")
+      implementation("com.google.dagger:hilt-android:2.35.1")
 
       androidTestImplementation("androidx.test:runner:1.3.0")
       debugImplementation("it.czerwinski.android.hilt:hilt-fragment-testing:[VERSION]")
@@ -210,7 +210,7 @@ Must be used as `debugImplementation` dependency to properly register `EmptyFrag
 
   ```groovy
   dependencies {
-      implementation 'com.google.dagger:hilt-android:2.34.1-beta'
+      implementation 'com.google.dagger:hilt-android:2.35.1'
 
       androidTestImplementation 'androidx.test:runner:1.3.0'
       debugImplementation 'it.czerwinski.android.hilt:hilt-fragment-testing:[VERSION]'

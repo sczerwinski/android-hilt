@@ -4,7 +4,7 @@ plugins {
     kotlin("kapt")
     id("kotlinx-serialization")
     id("dagger.hilt.android.plugin")
-    id("io.gitlab.arturbosch.detekt") version "1.16.0"
+    id("io.gitlab.arturbosch.detekt") version "1.17.0"
 }
 
 android {
@@ -46,15 +46,15 @@ kapt {
 }
 
 dependencies {
-    implementation("com.google.dagger:hilt-android:2.34.1-beta")
-    kapt("com.google.dagger:hilt-android-compiler:2.34.1-beta")
+    implementation("com.google.dagger:hilt-android:2.35.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.35.1")
 
     implementation(project(":hilt:extensions"))
     kapt(project(":hilt:processor"))
 
     implementation("com.google.android.material:material:1.3.0")
 
-    implementation("androidx.activity:activity-ktx:1.2.2")
+    implementation("androidx.activity:activity-ktx:1.2.3")
 
     implementation("androidx.multidex:multidex:2.0.1")
 
@@ -67,9 +67,9 @@ dependencies {
     implementation("io.ktor:ktor-client-serialization:1.5.3")
     implementation("io.ktor:ktor-client-logging:1.5.3")
 
-    implementation("androidx.room:room-runtime:2.2.6")
-    kapt("androidx.room:room-compiler:2.2.6")
-    implementation("androidx.room:room-ktx:2.2.6")
+    implementation("androidx.room:room-runtime:2.3.0")
+    kapt("androidx.room:room-compiler:2.3.0")
+    implementation("androidx.room:room-ktx:2.3.0")
     implementation("androidx.sqlite:sqlite-ktx:2.1.0")
     implementation("it.czerwinski.android.room:room-extensions:1.0.1")
 
@@ -77,8 +77,8 @@ dependencies {
 
     implementation("com.squareup.picasso:picasso:2.8")
 
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.34.1-beta")
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.34.1-beta")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.35.1")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.35.1")
 
     androidTestImplementation("io.ktor:ktor-client-mock:1.5.3")
 

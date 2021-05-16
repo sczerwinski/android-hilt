@@ -2,14 +2,14 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm")
-    id("io.gitlab.arturbosch.detekt") version "1.16.0"
+    id("io.gitlab.arturbosch.detekt") version "1.17.0"
     id("org.jetbrains.dokka")
     `maven-publish`
     signing
 }
 
 dependencies {
-    implementation("com.google.dagger:hilt-core:2.34.1-beta")
+    implementation("com.google.dagger:hilt-core:2.35.1")
 }
 
 tasks.withType<KotlinCompile> {
