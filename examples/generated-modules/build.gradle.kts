@@ -4,7 +4,7 @@ plugins {
     kotlin("kapt")
     id("kotlinx-serialization")
     id("dagger.hilt.android.plugin")
-    id("io.gitlab.arturbosch.detekt") version "1.16.0"
+    id("io.gitlab.arturbosch.detekt") version "1.17.0"
 }
 
 android {
@@ -54,7 +54,7 @@ dependencies {
 
     implementation("com.google.android.material:material:1.3.0")
 
-    implementation("androidx.activity:activity-ktx:1.2.2")
+    implementation("androidx.activity:activity-ktx:1.2.3")
 
     implementation("androidx.multidex:multidex:2.0.1")
 

@@ -3,7 +3,7 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
-    id("io.gitlab.arturbosch.detekt") version "1.16.0"
+    id("io.gitlab.arturbosch.detekt") version "1.17.0"
     id("org.jetbrains.dokka")
     `maven-publish`
     signing
@@ -49,12 +49,13 @@ dependencies {
     api("androidx.test:core:1.3.0")
 
     androidTestImplementation("androidx.test:runner:1.3.0")
-    debugImplementation("androidx.fragment:fragment-testing:1.3.2") {
+    debugImplementation("androidx.fragment:fragment-testing:1.3.3") {
         exclude(group = "androidx.text", module = "monitor")
+        exclude(group = "androidx.activity", module = "activity-ktx")
     }
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
     androidTestImplementation("com.google.android.material:material:1.3.0")
-    androidTestImplementation("androidx.activity:activity-ktx:1.2.2")
+    androidTestImplementation("androidx.activity:activity-ktx:1.2.3")
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.35.1")
     kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.35.1")
 }
