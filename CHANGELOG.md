@@ -7,7 +7,7 @@
   - Upgrade Kotlin to `1.5.0`
   - Upgrade Android Gradle Plugin to `4.2.1`
   - Upgrade Hilt to `2.35.1`
-  - Upgrade Ktor Client to `1.5.3` (example only)
+  - Upgrade Ktor Client to `1.5.4` (example only)
 
 ## [1.1.0]
 ### Changed
