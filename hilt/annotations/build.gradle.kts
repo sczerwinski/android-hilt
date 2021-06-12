@@ -9,7 +9,7 @@ plugins {
 }
 
 dependencies {
-    implementation("com.google.dagger:hilt-core:2.36")
+    implementation("com.google.dagger:hilt-core:2.37")
 }
 
 tasks.withType<KotlinCompile> {

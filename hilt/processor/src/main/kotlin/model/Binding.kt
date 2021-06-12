@@ -19,15 +19,17 @@ package it.czerwinski.android.hilt.processor.model
 
 import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
+import com.squareup.javapoet.TypeName
+import it.czerwinski.android.hilt.processor.rawType
 
 data class Binding(
     val annotatedClassName: ClassName,
-    val supertypeClassName: ClassName,
+    val supertypeClassName: TypeName,
     val componentClassName: ClassName,
     val annotations: List<AnnotationSpec>,
     val isTest: Boolean
 ) {
 
     val groupingKey: ModuleGroupingKey =
-        ModuleGroupingKey(annotatedClassName.packageName(), supertypeClassName, componentClassName, isTest)
+        ModuleGroupingKey(annotatedClassName.packageName(), supertypeClassName.rawType(), componentClassName, isTest)
 }
