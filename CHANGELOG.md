@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### Added
+- Support for parameterized supertypes (#122)
+
 ### Changed
 - Dependencies:
   - Upgrade Kotlin to `1.5.10`
