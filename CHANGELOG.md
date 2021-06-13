@@ -8,6 +8,7 @@
 - Dependencies:
   - Upgrade Kotlin to `1.5.10`
   - Upgrade Hilt to `2.37`
+  - Upgrade Ktor Client to `1.6.0` (example only)
 
 ## [1.1.1]
 ### Changed
