@@ -80,7 +80,7 @@ dependencies {
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.37")
     kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.37")
 
-    androidTestImplementation("io.ktor:ktor-client-mock:1.5.4")
+    androidTestImplementation("io.ktor:ktor-client-mock:1.6.0")
 
     androidTestImplementation("it.czerwinski.android:xpresso-core:1.0")
     androidTestImplementation("it.czerwinski.android:xpresso-recyclerview:1.0")
