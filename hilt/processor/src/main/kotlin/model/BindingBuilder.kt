@@ -56,7 +56,7 @@ class BindingBuilder(private val processingEnv: ProcessingEnvironment) {
 
         return Binding(
             annotatedClassName = element.className(),
-            supertypeClassName = (visitor.supertypeClassName ?: getSupertypeClassName(element)) as ClassName,
+            supertypeClassName = visitor.supertypeClassName ?: getSupertypeClassName(element),
             componentClassName = visitor.componentClassName as? ClassName ?: defaultComponentClassName,
             annotations = element.scopesAndQualifiers().map(AnnotationSpec::get),
             isTest = annotationType.simpleName.startsWith(TEST_ANNOTATION_PREFIX)

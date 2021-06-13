@@ -43,8 +43,8 @@ kapt {
 }
 
 dependencies {
-    implementation("com.google.dagger:hilt-android:2.36")
-    kapt("com.google.dagger:hilt-android-compiler:2.36")
+    implementation("com.google.dagger:hilt-android:2.37")
+    kapt("com.google.dagger:hilt-android-compiler:2.37")
 
     api("androidx.test:core:1.3.0")
 
@@ -56,8 +56,8 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
     androidTestImplementation("com.google.android.material:material:1.3.0")
     androidTestImplementation("androidx.activity:activity-ktx:1.2.3")
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.36")
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.36")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.37")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.37")
 }
 
 tasks {

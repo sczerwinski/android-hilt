@@ -24,12 +24,14 @@ import com.squareup.javapoet.TypeSpec
 import dagger.Module
 import dagger.hilt.InstallIn
 import it.czerwinski.android.hilt.processor.model.ModuleGroupingKey
+import it.czerwinski.android.hilt.processor.rawType
 import javax.lang.model.element.Modifier
 
 open class BaseModulePoet {
 
-    protected fun TypeName.toModuleNamePrefix(): String =
-        (box() as ClassName).simpleNames().joinToString(SIMPLE_NAME_SEPARATOR)
+    protected fun TypeName.toModuleNamePrefix(): String {
+        return box().rawType().simpleNames().joinToString(SIMPLE_NAME_SEPARATOR)
+    }
 
     protected fun TypeSpec.Builder.addCommonModuleSetup(
         groupingKey: ModuleGroupingKey,
