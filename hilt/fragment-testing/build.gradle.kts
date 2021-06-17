@@ -49,7 +49,7 @@ dependencies {
     api("androidx.test:core:1.3.0")
 
     androidTestImplementation("androidx.test:runner:1.3.0")
-    debugImplementation("androidx.fragment:fragment-testing:1.3.4") {
+    debugImplementation("androidx.fragment:fragment-testing:1.3.5") {
         exclude(group = "androidx.text", module = "monitor")
         exclude(group = "androidx.activity", module = "activity-ktx")
     }

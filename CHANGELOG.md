@@ -1,17 +1,9 @@
 # Changelog
 
 ## [Unreleased]
-### Added
-
-### Changed
-
-### Deprecated
-
-### Removed
-
 ### Fixed
+- Add `@SupportedSourceVersion` to `HiltModulesGenerator`
 
-### Security
 ## [1.2.0]
 ### Added
 - Support for parameterized supertypes (#122)
