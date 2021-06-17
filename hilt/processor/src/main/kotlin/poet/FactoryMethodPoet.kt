@@ -47,7 +47,7 @@ object FactoryMethodPoet {
 
     private fun createProvidesMethodName(factoryMethod: FactoryMethodModel) =
         (factoryMethod.enclosingClassName.simpleNames() + factoryMethod.methodName)
-            .joinToString(SIMPLE_NAME_SEPARATOR) { it.decapitalize(Locale.ENGLISH) }
+            .joinToString(SIMPLE_NAME_SEPARATOR) { name -> name.replaceFirstChar { it.lowercase(Locale.ENGLISH) } }
 
 
     private fun MethodSpec.Builder.addReceiverParameterIfClass(factoryMethod: FactoryMethodModel): MethodSpec.Builder =
