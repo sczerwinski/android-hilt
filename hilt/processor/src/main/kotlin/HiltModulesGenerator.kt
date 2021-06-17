@@ -31,9 +31,21 @@ import it.czerwinski.android.hilt.processor.poet.BindingsModulePoet
 import it.czerwinski.android.hilt.processor.poet.FactoryMethodsModulePoet
 import javax.annotation.processing.AbstractProcessor
 import javax.annotation.processing.RoundEnvironment
+import javax.annotation.processing.SupportedSourceVersion
+import javax.lang.model.SourceVersion
 import javax.lang.model.element.Element
 import javax.lang.model.element.TypeElement
 
+/**
+ * Generates Hilt modules from annotations:
+ * * [Bound]
+ * * [BoundTo]
+ * * [FactoryMethod]
+ * * [TestBound]
+ * * [TestBoundTo]
+ * * [TestFactoryMethod]
+ */
+@SupportedSourceVersion(SourceVersion.RELEASE_8)
 class HiltModulesGenerator : AbstractProcessor() {
 
     private val filer get() = processingEnv.filer
