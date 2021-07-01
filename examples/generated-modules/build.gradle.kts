@@ -64,7 +64,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
 
     implementation("io.ktor:ktor-client-android:1.6.0")
-    implementation("io.ktor:ktor-client-serialization:1.6.0")
+    implementation("io.ktor:ktor-client-serialization:1.6.1")
     implementation("io.ktor:ktor-client-logging:1.6.0")
 
     implementation("androidx.room:room-runtime:2.3.0")
