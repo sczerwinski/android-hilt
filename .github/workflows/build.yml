@@ -58,10 +58,27 @@ jobs:
           java-version: 8
       - name: Run Unit Tests
         run: ./gradlew testReleaseUnitTest --stacktrace
+      - name: Publish Test Report
+        if: ${{ always() }}
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        with:
+          files: '**/build/test-results/**/*.xml'
       - name: Run Detekt
+        if: ${{ always() }}
         run: ./gradlew detekt --stacktrace
+      - name: Generate Detekt Annotations
+        if: ${{ always() }}
+        uses: jwgmeligmeyling/checkstyle-github-action@master
+        with:
+          path: '**/detekt.xml'
       - name: Run Lint
+        if: ${{ always() }}
         run: ./gradlew lint --stacktrace
+      - name: Generate Lint Annotations
+        if: ${{ always() }}
+        uses: yutailang0119/action-android-lint@v1.1.0
+        with:
+          xml_path: '**/build/reports/lint-results-*.xml'
 
   dokka:
     name: Generate Dokka Documentation
