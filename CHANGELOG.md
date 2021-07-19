@@ -1,6 +1,19 @@
 # Changelog
 
 ## [Unreleased]
+### Changed
+- Dependencies:
+  - Upgrade Kotlin to `1.5.21`
+  - Upgrade Android Gradle Plugin to `4.2.2`
+  - Upgrade `kotlin-serialization` to `1.5.21`
+  - Upgrade `org.jetbrains.changelog` to `1.2.0`
+  - Upgrade `material` to `1.4.0`
+  - Upgrade AndroidX Test to `1.4.0`
+  - Upgrade Espresso to `1.4.0`
+  - Upgrade MockK to `1.12.0`
+  - Upgrade Dokka to `1.5.0`
+  - Upgrade Ktor Client to `1.6.1` (example only)
+
 ### Fixed
 - Add `@SupportedSourceVersion` to `HiltModulesGenerator`
 

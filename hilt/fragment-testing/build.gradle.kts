@@ -46,15 +46,15 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.37")
     kapt("com.google.dagger:hilt-android-compiler:2.37")
 
-    api("androidx.test:core:1.3.0")
+    api("androidx.test:core:1.4.0")
 
-    androidTestImplementation("androidx.test:runner:1.3.0")
+    androidTestImplementation("androidx.test:runner:1.4.0")
     debugImplementation("androidx.fragment:fragment-testing:1.3.5") {
         exclude(group = "androidx.text", module = "monitor")
         exclude(group = "androidx.activity", module = "activity-ktx")
     }
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
-    androidTestImplementation("com.google.android.material:material:1.3.0")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    androidTestImplementation("com.google.android.material:material:1.4.0")
     androidTestImplementation("androidx.activity:activity-ktx:1.2.3")
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.37")
     kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.37")

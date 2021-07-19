@@ -52,7 +52,7 @@ dependencies {
     implementation(project(":hilt:extensions"))
     kapt(project(":hilt:processor"))
 
-    implementation("com.google.android.material:material:1.3.0")
+    implementation("com.google.android.material:material:1.4.0")
 
     implementation("androidx.activity:activity-ktx:1.2.3")
 
@@ -63,9 +63,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
 
-    implementation("io.ktor:ktor-client-android:1.6.0")
-    implementation("io.ktor:ktor-client-serialization:1.6.0")
-    implementation("io.ktor:ktor-client-logging:1.6.0")
+    implementation("io.ktor:ktor-client-android:1.6.1")
+    implementation("io.ktor:ktor-client-serialization:1.6.1")
+    implementation("io.ktor:ktor-client-logging:1.6.1")
 
     implementation("androidx.room:room-runtime:2.3.0")
     kapt("androidx.room:room-compiler:2.3.0")
@@ -80,7 +80,7 @@ dependencies {
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.37")
     kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.37")
 
-    androidTestImplementation("io.ktor:ktor-client-mock:1.6.0")
+    androidTestImplementation("io.ktor:ktor-client-mock:1.6.1")
 
     androidTestImplementation("it.czerwinski.android:xpresso-core:1.0")
     androidTestImplementation("it.czerwinski.android:xpresso-recyclerview:1.0")
