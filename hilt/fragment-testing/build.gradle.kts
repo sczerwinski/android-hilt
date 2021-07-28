@@ -56,7 +56,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
     androidTestImplementation("com.google.android.material:material:1.4.0")
     androidTestImplementation("androidx.activity:activity-ktx:1.2.3")
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.37")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.38.1")
     kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.37")
 }
 
