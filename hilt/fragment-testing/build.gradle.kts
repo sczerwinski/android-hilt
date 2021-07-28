@@ -44,7 +44,7 @@ kapt {
 
 dependencies {
     implementation("com.google.dagger:hilt-android:2.37")
-    kapt("com.google.dagger:hilt-android-compiler:2.37")
+    kapt("com.google.dagger:hilt-android-compiler:2.38.1")
 
     api("androidx.test:core:1.4.0")
 
