@@ -2,7 +2,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
     id("de.mannodermaus.android-junit5")
-    id("io.gitlab.arturbosch.detekt") version "1.17.1"
+    id("io.gitlab.arturbosch.detekt") version "1.18.0"
     id("org.jetbrains.dokka")
     `maven-publish`
     signing
@@ -10,13 +10,11 @@ plugins {
 
 android {
 
-    compileSdkVersion(30)
+    compileSdk = 31
 
     defaultConfig {
-        minSdkVersion(14)
-        targetSdkVersion(30)
-        versionCode = 1
-        versionName = "${project.version}"
+        minSdk = 16
+        targetSdk = 31
     }
 
     buildTypes {
@@ -33,7 +31,7 @@ android {
 dependencies {
     api(project(":hilt:annotations"))
 
-    implementation("com.google.dagger:hilt-android:2.37")
+    implementation("com.google.dagger:hilt-android:2.38.1")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")

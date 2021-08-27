@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".PostsActivity">
+        <activity
+            android:name=".PostsActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

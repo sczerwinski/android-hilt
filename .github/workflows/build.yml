@@ -33,7 +33,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: zulu
-          java-version: 8
+          java-version: 11
       - name: Export Properties
         id: properties
         shell: bash
@@ -58,7 +58,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: zulu
-          java-version: 8
+          java-version: 11
       - name: Run Unit Tests
         run: ./gradlew testReleaseUnitTest --stacktrace
       - name: Publish Test Report
@@ -94,7 +94,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: zulu
-          java-version: 8
+          java-version: 11
       - name: Generate Documentation
         run: ./gradlew dokkaJavadoc dokkaJekyll --stacktrace
 
@@ -109,7 +109,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: zulu
-          java-version: 8
+          java-version: 11
       - name: Assemble Release AAR
         run: ./gradlew assembleRelease --stacktrace
 
@@ -152,7 +152,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: zulu
-          java-version: 8
+          java-version: 11
       - name: Decrypt Key Ring File
         env:
           FILE_PASSPHRASE: ${{ secrets.FILE_PASSPHRASE }}
