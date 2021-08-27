@@ -2,12 +2,18 @@
 
 ## [Unreleased]
 ### Changed
+- Android SDK:
+  - Change minimum SDK to `16` (to support SDK `14`, use previous version)
+  - Change target SDK to `31`
+- Upgrade Gradle to `7.2`
 - Dependencies:
-  - Upgrade Kotlin to `1.5.21`
-  - Upgrade Android Gradle Plugin to `4.2.2`
-  - Upgrade `kotlin-serialization` to `1.5.21`
-  - Upgrade `org.jetbrains.changelog` to `1.2.0`
+  - Upgrade Kotlin to `1.5.30`
+  - Upgrade Android Gradle Plugin to `7.0.1`
+  - Upgrade Hilt to `2.38.1`
+  - Upgrade `kotlin-serialization` to `1.5.30`
+  - Upgrade `org.jetbrains.changelog` to `1.3.0`
   - Upgrade `material` to `1.4.0`
+  - Upgrade `activity-ktx` to `1.3.1`
   - Upgrade AndroidX Test to `1.4.0`
   - Upgrade Espresso to `1.4.0`
   - Upgrade MockK to `1.12.0`
