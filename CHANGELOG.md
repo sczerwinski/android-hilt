@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Changed
+- Annotation processor is now incremental
 - Android SDK:
   - Change minimum SDK to `16` (to support SDK `14`, use previous version)
   - Change target SDK to `31`

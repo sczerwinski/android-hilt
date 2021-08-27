@@ -142,8 +142,8 @@ annotation processor will generate modules:
 public class UsersDao_SingletonComponent_FactoryMethodsModule {
     @Provides
     @Singleton
-    public UsersDao appDatabase_usersDao(AppDatabase $receiver) {
-        return $receiver.usersDao();
+    public UsersDao appDatabase_usersDao(AppDatabase factory) {
+        return factory.usersDao();
     }
 }
 ```
@@ -153,8 +153,8 @@ public class UsersDao_SingletonComponent_FactoryMethodsModule {
 public class AppDatabase_SingletonComponent_FactoryMethodsModule {
     @Provides
     @Singleton
-    public AppDatabase databaseFactory_createDatabase(DatabaseFactory $receiver) {
-        return $receiver.createDatabase();
+    public AppDatabase databaseFactory_createDatabase(DatabaseFactory factory) {
+        return factory.createDatabase();
     }
 }
 ```
@@ -164,8 +164,8 @@ public class AppDatabase_SingletonComponent_FactoryMethodsModule {
 public class DatabaseFactory_SingletonComponent_FactoryMethodsModule {
     @Provides
     public DatabaseFactory databaseFactoryProvider_createDatabaseFactory(
-            @ApplicationContext Context context) {
-        return DatabaseFactoryProvider.INSTANCE.createDatabaseFactory(context);
+            @ApplicationContext Context context_0) {
+        return DatabaseFactoryProvider.INSTANCE.createDatabaseFactory(context_0);
     }
 }
 ```
