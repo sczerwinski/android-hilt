@@ -31,7 +31,7 @@ import kotlin.reflect.KClass
  * the first parameter of the generated provide function.
  */
 @Target(AnnotationTarget.FUNCTION)
-@Retention(AnnotationRetention.SOURCE)
+@Retention(AnnotationRetention.BINARY)
 @MustBeDocumented
 annotation class FactoryMethod(
 
