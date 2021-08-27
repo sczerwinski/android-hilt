@@ -31,7 +31,8 @@ object FactoryMethodPoet {
 
     private const val PROVIDES_RETURN_FORMAT_STATIC = "return \$T.\$N(\$L);"
     private const val PROVIDES_RETURN_FORMAT_OBJECT = "return \$T.INSTANCE.\$N(\$L);"
-    private const val PROVIDES_RETURN_FORMAT_INSTANCE = "return \$\$receiver.\$N(\$L);"
+    private const val PROVIDES_RETURN_FORMAT_INSTANCE = "return factory.\$N(\$L);"
+    private const val INSTANCE_PARAMETER_NAME = "factory"
 
     fun generateProvidesMethodSpec(factoryMethod: FactoryMethodModel): MethodSpec =
         MethodSpec.methodBuilder(createProvidesMethodName(factoryMethod))
@@ -58,7 +59,7 @@ object FactoryMethodPoet {
         addParameter(createReceiverParameterSpec(factoryMethod))
 
     private fun createReceiverParameterSpec(factoryMethod: FactoryMethodModel): ParameterSpec =
-        ParameterSpec.builder(factoryMethod.enclosingClassName, "\$receiver")
+        ParameterSpec.builder(factoryMethod.enclosingClassName, INSTANCE_PARAMETER_NAME)
             .addAnnotation(NonNull::class.java)
             .build()
 
