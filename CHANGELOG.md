@@ -1,6 +1,19 @@
 # Changelog
 
 ## [Unreleased]
+### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [1.3.0-RC1]
 ### Changed
 - Annotation processor is now incremental
 - Android SDK:
@@ -87,10 +100,8 @@
   - Upgrade `io.mockk:mockk` to `1.10.5`
 
 ## [1.0.0]
-No changes since 1.0.0-RC1
 
 ## [1.0.0-RC1]
-No changes since 1.0.0-BETA1
 
 ## [1.0.0-BETA1]
 ### Fixed
