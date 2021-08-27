@@ -21,8 +21,10 @@ import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.TypeName
 import it.czerwinski.android.hilt.processor.rawType
+import javax.lang.model.element.Element
 
 data class Binding(
+    val originatingElement: Element,
     val annotatedClassName: ClassName,
     val supertypeClassName: TypeName,
     val componentClassName: ClassName,

@@ -33,7 +33,7 @@ import kotlin.reflect.KClass
  * @since 1.1.0
  */
 @Target(AnnotationTarget.FUNCTION)
-@Retention(AnnotationRetention.SOURCE)
+@Retention(AnnotationRetention.BINARY)
 @MustBeDocumented
 annotation class TestFactoryMethod(
 

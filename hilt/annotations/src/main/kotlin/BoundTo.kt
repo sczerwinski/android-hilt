@@ -26,7 +26,7 @@ import kotlin.reflect.KClass
  * Any annotations annotated with `@Scope` or `@Qualifier` will also annotate the resulting `@Binds` method.
  */
 @Target(AnnotationTarget.CLASS)
-@Retention(AnnotationRetention.SOURCE)
+@Retention(AnnotationRetention.BINARY)
 @MustBeDocumented
 annotation class BoundTo(
 

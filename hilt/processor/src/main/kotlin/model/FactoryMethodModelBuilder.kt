@@ -25,8 +25,8 @@ import com.squareup.javapoet.TypeName
 import dagger.hilt.components.SingletonComponent
 import it.czerwinski.android.hilt.processor.className
 import it.czerwinski.android.hilt.processor.findAnnotationOfType
+import it.czerwinski.android.hilt.processor.rawType
 import it.czerwinski.android.hilt.processor.scopesAndQualifiers
-import it.czerwinski.android.hilt.processor.simpleName
 import javax.lang.model.element.Element
 import javax.lang.model.element.ElementKind
 import javax.lang.model.element.ExecutableElement
@@ -63,9 +63,10 @@ class FactoryMethodModelBuilder {
         }
 
         return FactoryMethodModel(
+            originatingElement = element,
             methodName = element.simpleName.toString(),
             isStatic = Modifier.STATIC in element.modifiers,
-            parameters = annotatedMethodElement.parameters.map(::createParameterSpec),
+            parameters = annotatedMethodElement.parameters.mapIndexed(::createParameterSpec),
             returnTypeName = TypeName.get(annotatedMethodElement.returnType),
             enclosingClassName = enclosingElement.className(),
             enclosingElementKind = KotlinElementKind.forElement(enclosingElement),
@@ -75,8 +76,10 @@ class FactoryMethodModelBuilder {
         )
     }
 
-    private fun createParameterSpec(parameter: VariableElement) =
-        ParameterSpec.builder(TypeName.get(parameter.asType()), parameter.simpleName())
+    private fun createParameterSpec(index: Int, parameter: VariableElement): ParameterSpec {
+        val parameterTypeName = TypeName.get(parameter.asType())
+        val parameterName = parameterTypeName.box().rawType().simpleName().replaceFirstChar(Char::lowercase)
+        return ParameterSpec.builder(parameterTypeName, PARAMETER_NAME_FORMAT.format(parameterName, index))
             .addAnnotations(parameter.scopesAndQualifiers().map(AnnotationSpec::get))
             .apply {
                 if (!parameter.asType().kind.isPrimitive) {
@@ -84,9 +87,11 @@ class FactoryMethodModelBuilder {
                 }
             }
             .build()
+    }
 
     companion object {
         private const val TEST_ANNOTATION_PREFIX = "Test"
+        private const val PARAMETER_NAME_FORMAT = "%s_%d"
 
         private val defaultComponentClassName = ClassName.get(SingletonComponent::class.java)
     }

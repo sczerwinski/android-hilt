@@ -21,8 +21,10 @@ import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.ParameterSpec
 import com.squareup.javapoet.TypeName
+import javax.lang.model.element.Element
 
 data class FactoryMethodModel(
+    val originatingElement: Element,
     val methodName: String,
     val isStatic: Boolean,
     val parameters: List<ParameterSpec>,
