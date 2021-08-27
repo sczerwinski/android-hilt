@@ -55,6 +55,7 @@ class BindingBuilder(private val processingEnv: ProcessingEnvironment) {
         }
 
         return Binding(
+            originatingElement = element,
             annotatedClassName = element.className(),
             supertypeClassName = visitor.supertypeClassName ?: getSupertypeClassName(element),
             componentClassName = visitor.componentClassName as? ClassName ?: defaultComponentClassName,

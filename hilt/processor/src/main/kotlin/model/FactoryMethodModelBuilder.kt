@@ -63,6 +63,7 @@ class FactoryMethodModelBuilder {
         }
 
         return FactoryMethodModel(
+            originatingElement = element,
             methodName = element.simpleName.toString(),
             isStatic = Modifier.STATIC in element.modifiers,
             parameters = annotatedMethodElement.parameters.mapIndexed(::createParameterSpec),

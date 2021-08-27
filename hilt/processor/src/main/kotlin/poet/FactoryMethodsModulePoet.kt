@@ -48,7 +48,8 @@ object FactoryMethodsModulePoet : BaseModulePoet() {
     ): TypeSpec =
         TypeSpec.classBuilder(createModuleClassName(groupingKey))
             .addCommonModuleSetup(groupingKey, createModuleClassName(groupingKey.copy(isTest = false)))
-            .addMethods(factoryMethods.map { binding -> FactoryMethodPoet.generateProvidesMethodSpec(binding) })
+            .addMethods(factoryMethods.map { method -> FactoryMethodPoet.generateProvidesMethodSpec(method) })
+            .addOriginatingElements(factoryMethods.map { method -> method.originatingElement }.distinct())
             .build()
 
     private fun createModuleClassName(groupingKey: ModuleGroupingKey): ClassName =

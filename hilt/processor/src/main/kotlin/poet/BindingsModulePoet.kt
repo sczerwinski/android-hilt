@@ -56,6 +56,7 @@ object BindingsModulePoet : BaseModulePoet() {
         TypeSpec.interfaceBuilder(createModuleClassName(groupingKey))
             .addCommonModuleSetup(groupingKey, createModuleClassName(groupingKey.copy(isTest = false)))
             .addMethods(bindings.map { binding -> generateBindsMethodSpec(binding) })
+            .addOriginatingElements(bindings.map { binding -> binding.originatingElement }.distinct())
             .build()
 
     private fun createModuleClassName(groupingKey: ModuleGroupingKey): ClassName =

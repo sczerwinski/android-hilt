@@ -25,6 +25,7 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import it.czerwinski.android.hilt.processor.model.ModuleGroupingKey
 import it.czerwinski.android.hilt.processor.rawType
+import javax.lang.model.element.Element
 import javax.lang.model.element.Modifier
 
 open class BaseModulePoet {
@@ -57,6 +58,13 @@ open class BaseModulePoet {
             .addMember(TEST_COMPONENT_MEMBER_NAME, COMPONENT_MEMBER_FORMAT, componentClassName)
             .addMember(TEST_REPLACES_MEMBER_NAME, REPLACES_MEMBER_FORMAT, replacesClassName)
             .build()
+
+    protected fun TypeSpec.Builder.addOriginatingElements(originatingElements: Iterable<Element>): TypeSpec.Builder =
+        apply {
+            for (element in originatingElements) {
+                addOriginatingElement(element)
+            }
+        }
 
     companion object {
 
