@@ -45,6 +45,7 @@ object BindingsModulePoet : BaseModulePoet() {
             groupingKey.packageName,
             generateBindingsModuleInterface(groupingKey, bindings)
         )
+            .addDefaultFileComment()
             .build()
             .writeTo(filer)
     }

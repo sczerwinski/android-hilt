@@ -38,6 +38,7 @@ object FactoryMethodsModulePoet : BaseModulePoet() {
             groupingKey.packageName,
             generateFactoryMethodModuleClass(groupingKey, factoryMethods)
         )
+            .addDefaultFileComment()
             .build()
             .writeTo(filer)
     }
