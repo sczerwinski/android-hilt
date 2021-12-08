@@ -63,7 +63,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
 
-    implementation("io.ktor:ktor-client-android:1.6.1")
+    implementation("io.ktor:ktor-client-android:1.6.7")
     implementation("io.ktor:ktor-client-serialization:1.6.1")
     implementation("io.ktor:ktor-client-logging:1.6.1")
 
