@@ -12,6 +12,7 @@
 ### Fixed
 
 ### Security
+- Upgrade `wrapper-validation-action` to `v1.0.5` (fix build process vulnerability)
 
 ## [1.3.0-RC1]
 ### Changed
