@@ -4,6 +4,10 @@
 ### Added
 
 ### Changed
+- Dependencies:
+  - Upgrade Kotlin to `1.6.10`
+  - Upgrade Android Gradle Plugin to `7.0.4`
+  - Upgrade Hilt to `2.40.5`
 
 ### Deprecated
 
