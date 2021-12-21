@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Fetch Sources
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.4.0
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v1.0.4
 
@@ -28,7 +28,7 @@ jobs:
       changelog: ${{ steps.properties.outputs.changelog }}
     steps:
       - name: Fetch Sources
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.4.0
       - name: Setup Java
         uses: actions/setup-java@v2
         with:
@@ -53,7 +53,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Fetch Sources
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.4.0
       - name: Setup Java
         uses: actions/setup-java@v2
         with:
@@ -79,9 +79,9 @@ jobs:
         run: ./gradlew lint --stacktrace
       - name: Generate Lint Annotations
         if: ${{ always() }}
-        uses: yutailang0119/action-android-lint@v1.1.0
+        uses: yutailang0119/action-android-lint@v2
         with:
-          xml_path: '**/build/reports/lint-results-*.xml'
+          report-path: '**/build/reports/lint-results-*.xml'
 
   dokka:
     name: Generate Dokka Documentation
@@ -89,7 +89,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Fetch Sources
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.4.0
       - name: Setup Java
         uses: actions/setup-java@v2
         with:
@@ -104,7 +104,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Fetch Sources
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.4.0
       - name: Setup Java
         uses: actions/setup-java@v2
         with:
@@ -120,7 +120,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Fetch Sources
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.4.0
       - name: Remove Old Release Drafts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -147,7 +147,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Fetch Sources
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.4.0
       - name: Setup Java
         uses: actions/setup-java@v2
         with:

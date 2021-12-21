@@ -3,7 +3,7 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
-    id("io.gitlab.arturbosch.detekt") version "1.18.0"
+    id("io.gitlab.arturbosch.detekt") version "1.19.0"
     id("org.jetbrains.dokka")
     `maven-publish`
     signing
@@ -41,8 +41,8 @@ kapt {
 }
 
 dependencies {
-    implementation("com.google.dagger:hilt-android:2.38.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.38.1")
+    implementation("com.google.dagger:hilt-android:2.40.5")
+    kapt("com.google.dagger:hilt-android-compiler:2.40.5")
 
     api("androidx.test:core:1.4.0")
 
@@ -53,9 +53,9 @@ dependencies {
     }
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
     androidTestImplementation("com.google.android.material:material:1.4.0")
-    androidTestImplementation("androidx.activity:activity-ktx:1.3.1")
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.38.1")
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.38.1")
+    androidTestImplementation("androidx.activity:activity-ktx:1.4.0")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.40.5")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.40.5")
 }
 
 tasks {

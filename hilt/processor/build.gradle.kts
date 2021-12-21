@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm")
     kotlin("kapt")
-    id("io.gitlab.arturbosch.detekt") version "1.18.0"
+    id("io.gitlab.arturbosch.detekt") version "1.19.0"
     id("org.jetbrains.dokka")
     `maven-publish`
     signing
@@ -16,8 +16,8 @@ tasks.withType<KotlinCompile> {
 dependencies {
     implementation(project(":hilt:annotations"))
 
-    implementation("androidx.annotation:annotation:1.2.0")
-    implementation("com.google.dagger:hilt-core:2.38.1")
+    implementation("androidx.annotation:annotation:1.3.0")
+    implementation("com.google.dagger:hilt-core:2.40.5")
     implementation("com.squareup:javapoet:1.13.0")
 }
 

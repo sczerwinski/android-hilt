@@ -2,7 +2,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
     id("de.mannodermaus.android-junit5")
-    id("io.gitlab.arturbosch.detekt") version "1.18.0"
+    id("io.gitlab.arturbosch.detekt") version "1.19.0"
     id("org.jetbrains.dokka")
     `maven-publish`
     signing
@@ -31,11 +31,11 @@ android {
 dependencies {
     api(project(":hilt:annotations"))
 
-    implementation("com.google.dagger:hilt-android:2.38.1")
+    implementation("com.google.dagger:hilt-android:2.40.5")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")
-    testImplementation("io.mockk:mockk:1.12.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
+    testImplementation("io.mockk:mockk:1.12.1")
 }
 
 tasks {
