@@ -81,7 +81,7 @@ jobs:
         if: ${{ always() }}
         uses: yutailang0119/action-android-lint@v2
         with:
-          xml_path: '**/build/reports/lint-results-*.xml'
+          report-path: '**/build/reports/lint-results-*.xml'
 
   dokka:
     name: Generate Dokka Documentation
