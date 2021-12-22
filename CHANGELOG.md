@@ -1,21 +1,11 @@
 # Changelog
 
 ## [Unreleased]
-### Added
-
 ### Changed
 - Dependencies:
   - Upgrade Kotlin to `1.6.10`
   - Upgrade Android Gradle Plugin to `7.0.4`
   - Upgrade Hilt to `2.40.5`
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
 
 ## [1.3.0-RC1]
 ### Changed
