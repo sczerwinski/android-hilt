@@ -52,7 +52,7 @@ dependencies {
         exclude(group = "androidx.activity", module = "activity-ktx")
     }
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
-    androidTestImplementation("com.google.android.material:material:1.4.0")
+    androidTestImplementation("com.google.android.material:material:1.5.0")
     androidTestImplementation("androidx.activity:activity-ktx:1.4.0")
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.40.5")
     kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.40.5")

@@ -52,7 +52,7 @@ dependencies {
     implementation(project(":hilt:extensions"))
     kapt(project(":hilt:processor"))
 
-    implementation("com.google.android.material:material:1.4.0")
+    implementation("com.google.android.material:material:1.5.0")
 
     implementation("androidx.activity:activity-ktx:1.4.0")
 
