@@ -79,7 +79,7 @@ jobs:
         run: ./gradlew lint --stacktrace
       - name: Generate Lint Annotations
         if: ${{ always() }}
-        uses: yutailang0119/action-android-lint@v2
+        uses: yutailang0119/action-android-lint@v3
         with:
           report-path: '**/build/reports/lint-results-*.xml'
 
