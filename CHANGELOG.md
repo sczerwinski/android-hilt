@@ -1,17 +1,15 @@
 # Changelog
 
 ## [Unreleased]
-### Added
-
 ### Changed
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
+- Upgrade Gradle to `7.4.2`
+- Dependencies:
+  - Upgrade Kotlin to `1.6.20`
+  - Upgrade Android Gradle Plugin to `7.1.3`
+  - Upgrade `material` to `1.5.0`
+  - Upgrade Hilt to `2.41`
+  - Upgrade MockK to `1.12.3`
+  - Upgrade Dokka to `1.6.10`
 
 ## [1.3.0]
 ### Changed
