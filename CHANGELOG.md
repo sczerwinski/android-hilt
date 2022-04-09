@@ -10,6 +10,7 @@
   - Upgrade Hilt to `2.41`
   - Upgrade MockK to `1.12.3`
   - Upgrade Dokka to `1.6.10`
+  - Upgrade Ktor Client to `2.0.0` (example only)
 
 ## [1.3.0]
 ### Changed

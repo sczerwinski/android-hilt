@@ -18,6 +18,7 @@
 package it.czerwinski.android.hilt.examples.generated.repositories
 
 import io.ktor.client.HttpClient
+import io.ktor.client.call.body
 import io.ktor.client.request.get
 import it.czerwinski.android.hilt.annotations.Bound
 import it.czerwinski.android.hilt.examples.generated.model.Post
@@ -30,7 +31,7 @@ class RemotePostsRepository @Inject constructor(
     private val client: HttpClient,
 ) : PostsRepository {
 
-    override suspend fun findAll(): List<Post> = client.get(POSTS_URL)
+    override suspend fun findAll(): List<Post> = client.get(POSTS_URL).body()
 
     companion object {
         private const val BASE_URL = "https://czerwinski.it/api"
