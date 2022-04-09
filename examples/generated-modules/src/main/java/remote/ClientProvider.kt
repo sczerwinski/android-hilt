@@ -17,14 +17,12 @@
 
 package it.czerwinski.android.hilt.examples.generated.remote
 
-import android.util.Log
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.LogLevel
-import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.plugins.logging.MessageLengthLimitingLogger
 import io.ktor.client.plugins.resources.Resources
@@ -63,14 +61,4 @@ object ClientProvider {
         }
     }
 
-    private object AndroidLogger : Logger {
-
-        private const val TAG = "HttpClient"
-
-        override fun log(message: String) {
-            for (line in message.lines()) {
-                Log.d(TAG, line)
-            }
-        }
-    }
 }

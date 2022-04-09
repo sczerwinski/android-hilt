@@ -35,8 +35,7 @@ class DispatchingPostsRepository @Inject constructor(
             val remotePosts = remoteRepository.findAll()
             dao.replace(remotePosts)
         } catch (ignored: Exception) {
-        } finally {
-            return localRepository.findAll()
         }
+        return localRepository.findAll()
     }
 }

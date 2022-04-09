@@ -23,17 +23,16 @@ import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
 import io.ktor.client.engine.mock.respondError
-import io.ktor.client.features.json.JsonFeature
-import io.ktor.client.features.json.serializer.KotlinxSerializer
-import io.ktor.client.features.logging.ANDROID
-import io.ktor.client.features.logging.LogLevel
-import io.ktor.client.features.logging.Logger
-import io.ktor.client.features.logging.Logging
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logging
+import io.ktor.client.plugins.logging.MessageLengthLimitingLogger
+import io.ktor.client.plugins.resources.Resources
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.fullPath
 import io.ktor.http.headersOf
-import io.ktor.util.KtorExperimentalAPI
+import io.ktor.serialization.kotlinx.json.json
 import it.czerwinski.android.hilt.annotations.TestFactoryMethod
 import java.io.File
 import java.io.FileNotFoundException
@@ -47,28 +46,27 @@ object TestClientProvider {
 
     @TestFactoryMethod
     @Singleton
-    @KtorExperimentalAPI
-    fun getClient(): HttpClient = HttpClient(MockEngine) {
-        engine {
-            addHandler { request ->
-                try {
-                    @Suppress("BlockingMethodInNonBlockingContext")
-                    val responseBody = context.assets.open(request.url.fullPath.removePrefix(File.separator))
-                        .use { input -> input.bufferedReader().readText() }
-                    respond(content = responseBody, headers = responseHeaders)
-                } catch (exception: FileNotFoundException) {
-                    respondError(
-                        status = HttpStatusCode.NotFound,
-                        content = exception.message ?: HttpStatusCode.NotFound.description
-                    )
-                }
+    fun getClient(): HttpClient = HttpClient(
+        MockEngine { request ->
+            try {
+                @Suppress("BlockingMethodInNonBlockingContext")
+                val responseBody = context.assets.open(request.url.fullPath.removePrefix(File.separator))
+                    .use { input -> input.bufferedReader().readText() }
+                respond(content = responseBody, headers = responseHeaders)
+            } catch (exception: FileNotFoundException) {
+                respondError(
+                    status = HttpStatusCode.NotFound,
+                    content = exception.message ?: HttpStatusCode.NotFound.description
+                )
             }
         }
-        install(JsonFeature) {
-            serializer = KotlinxSerializer()
+    ) {
+        install(Resources)
+        install(ContentNegotiation) {
+            json()
         }
         install(Logging) {
-            logger = Logger.ANDROID
+            logger = MessageLengthLimitingLogger(delegate = AndroidLogger)
             level = LogLevel.BODY
         }
     }
