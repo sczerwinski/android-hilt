@@ -17,34 +17,60 @@
 
 package it.czerwinski.android.hilt.examples.generated.remote
 
+import android.util.Log
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
-import io.ktor.client.features.json.JsonFeature
-import io.ktor.client.features.json.serializer.KotlinxSerializer
-import io.ktor.client.features.logging.ANDROID
-import io.ktor.client.features.logging.LogLevel
-import io.ktor.client.features.logging.Logger
-import io.ktor.client.features.logging.Logging
+import io.ktor.client.plugins.HttpTimeout
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
+import io.ktor.client.plugins.logging.Logging
+import io.ktor.client.plugins.logging.MessageLengthLimitingLogger
+import io.ktor.client.plugins.resources.Resources
+import io.ktor.http.URLProtocol
+import io.ktor.http.path
+import io.ktor.serialization.kotlinx.json.json
 import it.czerwinski.android.hilt.annotations.FactoryMethod
 import javax.inject.Singleton
 
 object ClientProvider {
 
-    private const val TIMEOUT = 120_000
+    private const val TIMEOUT = 120_000L
 
     @FactoryMethod
     @Singleton
     fun getClient(): HttpClient = HttpClient(Android) {
-        engine {
-            connectTimeout = TIMEOUT
-            socketTimeout = TIMEOUT
+        defaultRequest {
+            url {
+                protocol = URLProtocol.HTTPS
+                host = "czerwinski.it"
+                path("api/")
+            }
         }
-        install(JsonFeature) {
-            serializer = KotlinxSerializer()
+        install(HttpTimeout) {
+            requestTimeoutMillis = TIMEOUT
+            connectTimeoutMillis = TIMEOUT
+            socketTimeoutMillis = TIMEOUT
+        }
+        install(Resources)
+        install(ContentNegotiation) {
+            json()
         }
         install(Logging) {
-            logger = Logger.ANDROID
+            logger = MessageLengthLimitingLogger(delegate = AndroidLogger)
             level = LogLevel.BODY
+        }
+    }
+
+    private object AndroidLogger : Logger {
+
+        private const val TAG = "HttpClient"
+
+        override fun log(message: String) {
+            for (line in message.lines()) {
+                Log.d(TAG, line)
+            }
         }
     }
 }
