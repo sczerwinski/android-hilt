@@ -46,13 +46,13 @@ kapt {
 }
 
 dependencies {
-    implementation("com.google.dagger:hilt-android:2.40.5")
-    kapt("com.google.dagger:hilt-android-compiler:2.40.5")
+    implementation("com.google.dagger:hilt-android:2.41")
+    kapt("com.google.dagger:hilt-android-compiler:2.41")
 
     implementation(project(":hilt:extensions"))
     kapt(project(":hilt:processor"))
 
-    implementation("com.google.android.material:material:1.4.0")
+    implementation("com.google.android.material:material:1.5.0")
 
     implementation("androidx.activity:activity-ktx:1.4.0")
 
@@ -60,16 +60,16 @@ dependencies {
 
     implementation("androidx.browser:browser:1.4.0")
 
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
 
     implementation("io.ktor:ktor-client-android:1.6.7")
     implementation("io.ktor:ktor-client-serialization:1.6.7")
-    implementation("io.ktor:ktor-client-logging:1.6.7")
+    implementation("io.ktor:ktor-client-logging:2.0.0")
 
-    implementation("androidx.room:room-runtime:2.4.0")
-    kapt("androidx.room:room-compiler:2.4.0")
-    implementation("androidx.room:room-ktx:2.4.0")
+    implementation("androidx.room:room-runtime:2.4.2")
+    kapt("androidx.room:room-compiler:2.4.2")
+    implementation("androidx.room:room-ktx:2.4.2")
     implementation("androidx.sqlite:sqlite-ktx:2.2.0")
     implementation("it.czerwinski.android.room:room-extensions:1.1.0")
 
@@ -77,8 +77,8 @@ dependencies {
 
     implementation("com.squareup.picasso:picasso:2.8")
 
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.40.5")
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.40.5")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.41")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.41")
 
     androidTestImplementation("io.ktor:ktor-client-mock:1.6.7")
 
