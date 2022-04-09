@@ -63,9 +63,12 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
 
-    implementation("io.ktor:ktor-client-android:1.6.7")
-    implementation("io.ktor:ktor-client-serialization:1.6.7")
-    implementation("io.ktor:ktor-client-logging:1.6.7")
+    implementation("io.ktor:ktor-client-android:2.0.0")
+    implementation("io.ktor:ktor-client-resources:2.0.0")
+    implementation("io.ktor:ktor-client-content-negotiation:2.0.0")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.0.0")
+    implementation("io.ktor:ktor-client-logging:2.0.0")
+    implementation("ch.qos.logback:logback-classic:1.2.11")
 
     implementation("androidx.room:room-runtime:2.4.2")
     kapt("androidx.room:room-compiler:2.4.2")
@@ -73,7 +76,7 @@ dependencies {
     implementation("androidx.sqlite:sqlite-ktx:2.2.0")
     implementation("it.czerwinski.android.room:room-extensions:1.1.0")
 
-    implementation("joda-time:joda-time:2.10.13")
+    implementation("joda-time:joda-time:2.10.14")
 
     implementation("com.squareup.picasso:picasso:2.8")
 
