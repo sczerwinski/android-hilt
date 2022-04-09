@@ -17,7 +17,6 @@
 
 package it.czerwinski.android.hilt.examples.generated.repositories
 
-import androidx.lifecycle.LiveData
 import it.czerwinski.android.hilt.annotations.Bound
 import it.czerwinski.android.hilt.examples.generated.db.PostsDao
 import it.czerwinski.android.hilt.examples.generated.model.Post

@@ -76,14 +76,14 @@ dependencies {
     implementation("androidx.sqlite:sqlite-ktx:2.2.0")
     implementation("it.czerwinski.android.room:room-extensions:1.1.0")
 
-    implementation("joda-time:joda-time:2.10.13")
+    implementation("joda-time:joda-time:2.10.14")
 
     implementation("com.squareup.picasso:picasso:2.8")
 
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.41")
     kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.41")
 
-    androidTestImplementation("io.ktor:ktor-client-mock:1.6.7")
+    androidTestImplementation("io.ktor:ktor-client-mock:2.0.0")
 
     androidTestImplementation("it.czerwinski.android:xpresso-core:1.0")
     androidTestImplementation("it.czerwinski.android:xpresso-recyclerview:1.0")
