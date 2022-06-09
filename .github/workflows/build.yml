@@ -97,7 +97,7 @@ jobs:
           distribution: zulu
           java-version: 11
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: 3.8
       - name: Run Connected Checks
