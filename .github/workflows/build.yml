@@ -63,7 +63,7 @@ jobs:
         run: ./gradlew testReleaseUnitTest --stacktrace
       - name: Publish Test Report
         if: ${{ always() }}
-        uses: EnricoMi/publish-unit-test-result-action@v1
+        uses: EnricoMi/publish-unit-test-result-action@v2
         with:
           check_name: "Unit Test Results"
           files: '**/build/test-results/**/*.xml'
@@ -112,7 +112,7 @@ jobs:
           script: ./gradlew connectedCheck --stacktrace
       - name: Publish Android Test Report
         if: ${{ always() }}
-        uses: EnricoMi/publish-unit-test-result-action/composite@v1
+        uses: EnricoMi/publish-unit-test-result-action/composite@v2
         with:
           check_name: "Connected Test Results"
           files: '**/build/outputs/androidTest-results/**/*.xml'
