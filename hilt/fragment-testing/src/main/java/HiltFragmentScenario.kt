@@ -174,7 +174,7 @@ class HiltFragmentScenario<F : Fragment, A : FragmentActivity> private construct
         }
 
         private object Factory : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 val viewModel = FragmentFactoryViewModel()
                 return checkNotNull(modelClass.cast(viewModel))
             }

@@ -3,21 +3,21 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm")
     kotlin("kapt")
-    id("io.gitlab.arturbosch.detekt") version "1.19.0"
+    id("io.gitlab.arturbosch.detekt") version "1.22.0"
     id("org.jetbrains.dokka")
     `maven-publish`
     signing
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "11"
 }
 
 dependencies {
     implementation(project(":hilt:annotations"))
 
-    implementation("androidx.annotation:annotation:1.3.0")
-    implementation("com.google.dagger:hilt-core:2.41")
+    implementation("androidx.annotation:annotation:1.6.0")
+    implementation("com.google.dagger:hilt-core:2.45")
     implementation("com.squareup:javapoet:1.13.0")
 }
 

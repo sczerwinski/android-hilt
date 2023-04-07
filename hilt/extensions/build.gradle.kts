@@ -2,7 +2,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
     id("de.mannodermaus.android-junit5")
-    id("io.gitlab.arturbosch.detekt") version "1.19.0"
+    id("io.gitlab.arturbosch.detekt") version "1.22.0"
     id("org.jetbrains.dokka")
     `maven-publish`
     signing
@@ -10,11 +10,11 @@ plugins {
 
 android {
 
-    compileSdk = 31
+    compileSdk = 33
 
     defaultConfig {
         minSdk = 16
-        targetSdk = 31
+        targetSdk = 33
     }
 
     buildTypes {
@@ -23,19 +23,24 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 }
 
 dependencies {
     api(project(":hilt:annotations"))
 
-    implementation("com.google.dagger:hilt-android:2.41")
+    implementation("com.google.dagger:hilt-android:2.45")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
-    testImplementation("io.mockk:mockk:1.12.3")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
+    testImplementation("io.mockk:mockk:1.13.4")
 }
 
 tasks {
