@@ -23,6 +23,7 @@ import org.gradle.api.publish.maven.MavenPomIssueManagement
 import org.gradle.api.publish.maven.MavenPomLicenseSpec
 import org.gradle.api.publish.maven.MavenPomScm
 import org.gradle.kotlin.dsl.provideDelegate
+import java.util.*
 
 fun MavenPom.commonPom(project: Project) {
     val libDescription: String by project.rootProject
@@ -42,7 +43,11 @@ fun MavenPom.commonPom(project: Project) {
 
 @Suppress("DefaultLocale")
 private fun projectName(libDescription: String, project: Project) =
-    "$libDescription: ${project.name.replace('-', ' ').capitalize()}"
+    "$libDescription: ${
+        project.name
+            .replace('-', ' ')
+            .replaceFirstChar { it.titlecase(Locale.getDefault()) }
+    }"
 
 private fun MavenPomScm.git(gitUrl: String) {
     connection.set("scm:git:$gitUrl.git")

@@ -4,16 +4,16 @@ plugins {
     kotlin("kapt")
     id("kotlinx-serialization")
     id("dagger.hilt.android.plugin")
-    id("io.gitlab.arturbosch.detekt") version "1.19.0"
+    id("io.gitlab.arturbosch.detekt") version "1.22.0"
 }
 
 android {
 
-    compileSdk = 31
+    compileSdk = 33
 
     defaultConfig {
         minSdk = 16
-        targetSdk = 31
+        targetSdk = 33
 
         applicationId = "it.czerwinski.android.hilt.examples.generated"
 
@@ -32,12 +32,16 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
+    }
+
+    packagingOptions {
+        resources.excludes.add("META-INF/INDEX.LIST")
     }
 }
 
@@ -46,42 +50,42 @@ kapt {
 }
 
 dependencies {
-    implementation("com.google.dagger:hilt-android:2.41")
-    kapt("com.google.dagger:hilt-android-compiler:2.41")
+    implementation("com.google.dagger:hilt-android:2.45")
+    kapt("com.google.dagger:hilt-android-compiler:2.45")
 
     implementation(project(":hilt:extensions"))
     kapt(project(":hilt:processor"))
 
-    implementation("com.google.android.material:material:1.5.0")
+    implementation("com.google.android.material:material:1.8.0")
 
-    implementation("androidx.activity:activity-ktx:1.4.0")
+    implementation("androidx.activity:activity-ktx:1.7.0")
 
     implementation("androidx.multidex:multidex:2.0.1")
 
-    implementation("androidx.browser:browser:1.4.0")
+    implementation("androidx.browser:browser:1.5.0")
 
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
 
-    implementation("io.ktor:ktor-client-android:2.0.0")
-    implementation("io.ktor:ktor-client-resources:2.0.0")
-    implementation("io.ktor:ktor-client-content-negotiation:2.0.0")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:2.0.0")
-    implementation("io.ktor:ktor-client-logging:2.0.0")
-    implementation("ch.qos.logback:logback-classic:1.2.11")
+    implementation("io.ktor:ktor-client-android:2.2.4")
+    implementation("io.ktor:ktor-client-resources:2.2.4")
+    implementation("io.ktor:ktor-client-content-negotiation:2.2.4")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.2.4")
+    implementation("io.ktor:ktor-client-logging:2.2.4")
+    implementation("ch.qos.logback:logback-classic:1.4.5")
 
-    implementation("androidx.room:room-runtime:2.4.2")
-    kapt("androidx.room:room-compiler:2.4.2")
-    implementation("androidx.room:room-ktx:2.4.2")
-    implementation("androidx.sqlite:sqlite-ktx:2.2.0")
-    implementation("it.czerwinski.android.room:room-extensions:1.1.0")
+    implementation("androidx.room:room-runtime:2.5.1")
+    kapt("androidx.room:room-compiler:2.5.1")
+    implementation("androidx.room:room-ktx:2.5.1")
+    implementation("androidx.sqlite:sqlite-ktx:2.3.1")
+    implementation("it.czerwinski.android.room:room-extensions:1.2.0")
 
     implementation("joda-time:joda-time:2.10.14")
 
     implementation("com.squareup.picasso:picasso:2.8")
 
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.41")
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.41")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.45")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.45")
 
     androidTestImplementation("io.ktor:ktor-client-mock:2.0.0")
 

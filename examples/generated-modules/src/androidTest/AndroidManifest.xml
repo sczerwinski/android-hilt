@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
-    package="it.czerwinski.android.hilt.fragment.testing.test">
+    package="it.czerwinski.android.hilt.examples.generated.test">
 
     <application android:name="dagger.hilt.android.testing.HiltTestApplication">
+
+        <activity
+            android:name="it.czerwinski.android.hilt.examples.generated.PostsActivity"
+            android:label="PostsActivity" />
+
         <activity
             android:name="androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity"
             android:label="InstrumentationActivityInvoker$BootstrapActivity" />
+
     </application>
 
 </manifest>

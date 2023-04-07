@@ -7,10 +7,10 @@ buildscript {
     }
 
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.20")
-        classpath("org.jetbrains.kotlin:kotlin-serialization:1.6.20")
-        classpath("com.android.tools.build:gradle:7.1.3")
-        classpath("com.google.dagger:hilt-android-gradle-plugin:2.41")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.20")
+        classpath("org.jetbrains.kotlin:kotlin-serialization:1.8.20")
+        classpath("com.android.tools.build:gradle:7.4.2")
+        classpath("com.google.dagger:hilt-android-gradle-plugin:2.45")
         classpath("de.mannodermaus.gradle.plugins:android-junit5:1.8.2.0")
     }
 }
@@ -31,7 +31,7 @@ allprojects {
 }
 
 plugins {
-    id("org.jetbrains.changelog") version "1.3.1"
+    id("org.jetbrains.changelog") version "2.0.0"
 }
 
 changelog {
