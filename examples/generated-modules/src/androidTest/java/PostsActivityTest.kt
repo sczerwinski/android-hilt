@@ -24,7 +24,6 @@ import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import it.czerwinski.android.xpresso.launchTestActivity
 import it.czerwinski.android.xpresso.recyclerview.onRecyclerView
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 
@@ -35,16 +34,15 @@ class PostsActivityTest {
     val hiltRule = HiltAndroidRule(this)
 
     @Test
-    @Ignore("Doesn't work after dependencies update")
     fun testPostsList() {
-        launchTestActivity<PostsActivity>()
-
-        onRecyclerView(withId(R.id.posts_list))
-            .onItem<PostsAdapter.ViewHolder>(position = 0) {
-                on<TextView>(withId(R.id.title))
-                    .check(withText("Test"))
-                on<TextView>(withId(R.id.brief))
-                    .check(withText("Test post"))
-            }
+        launchTestActivity<PostsActivity>().use {
+            onRecyclerView(withId(R.id.posts_list))
+                .onItem<PostsAdapter.ViewHolder>(position = 0) {
+                    on<TextView>(withId(R.id.title))
+                        .check(withText("Test"))
+                    on<TextView>(withId(R.id.brief))
+                        .check(withText("Test post"))
+                }
+        }
     }
 }

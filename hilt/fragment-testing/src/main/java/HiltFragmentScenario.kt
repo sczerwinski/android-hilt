@@ -25,12 +25,14 @@ import android.content.ComponentName
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.annotation.IdRes
 import androidx.annotation.MainThread
 import androidx.annotation.StyleRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentFactory
+import androidx.fragment.app.commitNow
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -38,6 +40,7 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ActivityScenario.ActivityAction
 import androidx.test.core.app.ApplicationProvider
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.Closeable
 
 /**
  * `HiltFragmentScenario` provides API to start and drive a Fragment's lifecycle state for testing.
@@ -50,7 +53,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class HiltFragmentScenario<F : Fragment, A : FragmentActivity> private constructor(
     private val fragmentClass: Class<F>,
     private val activityScenario: ActivityScenario<A>
-) {
+) : Closeable {
 
     /**
      * Moves Fragment state to a new state.
@@ -82,19 +85,19 @@ class HiltFragmentScenario<F : Fragment, A : FragmentActivity> private construct
             activityScenario.onActivity { activity ->
                 val fragment = activity.supportFragmentManager.findFragmentByTag(FRAGMENT_TAG)
                 if (fragment != null) {
-                    activity
-                        .supportFragmentManager
-                        .beginTransaction()
-                        .remove(fragment)
-                        .commitNowAllowingStateLoss()
+                    activity.supportFragmentManager.commitNow {
+                        remove(fragment)
+                    }
                 }
             }
         } else {
             activityScenario.onActivity { activity ->
                 val fragment = activity.supportFragmentManager.findFragmentByTag(FRAGMENT_TAG)
                 checkNotNull(fragment) { "The fragment has been removed from FragmentManager already." }
+                activity.supportFragmentManager.commitNow {
+                    setMaxLifecycle(fragment, newState)
+                }
             }
-            activityScenario.moveToState(newState)
         }
         return this
     }
@@ -145,6 +148,15 @@ class HiltFragmentScenario<F : Fragment, A : FragmentActivity> private construct
     }
 
     /**
+     * Finishes the managed fragments and cleans up device's state.
+     *
+     * This method blocks execution until the host activity becomes destroyed.
+     */
+    override fun close() {
+        activityScenario.close()
+    }
+
+    /**
      * FragmentAction interface should be implemented by any class whose instances are intended to be executed
      * by the main thread. A Fragment that is instrumented by the HiltFragmentScenario is passed
      * to [FragmentAction.perform] method.
@@ -182,8 +194,8 @@ class HiltFragmentScenario<F : Fragment, A : FragmentActivity> private construct
 
         companion object {
             fun getInstance(activity: FragmentActivity): FragmentFactoryViewModel {
-                val viewModelProvider = ViewModelProvider(activity, Factory)
-                return viewModelProvider[FragmentFactoryViewModel::class.java]
+                val viewModel: FragmentFactoryViewModel by activity.viewModels { Factory }
+                return viewModel
             }
         }
     }
@@ -225,9 +237,10 @@ class HiltFragmentScenario<F : Fragment, A : FragmentActivity> private construct
             fragmentClass: Class<F>,
             fragmentArgs: Bundle? = null,
             @StyleRes themeResId: Int = defaultTheme,
+            initialState: Lifecycle.State = Lifecycle.State.RESUMED,
             factory: FragmentFactory? = null
         ): HiltFragmentScenario<F, EmptyFragmentActivity> = launch(
-            EmptyFragmentActivity::class.java, fragmentClass, fragmentArgs, themeResId, factory
+            EmptyFragmentActivity::class.java, fragmentClass, fragmentArgs, themeResId, initialState, factory
         )
 
         /**
@@ -241,9 +254,10 @@ class HiltFragmentScenario<F : Fragment, A : FragmentActivity> private construct
             fragmentClass: Class<F>,
             fragmentArgs: Bundle? = null,
             @StyleRes themeResId: Int = defaultTheme,
+            initialState: Lifecycle.State = Lifecycle.State.RESUMED,
             factory: FragmentFactory? = null
         ): HiltFragmentScenario<F, A> = internalLaunch(
-            activityClass, fragmentClass, fragmentArgs, themeResId, factory, containerViewId = 0
+            activityClass, fragmentClass, fragmentArgs, themeResId, initialState, factory, containerViewId = 0
         )
 
         /**
@@ -257,9 +271,10 @@ class HiltFragmentScenario<F : Fragment, A : FragmentActivity> private construct
             fragmentClass: Class<F>,
             fragmentArgs: Bundle? = null,
             @StyleRes themeResId: Int = defaultTheme,
+            initialState: Lifecycle.State = Lifecycle.State.RESUMED,
             factory: FragmentFactory? = null
         ): HiltFragmentScenario<F, EmptyFragmentActivity> = launchInContainer(
-            EmptyFragmentActivity::class.java, fragmentClass, fragmentArgs, themeResId, factory
+            EmptyFragmentActivity::class.java, fragmentClass, fragmentArgs, themeResId, initialState, factory
         )
 
         /**
@@ -274,9 +289,10 @@ class HiltFragmentScenario<F : Fragment, A : FragmentActivity> private construct
             fragmentClass: Class<F>,
             fragmentArgs: Bundle? = null,
             @StyleRes themeResId: Int = defaultTheme,
+            initialState: Lifecycle.State = Lifecycle.State.RESUMED,
             factory: FragmentFactory? = null
         ): HiltFragmentScenario<F, A> = internalLaunch(
-            activityClass, fragmentClass, fragmentArgs, themeResId, factory, containerViewId = android.R.id.content
+            activityClass, fragmentClass, fragmentArgs, themeResId, initialState, factory, containerViewId = android.R.id.content
         )
 
         @Suppress("LongParameterList")
@@ -285,9 +301,13 @@ class HiltFragmentScenario<F : Fragment, A : FragmentActivity> private construct
             fragmentClass: Class<F>,
             fragmentArgs: Bundle?,
             @StyleRes themeResId: Int,
+            initialState: Lifecycle.State,
             factory: FragmentFactory?,
             @IdRes containerViewId: Int
         ): HiltFragmentScenario<F, A> {
+            require(initialState != Lifecycle.State.DESTROYED) {
+                "Cannot set initial Lifecycle state to $initialState for HiltFragmentScenario"
+            }
             val startActivityIntent =
                 Intent.makeMainActivity(ComponentName(ApplicationProvider.getApplicationContext(), activityClass))
                     .putExtra(EXTRA_THEME, themeResId)
@@ -303,10 +323,10 @@ class HiltFragmentScenario<F : Fragment, A : FragmentActivity> private construct
                         fragmentClass.name
                     )
                     fragment.arguments = fragmentArgs
-                    activity.supportFragmentManager
-                        .beginTransaction()
-                        .add(containerViewId, fragment, FRAGMENT_TAG)
-                        .commitNow()
+                    activity.supportFragmentManager.commitNow {
+                        add(containerViewId, fragment, FRAGMENT_TAG)
+                        setMaxLifecycle(fragment, initialState)
+                    }
                 }
         }
     }

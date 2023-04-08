@@ -15,7 +15,7 @@
  *
  */
 
-package it.czerwinski.android.hilt.fragment.testing.test
+package it.czerwinski.android.hilt.fragment.testing.tests.test
 
 import android.os.Bundle
 import androidx.test.espresso.Espresso.onView
@@ -25,23 +25,23 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import it.czerwinski.android.hilt.fragment.testing.launchFragment
-import it.czerwinski.android.hilt.fragment.testing.launchFragmentInContainer
+import it.czerwinski.android.hilt.fragment.testing.HiltFragmentScenario
+import it.czerwinski.android.hilt.fragment.testing.tests.TestFragment
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Rule
 import org.junit.Test
 
 @HiltAndroidTest
-class HiltFragmentScenarioExtensionsTest {
+class HiltFragmentScenarioTest {
 
     @get:Rule
     val hiltRule = HiltAndroidRule(this)
 
     @Test
-    fun launchFragment() {
-        with (launchFragment<TestFragment>()) {
-            onFragment { fragment ->
+    fun launch() {
+        HiltFragmentScenario.launch(TestFragment::class.java).use { scenario ->
+            scenario.onFragment { fragment ->
                 assertNotNull(fragment.viewModel)
                 assertEquals("Text from repository", fragment.viewModel.text.value)
             }
@@ -50,20 +50,9 @@ class HiltFragmentScenarioExtensionsTest {
     }
 
     @Test
-    fun launchFragmentWithInstantiateMethod() {
-        with (launchFragment { TestFragment() }) {
-            onFragment { fragment ->
-                assertNotNull(fragment.viewModel)
-                assertEquals("Text from repository", fragment.viewModel.text.value)
-            }
-            onView(withText("Text from repository")).check(doesNotExist())
-        }
-    }
-
-    @Test
-    fun launchFragmentInContainer() {
-        with (launchFragmentInContainer<TestFragment>()) {
-            onFragment { fragment ->
+    fun launchInContainer() {
+        HiltFragmentScenario.launchInContainer(TestFragment::class.java).use { scenario ->
+            scenario.onFragment { fragment ->
                 assertNotNull(fragment.viewModel)
                 assertEquals("Text from repository", fragment.viewModel.text.value)
             }
@@ -72,22 +61,11 @@ class HiltFragmentScenarioExtensionsTest {
     }
 
     @Test
-    fun launchFragmentInContainerWithInstantiateMethod() {
-        with (launchFragmentInContainer { TestFragment() }) {
-            onFragment { fragment ->
-                assertNotNull(fragment.viewModel)
-                assertEquals("Text from repository", fragment.viewModel.text.value)
-            }
-            onView(withText("Text from repository")).check(matches(isDisplayed()))
-        }
-    }
-
-    @Test
-    fun launchFragmentInContainerWithArgs() {
+    fun launchInContainerWithArgs() {
         val args = Bundle()
         args.putString(TestFragment.ARG_TEXT, "Test text")
-        with (launchFragmentInContainer<TestFragment>(fragmentArgs = args)) {
-            onFragment { fragment ->
+        HiltFragmentScenario.launchInContainer(TestFragment::class.java, fragmentArgs = args).use { scenario ->
+            scenario.onFragment { fragment ->
                 assertNotNull(fragment.viewModel)
             }
             onView(withText("Test text")).check(matches(isDisplayed()))
@@ -95,9 +73,12 @@ class HiltFragmentScenarioExtensionsTest {
     }
 
     @Test
-    fun launchFragmentInContainerWithTheme() {
-        with (launchFragmentInContainer<TestFragment>(themeResId = R.style.TestFragmentTheme)) {
-            onFragment { fragment ->
+    fun launchInContainerWithTheme() {
+        HiltFragmentScenario.launchInContainer(
+            TestFragment::class.java,
+            themeResId = it.czerwinski.android.hilt.fragment.testing.tests.R.style.TestFragmentTheme
+        ).use { scenario ->
+            scenario.onFragment { fragment ->
                 assertNotNull(fragment.viewModel)
                 assertEquals("Text from repository", fragment.viewModel.text.value)
             }

@@ -1,7 +1,11 @@
 # Changelog
 
 ## [Unreleased]
+### Added
+- Add `initialState` parameter to `HiltFragmentScenario` launching methods
+
 ### Changed
+- Make `HiltFragmentScenario` implement `Closeable`
 - Upgrade Gradle to `8.0.2`
 - Use Java 11
 - Change target SDK to `33`
@@ -13,6 +17,7 @@
 - Test dependencies:
   - Upgrade MockK to `1.13.4`
   - Upgrade JUnit to `5.9.2`
+  - Upgrade `de.mannodermaus.gradle.plugins:android-junit5` to `1.8.2.1`
   - Upgrade `androidx.test:core` to `1.5.0`
   - Upgrade `androidx.test:runner` to `1.5.2`
   - Upgrade `espresso-core` to `3.5.1`
@@ -30,7 +35,7 @@
   - Upgrade `lifecycle-viewmodel-ktx` to `2.6.1`
   - Upgrade `lifecycle-livedata-ktx` to `2.6.1`
   - Upgrade `browser` to `1.5.0`
-  - Upgrade `logback-classic` to `1.4.5`
+  - Upgrade `logback-classic` to `1.3.6`
 
 ## [1.3.0]
 ### Changed
