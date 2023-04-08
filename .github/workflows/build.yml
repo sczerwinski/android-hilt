@@ -16,7 +16,7 @@ jobs:
       - name: Fetch Sources
         uses: actions/checkout@v3
       - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v1.0.4
+        uses: gradle/wrapper-validation-action@v1.0.6
 
   properties:
     name: Export Properties
@@ -30,7 +30,7 @@ jobs:
       - name: Fetch Sources
         uses: actions/checkout@v3
       - name: Setup Java
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3.2.0
         with:
           distribution: zulu
           java-version: 11
@@ -55,7 +55,7 @@ jobs:
       - name: Fetch Sources
         uses: actions/checkout@v3
       - name: Setup Java
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3.2.0
         with:
           distribution: zulu
           java-version: 11
@@ -63,7 +63,7 @@ jobs:
         run: ./gradlew testReleaseUnitTest --stacktrace
       - name: Publish Test Report
         if: ${{ always() }}
-        uses: EnricoMi/publish-unit-test-result-action@v1
+        uses: EnricoMi/publish-unit-test-result-action@v2
         with:
           check_name: "Unit Test Results"
           files: '**/build/test-results/**/*.xml'
@@ -92,12 +92,12 @@ jobs:
       - name: Fetch Sources
         uses: actions/checkout@v3
       - name: Setup Java
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3.2.0
         with:
           distribution: zulu
           java-version: 11
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: 3.8
       - name: Run Connected Checks
@@ -112,7 +112,7 @@ jobs:
           script: ./gradlew connectedCheck --stacktrace
       - name: Publish Android Test Report
         if: ${{ always() }}
-        uses: EnricoMi/publish-unit-test-result-action/composite@v1
+        uses: EnricoMi/publish-unit-test-result-action/composite@v2
         with:
           check_name: "Connected Test Results"
           files: '**/build/outputs/androidTest-results/**/*.xml'
@@ -125,7 +125,7 @@ jobs:
       - name: Fetch Sources
         uses: actions/checkout@v3
       - name: Setup Java
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3.2.0
         with:
           distribution: zulu
           java-version: 11
@@ -140,7 +140,7 @@ jobs:
       - name: Fetch Sources
         uses: actions/checkout@v3
       - name: Setup Java
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3.2.0
         with:
           distribution: zulu
           java-version: 11
@@ -183,7 +183,7 @@ jobs:
       - name: Fetch Sources
         uses: actions/checkout@v3
       - name: Setup Java
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3.2.0
         with:
           distribution: zulu
           java-version: 11
@@ -199,7 +199,7 @@ jobs:
       - name: Fetch Sources
         uses: actions/checkout@v3
       - name: Setup Java
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3.2.0
         with:
           distribution: zulu
           java-version: 11
