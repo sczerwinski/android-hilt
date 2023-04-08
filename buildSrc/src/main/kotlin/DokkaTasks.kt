@@ -18,7 +18,9 @@
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.invoke
 import org.gradle.kotlin.dsl.provideDelegate
+import org.gradle.kotlin.dsl.withType
 import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.kotlin.gradle.internal.KaptTask
 
 fun DokkaTask.setUpJavadocTask(project: Project) {
     setUpDokkaTask(project, outputDirectoryName = "javadoc")
@@ -29,6 +31,8 @@ fun DokkaTask.setUpJekyllTask(project: Project) {
 }
 
 private fun DokkaTask.setUpDokkaTask(project: Project, outputDirectoryName: String) {
+    val kaptTasks = project.tasks.withType<KaptTask>().toList()
+    dependsOn(*kaptTasks.toTypedArray())
     val libDescription: String by project.rootProject
     outputDirectory.set(project.buildDir.resolve(outputDirectoryName))
     dokkaSourceSets {
