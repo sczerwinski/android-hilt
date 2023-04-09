@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### Added
 - Add `initialState` parameter to `HiltFragmentScenario` launching methods
+- Add unit tests for annotation processor
 
 ### Changed
 - Make `HiltFragmentScenario` implement `Closeable`
@@ -23,6 +24,7 @@
   - Upgrade `espresso-core` to `3.5.1`
   - Upgrade `material` to `1.8.0`
   - Upgrade `activity-ktx` to `1.7.0`
+  - Upgrade `logback-classic` to `1.4.6`
 - Build dependencies:
   - Upgrade `io.gitlab.arturbosch.detekt` to `1.22.0`
   - Upgrade `org.jetbrains.changelog` to `2.0.0`

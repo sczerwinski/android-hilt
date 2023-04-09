@@ -13,12 +13,22 @@ tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "11"
 }
 
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+
 dependencies {
     implementation(project(":hilt:annotations"))
 
     implementation("androidx.annotation:annotation:1.6.0")
     implementation("com.google.dagger:hilt-core:2.45")
     implementation("com.squareup:javapoet:1.13.0")
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
+    testImplementation("io.mockk:mockk:1.13.4")
+    kaptTest(project(":hilt:processor"))
+    testImplementation("ch.qos.logback:logback-classic:1.4.6")
 }
 
 tasks {

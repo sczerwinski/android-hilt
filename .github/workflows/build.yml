@@ -60,7 +60,7 @@ jobs:
           distribution: zulu
           java-version: 11
       - name: Run Unit Tests
-        run: ./gradlew testReleaseUnitTest --stacktrace
+        run: ./gradlew test --stacktrace
       - name: Publish Test Report
         if: ${{ always() }}
         uses: EnricoMi/publish-unit-test-result-action@v2
