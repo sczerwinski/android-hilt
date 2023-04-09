@@ -12,9 +12,10 @@ android {
 
     compileSdk = 33
 
+    namespace = "it.czerwinski.android.hilt"
+
     defaultConfig {
         minSdk = 16
-        targetSdk = 33
     }
 
     buildTypes {

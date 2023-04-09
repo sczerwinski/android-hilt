@@ -100,16 +100,18 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: 3.8
-      - name: Run Connected Checks
+      - name: Assemble Connected Tests
+        run: ./gradlew assembleAndroidTest --stacktrace
+      - name: Run Connected Checks On Emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 31
           target: default
           arch: x86_64
-          profile: Nexus 5
+          profile: Nexus 6
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
-          script: ./gradlew connectedCheck --stacktrace
+          script: ./gradlew connectedCheck --no-parallel --stacktrace
       - name: Publish Android Test Report
         if: ${{ always() }}
         uses: EnricoMi/publish-unit-test-result-action/composite@v2

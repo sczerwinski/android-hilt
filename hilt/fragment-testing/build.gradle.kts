@@ -13,13 +13,10 @@ android {
 
     compileSdk = 33
 
+    namespace = "it.czerwinski.android.hilt.fragment.testing"
+
     defaultConfig {
         minSdk = 16
-        targetSdk = 33
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        multiDexEnabled = true
     }
 
     buildTypes {
@@ -51,24 +48,13 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.45")
 
     api("androidx.test:core:1.5.0")
-
-    androidTestImplementation("androidx.test:runner:1.5.2")
-    debugImplementation("androidx.fragment:fragment-testing:1.5.6") {
-        exclude(group = "androidx.text", module = "monitor")
-        exclude(group = "androidx.activity", module = "activity-ktx")
-    }
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation("com.google.android.material:material:1.8.0")
-    androidTestImplementation("androidx.activity:activity-ktx:1.7.0")
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.45")
-    androidTestImplementation("androidx.multidex:multidex:2.0.1")
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.45")
+    api("androidx.fragment:fragment-ktx:1.5.6")
+    api("androidx.activity:activity-ktx:1.7.0")
 }
 
 configurations.all {
     resolutionStrategy {
-        force("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
-        force("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
+        force("androidx.activity:activity-ktx:1.7.0")
     }
 }
 

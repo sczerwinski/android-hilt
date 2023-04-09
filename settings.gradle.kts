@@ -13,4 +13,6 @@ include(":hilt:extensions")
 include(":hilt:fragment-testing")
 include(":hilt:processor")
 
+include(":tests:fragment-testing-test")
+
 include(":examples:generated-modules")

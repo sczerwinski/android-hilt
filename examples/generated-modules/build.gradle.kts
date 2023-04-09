@@ -11,6 +11,8 @@ android {
 
     compileSdk = 33
 
+    namespace = "it.czerwinski.android.hilt.examples.generated"
+
     defaultConfig {
         minSdk = 16
         targetSdk = 33
@@ -72,7 +74,10 @@ dependencies {
     implementation("io.ktor:ktor-client-content-negotiation:2.2.4")
     implementation("io.ktor:ktor-serialization-kotlinx-json:2.2.4")
     implementation("io.ktor:ktor-client-logging:2.2.4")
-    implementation("ch.qos.logback:logback-classic:1.4.5")
+
+    // Logback 1.4.x requires Java 11:
+    @Suppress("GradleDependency")
+    implementation("ch.qos.logback:logback-classic:1.3.6")
 
     implementation("androidx.room:room-runtime:2.5.1")
     kapt("androidx.room:room-compiler:2.5.1")
@@ -86,6 +91,8 @@ dependencies {
 
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.45")
     kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.45")
+
+    androidTestImplementation("androidx.test:core:1.5.0")
 
     androidTestImplementation("io.ktor:ktor-client-mock:2.0.0")
 
