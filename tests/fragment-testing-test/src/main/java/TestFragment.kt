@@ -49,6 +49,6 @@ class TestFragment : Fragment() {
     }
 
     companion object {
-        val ARG_TEXT = "TEXT"
+        const val ARG_TEXT = "TEXT"
     }
 }

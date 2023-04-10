@@ -240,7 +240,12 @@ class HiltFragmentScenario<F : Fragment, A : FragmentActivity> private construct
             initialState: Lifecycle.State = Lifecycle.State.RESUMED,
             factory: FragmentFactory? = null
         ): HiltFragmentScenario<F, EmptyFragmentActivity> = launch(
-            EmptyFragmentActivity::class.java, fragmentClass, fragmentArgs, themeResId, initialState, factory
+            activityClass = EmptyFragmentActivity::class.java,
+            fragmentClass = fragmentClass,
+            fragmentArgs = fragmentArgs,
+            themeResId = themeResId,
+            initialState = initialState,
+            factory = factory
         )
 
         /**
@@ -257,7 +262,13 @@ class HiltFragmentScenario<F : Fragment, A : FragmentActivity> private construct
             initialState: Lifecycle.State = Lifecycle.State.RESUMED,
             factory: FragmentFactory? = null
         ): HiltFragmentScenario<F, A> = internalLaunch(
-            activityClass, fragmentClass, fragmentArgs, themeResId, initialState, factory, containerViewId = 0
+            activityClass = activityClass,
+            fragmentClass = fragmentClass,
+            fragmentArgs = fragmentArgs,
+            themeResId = themeResId,
+            initialState = initialState,
+            factory = factory,
+            containerViewId = 0
         )
 
         /**
@@ -274,7 +285,12 @@ class HiltFragmentScenario<F : Fragment, A : FragmentActivity> private construct
             initialState: Lifecycle.State = Lifecycle.State.RESUMED,
             factory: FragmentFactory? = null
         ): HiltFragmentScenario<F, EmptyFragmentActivity> = launchInContainer(
-            EmptyFragmentActivity::class.java, fragmentClass, fragmentArgs, themeResId, initialState, factory
+            activityClass = EmptyFragmentActivity::class.java,
+            fragmentClass = fragmentClass,
+            fragmentArgs = fragmentArgs,
+            themeResId = themeResId,
+            initialState = initialState,
+            factory = factory
         )
 
         /**
@@ -292,7 +308,13 @@ class HiltFragmentScenario<F : Fragment, A : FragmentActivity> private construct
             initialState: Lifecycle.State = Lifecycle.State.RESUMED,
             factory: FragmentFactory? = null
         ): HiltFragmentScenario<F, A> = internalLaunch(
-            activityClass, fragmentClass, fragmentArgs, themeResId, initialState, factory, containerViewId = android.R.id.content
+            activityClass = activityClass,
+            fragmentClass = fragmentClass,
+            fragmentArgs = fragmentArgs,
+            themeResId = themeResId,
+            initialState = initialState,
+            factory = factory,
+            containerViewId = android.R.id.content
         )
 
         @Suppress("LongParameterList")

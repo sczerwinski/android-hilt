@@ -19,5 +19,10 @@ package it.czerwinski.android.hilt.fragment.testing.tests
 import javax.inject.Inject
 
 class TestRepository @Inject constructor() {
-    fun getText(): String = "Text from repository"
+
+    fun getText(): String = TEXT
+
+    companion object {
+        private const val TEXT = "Text from repository"
+    }
 }

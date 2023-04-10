@@ -28,7 +28,11 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
     testImplementation("io.mockk:mockk:1.13.4")
     kaptTest(project(":hilt:processor"))
-    testImplementation("ch.qos.logback:logback-classic:1.4.6")
+}
+
+detekt {
+    config = files("../../config/detekt/detekt.yml")
+    buildUponDefaultConfig  = true
 }
 
 tasks {

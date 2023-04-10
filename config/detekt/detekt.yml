@@ -1,3 +1,9 @@
+complexity:
+  LongParameterList:
+    ignoreDefaultParameters: true
 naming:
   InvalidPackageDeclaration:
+    active: false
+performance:
+  SpreadOperator:
     active: false
