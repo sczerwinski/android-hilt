@@ -12,6 +12,7 @@ include(":hilt:annotations")
 include(":hilt:extensions")
 include(":hilt:fragment-testing")
 include(":hilt:processor")
+include(":hilt:processor-ksp")
 
 include(":tests:fragment-testing-test")
 

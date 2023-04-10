@@ -2,10 +2,15 @@
 
 ## [Unreleased]
 ### Added
+- KSP processor for annotations:
+  `@Bound`, `@BoundTo`, `@FactoryMethod`, `@TestBound`, `@TestBoundTo`, `@TestFactoryMethod`
+- Support for `@FactoryMethod` in companion objects (requires KSP processor)
 - Add `initialState` parameter to `HiltFragmentScenario` launching methods
 - Add unit tests for annotation processor
 
 ### Changed
+- Annotations `@Bound`, `@BoundTo`, `@FactoryMethod`, `@TestBound`, `@TestBoundTo` and `@TestFactoryMethod`
+  are now marked `@Repeatable`
 - Make `HiltFragmentScenario` implement `Closeable`
 - Upgrade Gradle to `8.0.2`
 - Use Java 11
