@@ -50,6 +50,14 @@ class FactoryMethodModel private constructor(
         )
     )
 
+    override val replacesModuleClassName: ClassName = ClassName(
+        packageName = declarationFile.packageName.asString(),
+        simpleNames = listOf(
+            MODULE_NAME_FORMAT
+                .format(returnTypeName.simpleNames.joinToString(NAME_SEPARATOR), componentClassName.simpleName)
+        )
+    )
+
     val provideMethodName: String
         get() = ((enclosingClassName?.simpleNames ?: listOf(declarationFile.fileClassName)) + methodName)
             .joinToString(NAME_SEPARATOR) { name -> name.replaceFirstChar { it.lowercase(Locale.ENGLISH) } }

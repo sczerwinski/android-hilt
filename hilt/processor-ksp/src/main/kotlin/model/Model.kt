@@ -24,6 +24,7 @@ interface Model {
     val declarationFile: KSFile
     val moduleKind: HiltModuleKind
     val moduleClassName: ClassName
+    val replacesModuleClassName: ClassName
     val componentClassName: ClassName
     val annotations: List<AnnotationSpec>
     val isTest: Boolean

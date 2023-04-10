@@ -43,6 +43,14 @@ class BindingModel private constructor(
         )
     )
 
+    override val replacesModuleClassName: ClassName = ClassName(
+        packageName = declarationFile.packageName.asString(),
+        simpleNames = listOf(
+            MODULE_NAME_FORMAT
+                .format(supertypeClassName.simpleNames.joinToString(NAME_SEPARATOR), componentClassName.simpleName)
+        )
+    )
+
     val bindMethodName: String get() = "$BIND_METHOD_NAME_PREFIX${annotatedClassName.simpleName}"
 
     interface Builder {
