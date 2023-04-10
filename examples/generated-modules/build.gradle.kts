@@ -99,3 +99,8 @@ dependencies {
     androidTestImplementation("it.czerwinski.android:xpresso-core:1.0")
     androidTestImplementation("it.czerwinski.android:xpresso-recyclerview:1.0")
 }
+
+detekt {
+    config = files("../../config/detekt/detekt.yml")
+    buildUponDefaultConfig  = true
+}

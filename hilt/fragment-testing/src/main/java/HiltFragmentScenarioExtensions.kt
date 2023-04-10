@@ -39,7 +39,13 @@ inline fun <reified F : Fragment> launchFragment(
     @StyleRes themeResId: Int = HiltFragmentScenario.defaultTheme,
     initialState: Lifecycle.State = Lifecycle.State.RESUMED,
     factory: FragmentFactory? = null
-) = HiltFragmentScenario.launch(F::class.java, fragmentArgs, themeResId, initialState, factory)
+) = HiltFragmentScenario.launch(
+    fragmentClass = F::class.java,
+    fragmentArgs = fragmentArgs,
+    themeResId = themeResId,
+    initialState = initialState,
+    factory = factory
+)
 
 /**
  * Launches a Fragment with given arguments hosted by an empty [FragmentActivity] using
@@ -56,15 +62,20 @@ inline fun <reified F : Fragment> launchFragment(
     @StyleRes themeResId: Int = HiltFragmentScenario.defaultTheme,
     initialState: Lifecycle.State = Lifecycle.State.RESUMED,
     crossinline instantiate: () -> F
-) = HiltFragmentScenario.launch(F::class.java, fragmentArgs, themeResId, initialState, object : FragmentFactory() {
-    override fun instantiate(
-        classLoader: ClassLoader,
-        className: String
-    ) = when (className) {
-        F::class.java.name -> instantiate()
-        else -> super.instantiate(classLoader, className)
-    }
-})
+) = HiltFragmentScenario.launch(
+    fragmentClass = F::class.java,
+    fragmentArgs = fragmentArgs,
+    themeResId = themeResId,
+    initialState = initialState,
+    factory = object : FragmentFactory() {
+        override fun instantiate(
+            classLoader: ClassLoader,
+            className: String
+        ) = when (className) {
+            F::class.java.name -> instantiate()
+            else -> super.instantiate(classLoader, className)
+        }
+    })
 
 /**
  * Launches a Fragment in the Activity's root view container `android.R.id.content`, with
@@ -82,7 +93,13 @@ inline fun <reified F : Fragment> launchFragmentInContainer(
     @StyleRes themeResId: Int = HiltFragmentScenario.defaultTheme,
     initialState: Lifecycle.State = Lifecycle.State.RESUMED,
     factory: FragmentFactory? = null
-) = HiltFragmentScenario.launchInContainer(F::class.java, fragmentArgs, themeResId, initialState, factory)
+) = HiltFragmentScenario.launchInContainer(
+    fragmentClass = F::class.java,
+    fragmentArgs = fragmentArgs,
+    themeResId = themeResId,
+    initialState = initialState,
+    factory = factory
+)
 
 /**
  * Launches a Fragment in the Activity's root view container `android.R.id.content`, with
@@ -103,12 +120,18 @@ inline fun <reified F : Fragment> launchFragmentInContainer(
     @StyleRes themeResId: Int = HiltFragmentScenario.defaultTheme,
     initialState: Lifecycle.State = Lifecycle.State.RESUMED,
     crossinline instantiate: () -> F
-) = HiltFragmentScenario.launchInContainer(F::class.java, fragmentArgs, themeResId, initialState, object : FragmentFactory() {
-    override fun instantiate(
-        classLoader: ClassLoader,
-        className: String
-    ) = when (className) {
-        F::class.java.name -> instantiate()
-        else -> super.instantiate(classLoader, className)
+) = HiltFragmentScenario.launchInContainer(
+    fragmentClass = F::class.java,
+    fragmentArgs = fragmentArgs,
+    themeResId = themeResId,
+    initialState = initialState,
+    factory = object : FragmentFactory() {
+        override fun instantiate(
+            classLoader: ClassLoader,
+            className: String
+        ) = when (className) {
+            F::class.java.name -> instantiate()
+            else -> super.instantiate(classLoader, className)
+        }
     }
-})
+)

@@ -2,10 +2,16 @@
 
 ## [Unreleased]
 ### Added
+- KSP processor for annotations:
+  `@Bound`, `@BoundTo`, `@FactoryMethod`, `@TestBound`, `@TestBoundTo`, `@TestFactoryMethod`
+- Support for `@FactoryMethod` in companion objects (requires KSP processor)
 - Add `initialState` parameter to `HiltFragmentScenario` launching methods
 - Add unit tests for annotation processor
+- Example `generated-modules-ksp`, using KSP processor instead of kapt.
 
 ### Changed
+- Annotations `@Bound`, `@BoundTo`, `@FactoryMethod`, `@TestBound`, `@TestBoundTo` and `@TestFactoryMethod`
+  are now marked `@Repeatable`
 - Make `HiltFragmentScenario` implement `Closeable`
 - Upgrade Gradle to `8.0.2`
 - Use Java 11
@@ -38,6 +44,10 @@
   - Upgrade `lifecycle-livedata-ktx` to `2.6.1`
   - Upgrade `browser` to `1.5.0`
   - Upgrade `logback-classic` to `1.3.6`
+
+### Deprecated
+- Kapt processor (artifact `it.czerwinski.android.hilt:hilt-processor`).
+  Use KSP processor (artifact `it.czerwinski.android.hilt:hilt-processor-ksp`) instead.
 
 ## [1.3.0]
 ### Changed

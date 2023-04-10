@@ -16,6 +16,11 @@ tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "11"
 }
 
+detekt {
+    config = files("../../config/detekt/detekt.yml")
+    buildUponDefaultConfig  = true
+}
+
 tasks {
     dokkaJavadoc { setUpJavadocTask(project) }
     dokkaJekyll { setUpJekyllTask(project) }

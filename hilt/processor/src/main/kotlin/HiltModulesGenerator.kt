@@ -35,6 +35,7 @@ import javax.annotation.processing.SupportedSourceVersion
 import javax.lang.model.SourceVersion
 import javax.lang.model.element.Element
 import javax.lang.model.element.TypeElement
+import javax.tools.Diagnostic
 
 /**
  * Generates Hilt modules from annotations:
@@ -46,6 +47,7 @@ import javax.lang.model.element.TypeElement
  * * [TestFactoryMethod]
  */
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
+@Deprecated(message = "Use KSP processor instead")
 class HiltModulesGenerator : AbstractProcessor() {
 
     private val filer get() = processingEnv.filer
@@ -59,6 +61,11 @@ class HiltModulesGenerator : AbstractProcessor() {
         annotations: MutableSet<out TypeElement>,
         roundEnvironment: RoundEnvironment
     ): Boolean {
+        processingEnv.messager.printMessage(
+            Diagnostic.Kind.MANDATORY_WARNING,
+            "Dependency 'it.czerwinski.android.hilt:hilt-processor' is deprecated. " +
+                "Use 'it.czerwinski.android.hilt:hilt-processor-ksp' instead."
+        )
         boundAnnotationTypes
             .flatMap { annotationType -> createBindings(roundEnvironment, annotationType) }
             .groupBy { binding -> binding.groupingKey }

@@ -34,6 +34,7 @@ import kotlin.reflect.KClass
  */
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.BINARY)
+@Repeatable
 @MustBeDocumented
 annotation class TestFactoryMethod(
 

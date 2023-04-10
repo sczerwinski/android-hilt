@@ -63,3 +63,8 @@ dependencies {
     kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.45")
     debugImplementation(project(":hilt:fragment-testing"))
 }
+
+detekt {
+    config = files("../../config/detekt/detekt.yml")
+    buildUponDefaultConfig  = true
+}
