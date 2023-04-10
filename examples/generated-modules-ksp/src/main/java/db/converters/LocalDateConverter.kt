@@ -18,7 +18,7 @@
 package it.czerwinski.android.hilt.examples.generated.db.converters
 
 import androidx.room.TypeConverter
-import org.joda.time.LocalDate
+import java.time.LocalDate
 
 class LocalDateConverter {
 
