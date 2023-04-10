@@ -7,6 +7,7 @@
 - Support for `@FactoryMethod` in companion objects (requires KSP processor)
 - Add `initialState` parameter to `HiltFragmentScenario` launching methods
 - Add unit tests for annotation processor
+- Example `generated-modules-ksp`, using KSP processor instead of kapt.
 
 ### Changed
 - Annotations `@Bound`, `@BoundTo`, `@FactoryMethod`, `@TestBound`, `@TestBoundTo` and `@TestFactoryMethod`

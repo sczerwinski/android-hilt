@@ -17,3 +17,4 @@ include(":hilt:processor-ksp")
 include(":tests:fragment-testing-test")
 
 include(":examples:generated-modules")
+include(":examples:generated-modules-ksp")
