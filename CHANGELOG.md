@@ -44,6 +44,10 @@
   - Upgrade `browser` to `1.5.0`
   - Upgrade `logback-classic` to `1.3.6`
 
+### Deprecated
+- Kapt processor (artifact `it.czerwinski.android.hilt:hilt-processor`).
+  Use KSP processor (artifact `it.czerwinski.android.hilt:hilt-processor-ksp`) instead.
+
 ## [1.3.0]
 ### Changed
 - Dependencies:
