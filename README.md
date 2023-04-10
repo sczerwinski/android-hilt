@@ -12,9 +12,14 @@
 
   ```kotlin
   dependencies {
-      implementation("com.google.dagger:hilt-android:2.36")
+      implementation("com.google.dagger:hilt-android:2.45")
       implementation("it.czerwinski.android.hilt:hilt-extensions:[VERSION]")
+
+      // Using kapt:
       kapt("it.czerwinski.android.hilt:hilt-processor:[VERSION]")
+
+      // Using KSP (recommended):
+      ksp("it.czerwinski.android.hilt:hilt-processor-ksp:[VERSION]")
   }
   ```
 </details>
@@ -24,9 +29,14 @@
 
   ```groovy
   dependencies {
-      implementation 'com.google.dagger:hilt-android:2.36'
+      implementation 'com.google.dagger:hilt-android:2.45'
       implementation 'it.czerwinski.android.hilt:hilt-extensions:[VERSION]'
+
+      // Using kapt:
       kapt 'it.czerwinski.android.hilt:hilt-processor:[VERSION]'
+
+      // Using KSP (recommended):
+      ksp 'it.czerwinski.android.hilt:hilt-processor-ksp:[VERSION]'
   }
   ```
 </details>
@@ -69,6 +79,7 @@ class RepositoryA @Inject constructor() : Repository
 
 @BoundTo(supertype = Repository::class, component = SingletonComponent::class)
 @Singleton
+@Named("online")
 class RepositoryB @Inject constructor() : Repository
 
 @Bound(component = SingletonComponent::class)
@@ -76,21 +87,22 @@ class RepositoryB @Inject constructor() : Repository
 class RepositoryC @Inject constructor() : Repository
 ```
 will generate module:
-```java
+```kotlin
 @Module
-@InstallIn(SingletonComponent.class)
+@InstallIn(SingletonComponent::class)
 public interface Repository_SingletonComponent_BindingsModule {
 
     @Binds
-    Repository bindRepositoryA(RepositoryA implementation);
+    public fun bindRepositoryA(implementation: RepositoryA): Repository
 
     @Binds
     @Singleton
-    Repository bindRepositoryB(RepositoryB implementation);
+    @Named("online")
+    public fun bindRepositoryB(implementation: RepositoryB): Repository
 
     @Binds
     @Named("offline")
-    Repository bindRepositoryC(RepositoryC implementation);
+    public fun bindRepositoryC(implementation: RepositoryC): Repository
 }
 ```
 
@@ -136,37 +148,33 @@ object DatabaseFactoryProvider {
 }
 ```
 annotation processor will generate modules:
-```java
+```kotlin
 @Module
-@InstallIn(SingletonComponent.class)
-public class UsersDao_SingletonComponent_FactoryMethodsModule {
+@InstallIn(SingletonComponent::class)
+public object UsersDao_SingletonComponent_FactoryMethodsModule {
     @Provides
     @Singleton
-    public UsersDao appDatabase_usersDao(AppDatabase factory) {
-        return factory.usersDao();
-    }
+    public fun appDatabase_usersDao(factory: AppDatabase): UsersDao = factory.usersDao()
 }
 ```
-```java
+```kotlin
 @Module
-@InstallIn(SingletonComponent.class)
-public class AppDatabase_SingletonComponent_FactoryMethodsModule {
+@InstallIn(SingletonComponent::class)
+public object AppDatabase_SingletonComponent_FactoryMethodsModule {
     @Provides
     @Singleton
-    public AppDatabase databaseFactory_createDatabase(DatabaseFactory factory) {
-        return factory.createDatabase();
-    }
+    public fun databaseFactory_createDatabase(factory: DatabaseFactory): AppDatabase =
+        factory.createDatabase()
 }
 ```
-```java
+```kotlin
 @Module
-@InstallIn(SingletonComponent.class)
-public class DatabaseFactory_SingletonComponent_FactoryMethodsModule {
+@InstallIn(SingletonComponent::class)
+public object DatabaseFactory_SingletonComponent_FactoryMethodsModule {
     @Provides
-    public DatabaseFactory databaseFactoryProvider_createDatabaseFactory(
-            @ApplicationContext Context context_0) {
-        return DatabaseFactoryProvider.INSTANCE.createDatabaseFactory(context_0);
-    }
+    public fun databaseFactoryProvider_createDatabaseFactory(
+            @ApplicationContext context: Context
+    ): DatabaseFactory = DatabaseFactoryProvider.INSTANCE.createDatabaseFactory(context)
 }
 ```
 
@@ -197,9 +205,9 @@ Must be used as `debugImplementation` dependency to properly register `EmptyFrag
 
   ```kotlin
   dependencies {
-      implementation("com.google.dagger:hilt-android:2.36")
+      implementation("com.google.dagger:hilt-android:2.45")
 
-      androidTestImplementation("androidx.test:runner:1.3.0")
+      androidTestImplementation("androidx.test:runner:1.5.2")
       debugImplementation("it.czerwinski.android.hilt:hilt-fragment-testing:[VERSION]")
   }
   ```
@@ -210,9 +218,9 @@ Must be used as `debugImplementation` dependency to properly register `EmptyFrag
 
   ```groovy
   dependencies {
-      implementation 'com.google.dagger:hilt-android:2.36'
+      implementation 'com.google.dagger:hilt-android:2.45'
 
-      androidTestImplementation 'androidx.test:runner:1.3.0'
+      androidTestImplementation 'androidx.test:runner:1.5.2'
       debugImplementation 'it.czerwinski.android.hilt:hilt-fragment-testing:[VERSION]'
   }
   ```
