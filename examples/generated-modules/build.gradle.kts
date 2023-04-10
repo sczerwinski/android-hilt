@@ -85,7 +85,7 @@ dependencies {
     implementation("androidx.sqlite:sqlite-ktx:2.3.1")
     implementation("it.czerwinski.android.room:room-extensions:1.2.0")
 
-    implementation("joda-time:joda-time:2.10.14")
+    implementation("joda-time:joda-time:2.12.5")
 
     implementation("com.squareup.picasso:picasso:2.8")
 
@@ -94,7 +94,7 @@ dependencies {
 
     androidTestImplementation("androidx.test:core:1.5.0")
 
-    androidTestImplementation("io.ktor:ktor-client-mock:2.0.0")
+    androidTestImplementation("io.ktor:ktor-client-mock:2.2.4")
 
     androidTestImplementation("it.czerwinski.android:xpresso-core:1.0")
     androidTestImplementation("it.czerwinski.android:xpresso-recyclerview:1.0")

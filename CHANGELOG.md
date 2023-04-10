@@ -43,6 +43,7 @@
   - Upgrade `lifecycle-viewmodel-ktx` to `2.6.1`
   - Upgrade `lifecycle-livedata-ktx` to `2.6.1`
   - Upgrade `browser` to `1.5.0`
+  - Upgrade `joda-time` to `2.12.5`
   - Upgrade `logback-classic` to `1.3.6`
 
 ### Deprecated
