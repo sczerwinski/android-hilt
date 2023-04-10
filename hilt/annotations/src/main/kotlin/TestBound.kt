@@ -31,6 +31,7 @@ import kotlin.reflect.KClass
  */
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.BINARY)
+@Repeatable
 @MustBeDocumented
 annotation class TestBound(
 
