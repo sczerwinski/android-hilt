@@ -23,7 +23,7 @@ import androidx.room.PrimaryKey
 import it.czerwinski.android.hilt.examples.generated.remote.serializers.LocalDateSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.joda.time.LocalDate
+import java.time.LocalDate
 
 @Entity(tableName = "posts")
 @Serializable

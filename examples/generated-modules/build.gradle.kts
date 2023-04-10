@@ -14,7 +14,7 @@ android {
     namespace = "it.czerwinski.android.hilt.examples.generated"
 
     defaultConfig {
-        minSdk = 16
+        minSdk = 26
         targetSdk = 33
 
         applicationId = "it.czerwinski.android.hilt.examples.generated"
@@ -84,8 +84,6 @@ dependencies {
     implementation("androidx.room:room-ktx:2.5.1")
     implementation("androidx.sqlite:sqlite-ktx:2.3.1")
     implementation("it.czerwinski.android.room:room-extensions:1.2.0")
-
-    implementation("joda-time:joda-time:2.12.5")
 
     implementation("com.squareup.picasso:picasso:2.8")
 
