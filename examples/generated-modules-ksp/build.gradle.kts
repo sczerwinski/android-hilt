@@ -95,7 +95,7 @@ dependencies {
 
     androidTestImplementation("androidx.test:core:1.5.0")
 
-    androidTestImplementation("io.ktor:ktor-client-mock:2.0.0")
+    androidTestImplementation("io.ktor:ktor-client-mock:2.2.4")
 
     androidTestImplementation("it.czerwinski.android:xpresso-core:1.0")
     androidTestImplementation("it.czerwinski.android:xpresso-recyclerview:1.0")
