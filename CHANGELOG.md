@@ -14,15 +14,16 @@
   are now marked `@Repeatable`
 - Make `HiltFragmentScenario` implement `Closeable`
 - Upgrade Gradle to `8.0.2`
-- Use Java 11
+- Use Java 17
 - Change target SDK to `33`
 - Library dependencies:
   - Upgrade Kotlin to `1.8.20`
   - Upgrade Hilt to `2.45`
-  - Upgrade Android Gradle Plugin to `7.4.2`
+  - Upgrade Android Gradle Plugin to `8.0.0`
+  - Upgrade KSP to `1.8.20-1.0.11`
   - Upgrade `androidx.annotation:annotation` to `1.6.0`
 - Test dependencies:
-  - Upgrade MockK to `1.13.4`
+  - Upgrade MockK to `1.13.5`
   - Upgrade JUnit to `5.9.2`
   - Upgrade `de.mannodermaus.gradle.plugins:android-junit5` to `1.8.2.1`
   - Upgrade `androidx.test:core` to `1.5.0`

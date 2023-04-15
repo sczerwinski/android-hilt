@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
+    id("com.google.devtools.ksp") version "1.8.20-1.0.11"
     id("kotlinx-serialization")
     id("dagger.hilt.android.plugin")
     id("io.gitlab.arturbosch.detekt") version "1.22.0"
@@ -42,9 +43,17 @@ android {
         jvmTarget = "11"
     }
 
-    packagingOptions {
+    packaging {
         resources.excludes.add("META-INF/INDEX.LIST")
     }
+}
+
+kotlin.jvmToolchain {
+    languageVersion.set(JavaLanguageVersion.of(11))
+}
+
+java.toolchain {
+    languageVersion.set(JavaLanguageVersion.of(11))
 }
 
 kapt {
@@ -80,7 +89,7 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:1.3.6")
 
     implementation("androidx.room:room-runtime:2.5.1")
-    kapt("androidx.room:room-compiler:2.5.1")
+    ksp("androidx.room:room-compiler:2.5.1")
     implementation("androidx.room:room-ktx:2.5.1")
     implementation("androidx.sqlite:sqlite-ktx:2.3.1")
     implementation("it.czerwinski.android.room:room-extensions:1.2.0")
