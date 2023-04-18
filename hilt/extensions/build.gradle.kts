@@ -74,4 +74,8 @@ afterEvaluate {
         repositories { sonatype(project) }
     }
     signing { signAllMavenPublications(project, publishing) }
+    tasks {
+        getByName("generateMetadataFileForLibAarPublication")
+            .dependsOn(getByName("sourcesJar"))
+    }
 }

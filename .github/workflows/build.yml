@@ -178,7 +178,7 @@ jobs:
 
   publishBuild:
     name: Publish To Build Directory
-    if: github.event_name == 'pull_request'
+    if: (github.event_name == 'pull_request') || (github.ref != 'refs/heads/main')
     needs: gradleValidation
     runs-on: ubuntu-latest
     steps:
@@ -189,8 +189,15 @@ jobs:
         with:
           distribution: zulu
           java-version: 17
+      - name: Decrypt Key Ring File
+        env:
+          FILE_PASSPHRASE: ${{ secrets.FILE_PASSPHRASE }}
+        run: gpg --quiet --batch --yes --decrypt --passphrase="${FILE_PASSPHRASE}" --output secring.gpg secring.gpg.gpg
       - name: Publish To Build Directory
-        run: ./gradlew publish -PlibVersionSuffix="SNAPSHOT" --stacktrace
+        env:
+          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+          SIGNING_PASS: ${{ secrets.SIGNING_PASS }}
+        run: ./gradlew publish -PlibVersionSuffix="SNAPSHOT" -Psigning.secretKeyRingFile=../../secring.gpg -Psigning.password="${SIGNING_PASS}" -Psigning.keyId="${SIGNING_KEY_ID}" --stacktrace
 
   snapshot:
     name: Publish To OSSRH Snapshot Repository
