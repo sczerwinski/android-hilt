@@ -33,7 +33,7 @@ jobs:
         uses: actions/setup-java@v3.11.0
         with:
           distribution: zulu
-          java-version: 11
+          java-version: 17
       - name: Export Properties
         id: properties
         shell: bash
@@ -58,20 +58,26 @@ jobs:
         uses: actions/setup-java@v3.11.0
         with:
           distribution: zulu
-          java-version: 11
+          java-version: 17
       - name: Run Unit Tests
-        run: ./gradlew check --continue --stacktrace
+        run: ./gradlew test --stacktrace
       - name: Publish Test Report
         if: ${{ always() }}
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
           check_name: "Unit Test Results"
           files: '**/build/test-results/**/*.xml'
+      - name: Run Detekt
+        if: ${{ always() }}
+        run: ./gradlew detekt --stacktrace
       - name: Generate Detekt Annotations
         if: ${{ always() }}
         uses: jwgmeligmeyling/checkstyle-github-action@master
         with:
           path: '**/detekt.xml'
+      - name: Run Lint
+        if: ${{ always() }}
+        run: ./gradlew lint --stacktrace
       - name: Generate Lint Annotations
         if: ${{ always() }}
         uses: yutailang0119/action-android-lint@v3
@@ -89,11 +95,13 @@ jobs:
         uses: actions/setup-java@v3.11.0
         with:
           distribution: zulu
-          java-version: 11
+          java-version: 17
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: 3.8
+      - name: Assemble Connected Tests
+        run: ./gradlew assembleAndroidTest --stacktrace
       - name: Run Connected Checks On Emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -122,7 +130,7 @@ jobs:
         uses: actions/setup-java@v3.11.0
         with:
           distribution: zulu
-          java-version: 11
+          java-version: 17
       - name: Generate Documentation
         run: ./gradlew dokkaJavadoc dokkaJekyll --stacktrace
 
@@ -137,7 +145,7 @@ jobs:
         uses: actions/setup-java@v3.11.0
         with:
           distribution: zulu
-          java-version: 11
+          java-version: 17
       - name: Assemble Release AAR
         run: ./gradlew assembleRelease --stacktrace
 
@@ -170,7 +178,7 @@ jobs:
 
   publishBuild:
     name: Publish To Build Directory
-    if: github.event_name == 'pull_request'
+    if: (github.event_name == 'pull_request') || (github.ref != 'refs/heads/main')
     needs: gradleValidation
     runs-on: ubuntu-latest
     steps:
@@ -180,9 +188,16 @@ jobs:
         uses: actions/setup-java@v3.11.0
         with:
           distribution: zulu
-          java-version: 11
+          java-version: 17
+      - name: Decrypt Key Ring File
+        env:
+          FILE_PASSPHRASE: ${{ secrets.FILE_PASSPHRASE }}
+        run: gpg --quiet --batch --yes --decrypt --passphrase="${FILE_PASSPHRASE}" --output secring.gpg secring.gpg.gpg
       - name: Publish To Build Directory
-        run: ./gradlew publish -PlibVersionSuffix="SNAPSHOT" --stacktrace
+        env:
+          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+          SIGNING_PASS: ${{ secrets.SIGNING_PASS }}
+        run: ./gradlew publish -PlibVersionSuffix="SNAPSHOT" -Psigning.secretKeyRingFile=../../secring.gpg -Psigning.password="${SIGNING_PASS}" -Psigning.keyId="${SIGNING_KEY_ID}" --stacktrace
 
   snapshot:
     name: Publish To OSSRH Snapshot Repository
@@ -196,7 +211,7 @@ jobs:
         uses: actions/setup-java@v3.11.0
         with:
           distribution: zulu
-          java-version: 11
+          java-version: 17
       - name: Decrypt Key Ring File
         env:
           FILE_PASSPHRASE: ${{ secrets.FILE_PASSPHRASE }}

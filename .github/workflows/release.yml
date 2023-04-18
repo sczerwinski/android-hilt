@@ -30,7 +30,7 @@ jobs:
         uses: actions/setup-java@v3.11.0
         with:
           distribution: zulu
-          java-version: 11
+          java-version: 17
       - name: Decrypt Key Ring File
         env:
           FILE_PASSPHRASE: ${{ secrets.FILE_PASSPHRASE }}
@@ -56,7 +56,7 @@ jobs:
         uses: actions/setup-java@v3.11.0
         with:
           distribution: zulu
-          java-version: 11
+          java-version: 17
       - name: Patch Changelog
         run: ./gradlew patchChangelog
       - name: Commit files

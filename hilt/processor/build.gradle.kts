@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     kotlin("jvm")
     kotlin("kapt")
@@ -9,8 +7,12 @@ plugins {
     signing
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
+kotlin.jvmToolchain {
+    languageVersion.set(JavaLanguageVersion.of(11))
+}
+
+java.toolchain {
+    languageVersion.set(JavaLanguageVersion.of(11))
 }
 
 tasks.withType<Test> {
@@ -26,7 +28,8 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
-    testImplementation("io.mockk:mockk:1.13.4")
+    testImplementation("io.mockk:mockk:1.13.5")
+    testImplementation("ch.qos.logback:logback-classic:1.4.6")
     kaptTest(project(":hilt:processor"))
 }
 

@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     kotlin("jvm")
     id("io.gitlab.arturbosch.detekt") version "1.22.0"
@@ -8,12 +6,16 @@ plugins {
     signing
 }
 
-dependencies {
-    implementation("com.google.dagger:hilt-core:2.45")
+kotlin.jvmToolchain {
+    languageVersion.set(JavaLanguageVersion.of(11))
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
+java.toolchain {
+    languageVersion.set(JavaLanguageVersion.of(11))
+}
+
+dependencies {
+    implementation("com.google.dagger:hilt-core:2.45")
 }
 
 detekt {

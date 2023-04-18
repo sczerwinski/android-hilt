@@ -34,9 +34,17 @@ android {
         jvmTarget = "11"
     }
 
-    packagingOptions {
+    packaging {
         resources.excludes.add("META-INF/INDEX.LIST")
     }
+}
+
+kotlin.jvmToolchain {
+    languageVersion.set(JavaLanguageVersion.of(11))
+}
+
+java.toolchain {
+    languageVersion.set(JavaLanguageVersion.of(11))
 }
 
 kapt {
@@ -79,4 +87,8 @@ afterEvaluate {
         repositories { sonatype(project) }
     }
     signing { signAllMavenPublications(project, publishing) }
+    tasks {
+        getByName("generateMetadataFileForLibAarPublication")
+            .dependsOn(getByName("sourcesJar"))
+    }
 }

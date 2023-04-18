@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
-    id("com.google.devtools.ksp") version "1.8.20-1.0.10"
+    id("com.google.devtools.ksp") version "1.8.20-1.0.11"
     id("kotlinx-serialization")
     id("dagger.hilt.android.plugin")
     id("io.gitlab.arturbosch.detekt") version "1.22.0"
@@ -43,9 +43,17 @@ android {
         jvmTarget = "11"
     }
 
-    packagingOptions {
+    packaging {
         resources.excludes.add("META-INF/INDEX.LIST")
     }
+}
+
+kotlin.jvmToolchain {
+    languageVersion.set(JavaLanguageVersion.of(11))
+}
+
+java.toolchain {
+    languageVersion.set(JavaLanguageVersion.of(11))
 }
 
 kapt {

@@ -25,7 +25,6 @@ fun PublicationContainer.registerAarPublication(project: Project, componentName:
     register("libAar", MavenPublication::class) {
         from(project.components[componentName])
         artifact(project.tasks["javadocJar"])
-        artifact(project.tasks["sourcesJar"])
 
         artifactId = "${project.parent?.name}-${project.name}"
         groupId = "${project.group}"
