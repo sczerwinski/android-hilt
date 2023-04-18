@@ -60,18 +60,24 @@ jobs:
           distribution: zulu
           java-version: 17
       - name: Run Unit Tests
-        run: ./gradlew check --continue --stacktrace
+        run: ./gradlew test --stacktrace
       - name: Publish Test Report
         if: ${{ always() }}
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
           check_name: "Unit Test Results"
           files: '**/build/test-results/**/*.xml'
+      - name: Run Detekt
+        if: ${{ always() }}
+        run: ./gradlew detekt --stacktrace
       - name: Generate Detekt Annotations
         if: ${{ always() }}
         uses: jwgmeligmeyling/checkstyle-github-action@master
         with:
           path: '**/detekt.xml'
+      - name: Run Lint
+        if: ${{ always() }}
+        run: ./gradlew lint --stacktrace
       - name: Generate Lint Annotations
         if: ${{ always() }}
         uses: yutailang0119/action-android-lint@v3
@@ -94,6 +100,8 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: 3.8
+      - name: Assemble Connected Tests
+        run: ./gradlew assembleAndroidTest --stacktrace
       - name: Run Connected Checks On Emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
