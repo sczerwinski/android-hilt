@@ -80,7 +80,7 @@ dependencies {
 
     implementation("io.ktor:ktor-client-android:2.2.4")
     implementation("io.ktor:ktor-client-resources:2.2.4")
-    implementation("io.ktor:ktor-client-content-negotiation:2.2.4")
+    implementation("io.ktor:ktor-client-content-negotiation:2.3.0")
     implementation("io.ktor:ktor-serialization-kotlinx-json:2.2.4")
     implementation("io.ktor:ktor-client-logging:2.2.4")
 
