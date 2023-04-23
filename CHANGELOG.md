@@ -2,6 +2,19 @@
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [1.4.0] - 2023-04-23
+### Added
 - KSP processor for annotations:
   `@Bound`, `@BoundTo`, `@FactoryMethod`, `@TestBound`, `@TestBoundTo`, `@TestFactoryMethod`
 - Support for `@FactoryMethod` in companion objects (requires KSP processor)
@@ -127,6 +140,7 @@
   - `dagger.Lazy`
   - `javax.inject.Provider`
 
+[1.4.0]: https://github.com/sczerwinski/android-hilt/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/sczerwinski/android-hilt/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/sczerwinski/android-hilt/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/sczerwinski/android-hilt/compare/v1.1.0...v1.1.1
