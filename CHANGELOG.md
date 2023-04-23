@@ -22,22 +22,24 @@
   - Upgrade Android Gradle Plugin to `8.0.0`
   - Upgrade KSP to `1.8.20-1.0.11`
   - Upgrade `androidx.annotation:annotation` to `1.6.0`
+  - Upgrade `activity-ktx` to `1.7.1`
+  - Upgrade `fragment-ktx` to `1.5.7`
+  - Upgrade `androidx.test:core` to `1.5.0`
 - Test dependencies:
   - Upgrade MockK to `1.13.5`
   - Upgrade JUnit to `5.9.2`
   - Upgrade `de.mannodermaus.gradle.plugins:android-junit5` to `1.8.2.1`
-  - Upgrade `androidx.test:core` to `1.5.0`
   - Upgrade `androidx.test:runner` to `1.5.2`
   - Upgrade `espresso-core` to `3.5.1`
   - Upgrade `material` to `1.8.0`
-  - Upgrade `activity-ktx` to `1.7.0`
+  - Upgrade `fragment-testing` to `1.5.7`
   - Upgrade `logback-classic` to `1.4.6`
 - Build dependencies:
   - Upgrade `io.gitlab.arturbosch.detekt` to `1.22.0`
   - Upgrade `org.jetbrains.changelog` to `2.0.0`
   - Upgrade Dokka to `1.8.10`
 - Example dependencies:
-  - Upgrade Ktor Client to `2.2.4`
+  - Upgrade Ktor Client to `2.3.0`
   - Upgrade Room to `2.5.1`
   - Upgrade `room-extensions` to `1.2.0`
   - Upgrade `sqlite-ktx` to `2.3.1`

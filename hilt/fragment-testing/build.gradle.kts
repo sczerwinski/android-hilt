@@ -56,13 +56,13 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.45")
 
     api("androidx.test:core:1.5.0")
-    api("androidx.fragment:fragment-ktx:1.5.6")
-    api("androidx.activity:activity-ktx:1.7.0")
+    api("androidx.fragment:fragment-ktx:1.5.7")
+    api("androidx.activity:activity-ktx:1.7.1")
 }
 
 configurations.all {
     resolutionStrategy {
-        force("androidx.activity:activity-ktx:1.7.0")
+        force("androidx.activity:activity-ktx:1.7.1")
     }
 }
 
