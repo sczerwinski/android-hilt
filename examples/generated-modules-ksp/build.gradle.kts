@@ -69,7 +69,7 @@ dependencies {
 
     implementation("com.google.android.material:material:1.8.0")
 
-    implementation("androidx.activity:activity-ktx:1.7.0")
+    implementation("androidx.activity:activity-ktx:1.7.1")
 
     implementation("androidx.multidex:multidex:2.0.1")
 
@@ -78,11 +78,11 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
 
-    implementation("io.ktor:ktor-client-android:2.2.4")
-    implementation("io.ktor:ktor-client-resources:2.2.4")
-    implementation("io.ktor:ktor-client-content-negotiation:2.2.4")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:2.2.4")
-    implementation("io.ktor:ktor-client-logging:2.2.4")
+    implementation("io.ktor:ktor-client-android:2.3.0")
+    implementation("io.ktor:ktor-client-resources:2.3.0")
+    implementation("io.ktor:ktor-client-content-negotiation:2.3.0")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.0")
+    implementation("io.ktor:ktor-client-logging:2.3.0")
 
     // Logback 1.4.x requires Java 11:
     @Suppress("GradleDependency")
@@ -101,7 +101,7 @@ dependencies {
 
     androidTestImplementation("androidx.test:core:1.5.0")
 
-    androidTestImplementation("io.ktor:ktor-client-mock:2.2.4")
+    androidTestImplementation("io.ktor:ktor-client-mock:2.3.0")
 
     androidTestImplementation("it.czerwinski.android:xpresso-core:1.0")
     androidTestImplementation("it.czerwinski.android:xpresso-recyclerview:1.0")
