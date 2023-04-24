@@ -86,7 +86,7 @@ dependencies {
 
     // Logback 1.4.x requires Java 11:
     @Suppress("GradleDependency")
-    implementation("ch.qos.logback:logback-classic:1.3.7")
+    implementation("ch.qos.logback:logback-classic:1.4.7")
 
     implementation("androidx.room:room-runtime:2.5.1")
     ksp("androidx.room:room-compiler:2.5.1")
