@@ -92,7 +92,7 @@ dependencies {
     ksp("androidx.room:room-compiler:2.5.1")
     implementation("androidx.room:room-ktx:2.5.1")
     implementation("androidx.sqlite:sqlite-ktx:2.3.1")
-    implementation("it.czerwinski.android.room:room-extensions:1.2.0")
+    implementation("it.czerwinski.android.room:room-extensions:1.3.0")
 
     implementation("com.squareup.picasso:picasso:2.8")
 
