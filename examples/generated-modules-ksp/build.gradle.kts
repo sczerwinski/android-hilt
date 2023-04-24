@@ -86,13 +86,13 @@ dependencies {
 
     // Logback 1.4.x requires Java 11:
     @Suppress("GradleDependency")
-    implementation("ch.qos.logback:logback-classic:1.3.6")
+    implementation("ch.qos.logback:logback-classic:1.3.7")
 
     implementation("androidx.room:room-runtime:2.5.1")
     ksp("androidx.room:room-compiler:2.5.1")
     implementation("androidx.room:room-ktx:2.5.1")
     implementation("androidx.sqlite:sqlite-ktx:2.3.1")
-    implementation("it.czerwinski.android.room:room-extensions:1.2.0")
+    implementation("it.czerwinski.android.room:room-extensions:1.3.0")
 
     implementation("com.squareup.picasso:picasso:2.8")
 
