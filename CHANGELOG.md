@@ -4,6 +4,11 @@
 ### Added
 
 ### Changed
+- Test dependencies:
+  - Upgrade `logback-classic` to `1.4.7`
+- Example dependencies:
+  - Upgrade `room-extensions` to `1.3.0`
+  - Upgrade `logback-classic` to `1.3.7`
 
 ### Deprecated
 
