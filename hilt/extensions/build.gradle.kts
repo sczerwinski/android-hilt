@@ -47,7 +47,7 @@ dependencies {
 
     implementation("com.google.dagger:hilt-android:2.45")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.3")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
     testImplementation("io.mockk:mockk:1.13.5")
     testImplementation("ch.qos.logback:logback-classic:1.4.7")

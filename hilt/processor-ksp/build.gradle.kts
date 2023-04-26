@@ -28,7 +28,7 @@ dependencies {
     implementation("com.squareup:kotlinpoet:1.13.0")
     implementation("com.squareup:kotlinpoet-ksp:1.13.0")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.3")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
     testImplementation("io.mockk:mockk:1.13.5")
     kspTest(project(":hilt:processor-ksp"))
