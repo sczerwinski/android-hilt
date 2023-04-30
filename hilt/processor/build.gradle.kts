@@ -26,8 +26,8 @@ dependencies {
     implementation("com.google.dagger:hilt-core:2.45")
     implementation("com.squareup:javapoet:1.13.0")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.3")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.3")
     testImplementation("io.mockk:mockk:1.13.5")
     testImplementation("ch.qos.logback:logback-classic:1.4.7")
     kaptTest(project(":hilt:processor"))
