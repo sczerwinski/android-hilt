@@ -11,7 +11,7 @@ buildscript {
     }
 
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.20")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.21")
     }
 }
 
@@ -23,8 +23,8 @@ repositories {
 dependencies {
     implementation("com.android.tools.build:gradle:8.0.0")
     implementation("com.android.tools.build:gradle-api:8.0.0")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.20")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.20")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.21")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.21")
     implementation("org.jetbrains.dokka:dokka-core:1.8.10")
     implementation("org.jetbrains.dokka:dokka-gradle-plugin:1.8.10")
     implementation("com.squareup:javapoet:1.13.0") // Workaround for Hilt 2.40.2 issue

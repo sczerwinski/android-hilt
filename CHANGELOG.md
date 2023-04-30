@@ -4,7 +4,12 @@
 ### Added
 
 ### Changed
+- Library dependencies:
+  - Upgrade Kotlin to `1.8.21`
+  - Upgrade KSP to `1.8.21-1.0.11`
 - Test dependencies:
+  - Upgrade JUnit to `5.9.3`
+  - Upgrade `de.mannodermaus.gradle.plugins:android-junit5` to `1.9.3.0`
   - Upgrade `logback-classic` to `1.4.7`
 - Example dependencies:
   - Upgrade `room-extensions` to `1.3.0`
