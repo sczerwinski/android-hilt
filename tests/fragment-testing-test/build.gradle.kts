@@ -57,8 +57,8 @@ kapt {
 }
 
 dependencies {
-    implementation("com.google.dagger:hilt-android:2.45")
-    kapt("com.google.dagger:hilt-android-compiler:2.45")
+    implementation("com.google.dagger:hilt-android:2.46")
+    kapt("com.google.dagger:hilt-android-compiler:2.46")
 
     implementation("androidx.fragment:fragment-ktx:1.5.7")
     implementation("com.google.android.material:material:1.8.0")
@@ -67,8 +67,8 @@ dependencies {
     debugImplementation("androidx.fragment:fragment-testing:1.5.7")
     debugImplementation("androidx.test:monitor:1.6.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.45")
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.45")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.46")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.46")
     debugImplementation(project(":hilt:fragment-testing"))
 }
 
