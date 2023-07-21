@@ -5,6 +5,13 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    groups:
+      hilt:
+        patterns:
+          - "com.google.dagger:hilt*"
+      kotlinpoet:
+        patterns:
+          - "com.squareup:kotlinpoet*"
     ignore:
       - dependency-name: "ch.qos.logback:logback-classic"
         versions: ["1.4.x"]
