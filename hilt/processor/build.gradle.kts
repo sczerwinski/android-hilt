@@ -23,7 +23,7 @@ dependencies {
     implementation(project(":hilt:annotations"))
 
     implementation("androidx.annotation:annotation:1.6.0")
-    implementation("com.google.dagger:hilt-core:2.45")
+    implementation("com.google.dagger:hilt-core:2.47")
     implementation("com.squareup:javapoet:1.13.0")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.3")
