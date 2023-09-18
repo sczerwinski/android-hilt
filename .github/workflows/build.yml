@@ -16,7 +16,7 @@ jobs:
       - name: Fetch Sources
         uses: actions/checkout@v3
       - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v1.0.6
+        uses: gradle/wrapper-validation-action@v1.1.0
 
   properties:
     name: Export Properties
