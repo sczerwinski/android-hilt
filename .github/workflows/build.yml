@@ -51,6 +51,11 @@ jobs:
     name: Run Checks
     needs: gradleValidation
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: read
+      checks: write
+      pull-requests: write
     steps:
       - name: Fetch Sources
         uses: actions/checkout@v3
@@ -88,6 +93,11 @@ jobs:
     name: Run Connected Checks
     needs: gradleValidation
     runs-on: macos-latest
+    permissions:
+      contents: read
+      issues: read
+      checks: write
+      pull-requests: write
     steps:
       - name: Fetch Sources
         uses: actions/checkout@v3
@@ -175,29 +185,6 @@ jobs:
           release_name: v${{ needs.properties.outputs.version }}
           body: ${{ needs.properties.outputs.changelog }}
           draft: true
-
-  publishBuild:
-    name: Publish To Build Directory
-    if: (github.event_name == 'pull_request') || (github.ref != 'refs/heads/main')
-    needs: gradleValidation
-    runs-on: ubuntu-latest
-    steps:
-      - name: Fetch Sources
-        uses: actions/checkout@v3
-      - name: Setup Java
-        uses: actions/setup-java@v3.11.0
-        with:
-          distribution: zulu
-          java-version: 17
-      - name: Decrypt Key Ring File
-        env:
-          FILE_PASSPHRASE: ${{ secrets.FILE_PASSPHRASE }}
-        run: gpg --quiet --batch --yes --decrypt --passphrase="${FILE_PASSPHRASE}" --output secring.gpg secring.gpg.gpg
-      - name: Publish To Build Directory
-        env:
-          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
-          SIGNING_PASS: ${{ secrets.SIGNING_PASS }}
-        run: ./gradlew publish -PlibVersionSuffix="SNAPSHOT" -Psigning.secretKeyRingFile=../../secring.gpg -Psigning.password="${SIGNING_PASS}" -Psigning.keyId="${SIGNING_KEY_ID}" --stacktrace
 
   snapshot:
     name: Publish To OSSRH Snapshot Repository
