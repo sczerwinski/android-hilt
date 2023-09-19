@@ -67,7 +67,7 @@ dependencies {
     debugImplementation("androidx.fragment:fragment-testing:1.5.7")
     debugImplementation("androidx.test:monitor:1.6.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.45")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.48")
     kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.45")
     debugImplementation(project(":hilt:fragment-testing"))
 }
