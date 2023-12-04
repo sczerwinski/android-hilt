@@ -23,7 +23,7 @@ dependencies {
     implementation(project(":hilt:annotations"))
 
     implementation("androidx.annotation:annotation:1.6.0")
-    implementation("com.google.dagger:hilt-core:2.45")
+    implementation("com.google.dagger:hilt-core:2.49")
     implementation("com.google.devtools.ksp:symbol-processing-api:1.8.21-1.0.11")
     implementation("com.squareup:kotlinpoet:1.14.2")
     implementation("com.squareup:kotlinpoet-ksp:1.14.2")
