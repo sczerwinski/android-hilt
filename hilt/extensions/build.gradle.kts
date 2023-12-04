@@ -45,7 +45,7 @@ java.toolchain {
 dependencies {
     api(project(":hilt:annotations"))
 
-    implementation("com.google.dagger:hilt-android:2.45")
+    implementation("com.google.dagger:hilt-android:2.49")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.3")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
