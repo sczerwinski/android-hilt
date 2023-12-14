@@ -1,6 +1,6 @@
 plugins {
     kotlin("jvm")
-    id("com.google.devtools.ksp") version "1.8.21-1.0.11"
+    id("com.google.devtools.ksp") version "1.9.21-1.0.16"
     id("io.gitlab.arturbosch.detekt") version "1.22.0"
     id("org.jetbrains.dokka")
     `maven-publish`
