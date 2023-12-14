@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
-    id("com.google.devtools.ksp") version "1.8.21-1.0.11"
+    id("com.google.devtools.ksp") version "1.9.21-1.0.16"
     id("kotlinx-serialization")
     id("dagger.hilt.android.plugin")
     id("io.gitlab.arturbosch.detekt") version "1.22.0"
