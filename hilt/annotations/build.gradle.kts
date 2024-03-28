@@ -15,7 +15,7 @@ java.toolchain {
 }
 
 dependencies {
-    implementation("com.google.dagger:hilt-core:2.45")
+    implementation("com.google.dagger:hilt-core:2.51")
 }
 
 detekt {
