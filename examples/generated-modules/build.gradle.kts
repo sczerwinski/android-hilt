@@ -1,22 +1,22 @@
 plugins {
-    id("com.android.application")
-    kotlin("android")
-    kotlin("kapt")
-    id("com.google.devtools.ksp") version "1.8.21-1.0.11"
-    id("kotlinx-serialization")
-    id("dagger.hilt.android.plugin")
-    id("io.gitlab.arturbosch.detekt") version "1.22.0"
+    id(libs.plugins.android.application.get().pluginId)
+    id(libs.plugins.kotlin.android.get().pluginId)
+    id(libs.plugins.kotlin.kapt.get().pluginId)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.detekt)
 }
 
 android {
 
-    compileSdk = 33
+    compileSdk = 34
 
     namespace = "it.czerwinski.android.hilt.examples.generated"
 
     defaultConfig {
         minSdk = 26
-        targetSdk = 33
+        targetSdk = 34
 
         applicationId = "it.czerwinski.android.hilt.examples.generated"
 
@@ -61,53 +61,45 @@ kapt {
 }
 
 dependencies {
-    implementation("com.google.dagger:hilt-android:2.45")
-    kapt("com.google.dagger:hilt-android-compiler:2.45")
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
 
     implementation(project(":hilt:extensions"))
     kapt(project(":hilt:processor"))
 
-    implementation("com.google.android.material:material:1.8.0")
+    implementation(libs.material)
 
-    implementation("androidx.activity:activity-ktx:1.7.1")
+    implementation(libs.androidx.activity.ktx)
 
-    implementation("androidx.multidex:multidex:2.0.1")
+    implementation(libs.androidx.multidex)
 
-    implementation("androidx.browser:browser:1.5.0")
+    implementation(libs.androidx.browser)
 
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
+    implementation(libs.bundles.androidx.lifecycle)
 
-    implementation("io.ktor:ktor-client-android:2.3.0")
-    implementation("io.ktor:ktor-client-resources:2.3.0")
-    implementation("io.ktor:ktor-client-content-negotiation:2.3.0")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.0")
-    implementation("io.ktor:ktor-client-logging:2.3.0")
+    implementation(libs.bundles.ktor)
 
-    // Logback 1.4.x requires Java 11:
-    @Suppress("GradleDependency")
-    implementation("ch.qos.logback:logback-classic:1.3.7")
+    implementation(libs.logback.classic)
 
-    implementation("androidx.room:room-runtime:2.5.1")
-    ksp("androidx.room:room-compiler:2.5.1")
-    implementation("androidx.room:room-ktx:2.5.1")
-    implementation("androidx.sqlite:sqlite-ktx:2.3.1")
-    implementation("it.czerwinski.android.room:room-extensions:1.3.0")
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.sqlite.ktx)
+    implementation(libs.czerwinski.android.room)
 
-    implementation("com.squareup.picasso:picasso:2.8")
+    implementation(libs.picasso)
 
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.48")
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.45")
+    androidTestImplementation(libs.hilt.android.testing)
+    kaptAndroidTest(libs.hilt.android.compiler)
 
-    androidTestImplementation("androidx.test:core:1.5.0")
+    androidTestImplementation(libs.androidx.test.core)
 
-    androidTestImplementation("io.ktor:ktor-client-mock:2.3.0")
+    androidTestImplementation(libs.ktor.client.mock)
 
-    androidTestImplementation("it.czerwinski.android:xpresso-core:1.0")
-    androidTestImplementation("it.czerwinski.android:xpresso-recyclerview:1.0")
+    androidTestImplementation(libs.bundles.czerwinski.xpresso)
 }
 
 detekt {
-    config = files("../../config/detekt/detekt.yml")
+    config.from(file("../../config/detekt/detekt.yml"))
     buildUponDefaultConfig  = true
 }

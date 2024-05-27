@@ -34,7 +34,7 @@ private fun DokkaTask.setUpDokkaTask(project: Project, outputDirectoryName: Stri
     val kaptTasks = project.tasks.withType<KaptTask>().toList()
     dependsOn(*kaptTasks.toTypedArray())
     val libDescription: String by project.rootProject
-    outputDirectory.set(project.buildDir.resolve(outputDirectoryName))
+    outputDirectory.set(project.layout.buildDirectory.asFile.get().resolve(outputDirectoryName))
     dokkaSourceSets {
         named("main") {
             moduleName.set(libDescription)

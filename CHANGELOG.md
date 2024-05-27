@@ -4,16 +4,39 @@
 ### Added
 
 ### Changed
+- Define dependencies in TOML file
+- Android SDK:
+  - Change minimum SDK to `19` (to support SDK `16`, use previous version)
+  - Change target SDK to `34`
 - Library dependencies:
-  - Upgrade Kotlin to `1.8.21`
-  - Upgrade KSP to `1.8.21-1.0.11`
+  - Upgrade Kotlin to `2.0.0`
+  - Upgrade Hilt to `2.51.1`
+  - Upgrade Android Gradle Plugin to `8.4.1`
+  - Upgrade KSP to `2.0.0-1.0.21`
+  - Upgrade KotlinPoet to `1.17.0`
+  - Upgrade `androidx.annotation:annotation` to `1.8.0`
+  - Upgrade `activity-ktx` to `1.9.0`
+  - Upgrade `fragment-ktx` to `1.7.1`
 - Test dependencies:
-  - Upgrade JUnit to `5.9.3`
-  - Upgrade `de.mannodermaus.gradle.plugins:android-junit5` to `1.9.3.0`
-  - Upgrade `logback-classic` to `1.4.7`
+  - Upgrade MockK to `1.13.11`
+  - Upgrade JUnit to `5.10.2`
+  - Upgrade `de.mannodermaus.gradle.plugins:android-junit5` to `1.10.0.0`
+  - Upgrade `material` to `1.12.0`
+  - Upgrade `fragment-testing` to `1.7.1`
+  - Upgrade `logback-classic` to `1.5.6`
+- Build dependencies:
+  - Upgrade `io.gitlab.arturbosch.detekt` to `1.23.6`
+  - Upgrade `org.jetbrains.changelog` to `2.2.0`
+  - Upgrade Dokka to `1.9.20`
 - Example dependencies:
+  - Upgrade Ktor Client to `2.3.11`
+  - Upgrade Room to `2.6.1`
   - Upgrade `room-extensions` to `1.3.0`
-  - Upgrade `logback-classic` to `1.3.7`
+  - Upgrade `sqlite-ktx` to `2.4.0`
+  - Upgrade `lifecycle-viewmodel-ktx` to `2.8.0`
+  - Upgrade `lifecycle-livedata-ktx` to `2.8.0`
+  - Upgrade `browser` to `1.8.0`
+  - Upgrade `logback-classic` to `1.5.6`
 
 ### Deprecated
 

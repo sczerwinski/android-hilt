@@ -1,16 +1,16 @@
 plugins {
-    id("com.android.library")
-    kotlin("android")
-    id("de.mannodermaus.android-junit5")
-    id("io.gitlab.arturbosch.detekt") version "1.22.0"
-    id("org.jetbrains.dokka")
+    id(libs.plugins.android.library.get().pluginId)
+    id(libs.plugins.kotlin.android.get().pluginId)
+    alias(libs.plugins.android.junit5)
+    alias(libs.plugins.detekt)
+    id(libs.plugins.dokka.get().pluginId)
     `maven-publish`
     signing
 }
 
 android {
 
-    compileSdk = 33
+    compileSdk = 34
 
     namespace = "it.czerwinski.android.hilt"
 
@@ -45,16 +45,16 @@ java.toolchain {
 dependencies {
     api(project(":hilt:annotations"))
 
-    implementation("com.google.dagger:hilt-android:2.45")
+    implementation(libs.hilt.android)
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.3")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
-    testImplementation("io.mockk:mockk:1.13.5")
-    testImplementation("ch.qos.logback:logback-classic:1.4.7")
+    testImplementation(libs.junit.jupiter.api)
+    testRuntimeOnly(libs.junit.jupiter.engine)
+    testImplementation(libs.mockk)
+    testImplementation(libs.logback.classic)
 }
 
 detekt {
-    config = files("../../config/detekt/detekt.yml")
+    config.from(file("../../config/detekt/detekt.yml"))
     buildUponDefaultConfig  = true
 }
 

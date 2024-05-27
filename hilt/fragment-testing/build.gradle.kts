@@ -1,22 +1,22 @@
 plugins {
-    id("com.android.library")
-    kotlin("android")
-    kotlin("kapt")
-    id("dagger.hilt.android.plugin")
-    id("io.gitlab.arturbosch.detekt") version "1.22.0"
-    id("org.jetbrains.dokka")
+    id(libs.plugins.android.library.get().pluginId)
+    id(libs.plugins.kotlin.android.get().pluginId)
+    id(libs.plugins.kotlin.kapt.get().pluginId)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.detekt)
+    id(libs.plugins.dokka.get().pluginId)
     `maven-publish`
     signing
 }
 
 android {
 
-    compileSdk = 33
+    compileSdk = 34
 
     namespace = "it.czerwinski.android.hilt.fragment.testing"
 
     defaultConfig {
-        minSdk = 16
+        minSdk = 19
     }
 
     buildTypes {
@@ -52,22 +52,23 @@ kapt {
 }
 
 dependencies {
-    implementation("com.google.dagger:hilt-android:2.45")
-    kapt("com.google.dagger:hilt-android-compiler:2.45")
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
 
-    api("androidx.test:core:1.5.0")
-    api("androidx.fragment:fragment-ktx:1.5.7")
-    api("androidx.activity:activity-ktx:1.7.1")
+    api(libs.androidx.test.core)
+    api(libs.androidx.fragment.ktx)
+    api(libs.androidx.activity.ktx)
 }
 
 configurations.all {
     resolutionStrategy {
-        force("androidx.activity:activity-ktx:1.7.1")
+        val activityDependency = libs.androidx.activity.ktx.get()
+        force("${activityDependency.group}:${activityDependency.name}:${activityDependency.version}")
     }
 }
 
 detekt {
-    config = files("../../config/detekt/detekt.yml")
+    config.from(file("../../config/detekt/detekt.yml"))
     buildUponDefaultConfig  = true
 }
 
