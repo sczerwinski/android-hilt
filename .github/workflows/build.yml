@@ -115,7 +115,7 @@ jobs:
       - name: Run Connected Checks On Emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 31
+          api-level: 34
           target: default
           arch: x86_64
           profile: Nexus 6
