@@ -65,7 +65,7 @@ jobs:
           distribution: zulu
           java-version: 17
       - name: Run Unit Tests
-        run: ./gradlew test --stacktrace
+        run: ./gradlew test --continue --stacktrace
       - name: Publish Test Report
         if: ${{ always() }}
         uses: EnricoMi/publish-unit-test-result-action@v2
@@ -121,7 +121,7 @@ jobs:
           profile: Nexus 6
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
-          script: ./gradlew connectedCheck --no-parallel --stacktrace
+          script: ./gradlew connectedCheck --no-parallel --continue --stacktrace
       - name: Publish Android Test Report
         if: ${{ always() }}
         uses: EnricoMi/publish-unit-test-result-action/composite@v2
