@@ -70,6 +70,7 @@ dependencies {
     implementation(libs.material)
 
     implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.fragment.ktx)
 
     implementation(libs.androidx.multidex)
 
