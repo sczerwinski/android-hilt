@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.material)
 
     implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.fragment.ktx)
 
     implementation(libs.androidx.multidex)
 
@@ -89,18 +90,9 @@ dependencies {
 
     androidTestImplementation(libs.androidx.test.core)
 
-    androidTestImplementation(libs.androidx.fragment.ktx)
-
     androidTestImplementation(libs.ktor.client.mock)
 
     androidTestImplementation(libs.bundles.czerwinski.xpresso)
-}
-
-configurations.all {
-    resolutionStrategy {
-        val activityDependency = libs.androidx.activity.ktx.get()
-        force("${activityDependency.group}:${activityDependency.name}:${activityDependency.version}")
-    }
 }
 
 detekt {
