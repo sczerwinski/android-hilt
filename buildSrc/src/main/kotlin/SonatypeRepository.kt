@@ -25,7 +25,7 @@ private const val ENV_SONATYPE_USERNAME = "SONATYPE_USERNAME"
 private const val ENV_SONATYPE_PASSWORD = "SONATYPE_PASSWORD"
 
 fun RepositoryHandler.sonatype(project: Project) {
-    val isSnapshot = project.version.toString().endsWith("SNAPSHOT")
+    val isSnapshot = project.version.toString().endsWith(suffix = "SNAPSHOT")
     maven {
         if (System.getenv(ENV_SONATYPE_USERNAME) != null) {
             url = project.uri(if (isSnapshot) SNAPSHOTS_REPOSITORY_URL else RELEASE_REPOSITORY_URL)
@@ -34,7 +34,7 @@ fun RepositoryHandler.sonatype(project: Project) {
                 password = System.getenv(ENV_SONATYPE_PASSWORD)
             }
         } else {
-            url = project.uri("${project.buildDir}/maven")
+            url = project.uri(project.layout.buildDirectory.asFile.get().resolve(relative = "maven"))
         }
     }
 }

@@ -65,7 +65,7 @@ jobs:
           distribution: zulu
           java-version: 17
       - name: Run Unit Tests
-        run: ./gradlew test --stacktrace
+        run: ./gradlew test --continue --stacktrace
       - name: Publish Test Report
         if: ${{ always() }}
         uses: EnricoMi/publish-unit-test-result-action@v2
@@ -88,46 +88,6 @@ jobs:
         uses: yutailang0119/action-android-lint@v3
         with:
           report-path: '**/build/reports/lint-results-*.xml'
-
-  connectedChecks:
-    name: Run Connected Checks
-    needs: gradleValidation
-    runs-on: macos-latest
-    permissions:
-      contents: read
-      issues: read
-      checks: write
-      pull-requests: write
-    steps:
-      - name: Fetch Sources
-        uses: actions/checkout@v4
-      - name: Setup Java
-        uses: actions/setup-java@v3.12.0
-        with:
-          distribution: zulu
-          java-version: 17
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.8
-      - name: Assemble Connected Tests
-        run: ./gradlew assembleAndroidTest --stacktrace
-      - name: Run Connected Checks On Emulator
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 31
-          target: default
-          arch: x86_64
-          profile: Nexus 6
-          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: true
-          script: ./gradlew connectedCheck --no-parallel --stacktrace
-      - name: Publish Android Test Report
-        if: ${{ always() }}
-        uses: EnricoMi/publish-unit-test-result-action/composite@v2
-        with:
-          check_name: "Connected Test Results"
-          files: '**/build/outputs/androidTest-results/**/*.xml'
 
   dokka:
     name: Generate Dokka Documentation

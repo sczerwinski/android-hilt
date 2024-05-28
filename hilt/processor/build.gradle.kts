@@ -1,8 +1,8 @@
 plugins {
-    kotlin("jvm")
-    kotlin("kapt")
-    id("io.gitlab.arturbosch.detekt") version "1.22.0"
-    id("org.jetbrains.dokka")
+    id(libs.plugins.kotlin.jvm.get().pluginId)
+    id(libs.plugins.kotlin.kapt.get().pluginId)
+    alias(libs.plugins.detekt)
+    id(libs.plugins.dokka.get().pluginId)
     `maven-publish`
     signing
 }
@@ -22,19 +22,19 @@ tasks.withType<Test> {
 dependencies {
     implementation(project(":hilt:annotations"))
 
-    implementation("androidx.annotation:annotation:1.6.0")
-    implementation("com.google.dagger:hilt-core:2.45")
-    implementation("com.squareup:javapoet:1.13.0")
+    implementation(libs.androidx.annotation)
+    implementation(libs.hilt.core)
+    implementation(libs.javapoet)
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.3")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
-    testImplementation("io.mockk:mockk:1.13.5")
-    testImplementation("ch.qos.logback:logback-classic:1.4.7")
+    testImplementation(libs.junit.jupiter.api)
+    testRuntimeOnly(libs.junit.jupiter.engine)
+    testImplementation(libs.mockk)
+    testImplementation(libs.logback.classic)
     kaptTest(project(":hilt:processor"))
 }
 
 detekt {
-    config = files("../../config/detekt/detekt.yml")
+    config.from(file("../../config/detekt/detekt.yml"))
     buildUponDefaultConfig  = true
 }
 

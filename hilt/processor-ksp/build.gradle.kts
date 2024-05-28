@@ -1,8 +1,8 @@
 plugins {
-    kotlin("jvm")
-    id("com.google.devtools.ksp") version "1.8.21-1.0.11"
-    id("io.gitlab.arturbosch.detekt") version "1.22.0"
-    id("org.jetbrains.dokka")
+    id(libs.plugins.kotlin.jvm.get().pluginId)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.detekt)
+    id(libs.plugins.dokka.get().pluginId)
     `maven-publish`
     signing
 }
@@ -22,21 +22,21 @@ tasks.withType<Test> {
 dependencies {
     implementation(project(":hilt:annotations"))
 
-    implementation("androidx.annotation:annotation:1.6.0")
-    implementation("com.google.dagger:hilt-core:2.45")
-    implementation("com.google.devtools.ksp:symbol-processing-api:1.8.21-1.0.11")
-    implementation("com.squareup:kotlinpoet:1.14.2")
-    implementation("com.squareup:kotlinpoet-ksp:1.14.2")
+    implementation(libs.androidx.annotation)
+    implementation(libs.hilt.core)
+    implementation(libs.ksp.api)
+    implementation(libs.kotlinpoet)
+    implementation(libs.kotlinpoet.ksp)
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.3")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
-    testImplementation("io.mockk:mockk:1.13.5")
+    testImplementation(libs.junit.jupiter.api)
+    testRuntimeOnly(libs.junit.jupiter.engine)
+    testImplementation(libs.mockk)
+    testImplementation(libs.logback.classic)
     kspTest(project(":hilt:processor-ksp"))
-    testImplementation("ch.qos.logback:logback-classic:1.4.7")
 }
 
 detekt {
-    config = files("../../config/detekt/detekt.yml")
+    config.from(file("../../config/detekt/detekt.yml"))
     buildUponDefaultConfig  = true
 }
 

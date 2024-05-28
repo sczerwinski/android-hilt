@@ -6,6 +6,11 @@ updates:
     schedule:
       interval: "daily"
     groups:
+      kotlin:
+        patterns:
+          - "org.jetbrains.kotlin:kotlin-*"
+          - "com.google.devtools.ksp"
+          - "com.google.devtools.ksp:*"
       hilt:
         patterns:
           - "com.google.dagger:hilt*"

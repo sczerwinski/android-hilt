@@ -1,20 +1,20 @@
 plugins {
-    id("com.android.application")
-    kotlin("android")
-    kotlin("kapt")
-    id("dagger.hilt.android.plugin")
-    id("io.gitlab.arturbosch.detekt") version "1.22.0"
+    id(libs.plugins.android.application.get().pluginId)
+    id(libs.plugins.kotlin.android.get().pluginId)
+    id(libs.plugins.kotlin.kapt.get().pluginId)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.detekt)
 }
 
 android {
 
-    compileSdk = 33
+    compileSdk = 34
 
     namespace = "it.czerwinski.android.hilt.fragment.testing.tests"
 
     defaultConfig {
-        minSdk = 16
-        targetSdk = 33
+        minSdk = 19
+        targetSdk = 34
 
         applicationId = "it.czerwinski.android.hilt.fragment.testing.tests"
 
@@ -57,22 +57,22 @@ kapt {
 }
 
 dependencies {
-    implementation("com.google.dagger:hilt-android:2.45")
-    kapt("com.google.dagger:hilt-android-compiler:2.45")
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
 
-    implementation("androidx.fragment:fragment-ktx:1.5.7")
-    implementation("com.google.android.material:material:1.8.0")
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.material)
 
-    androidTestImplementation("androidx.test:runner:1.5.2")
-    debugImplementation("androidx.fragment:fragment-testing:1.5.7")
-    debugImplementation("androidx.test:monitor:1.6.1")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.48")
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.45")
+    androidTestImplementation(libs.androidx.test.runner)
+    debugImplementation(libs.androidx.fragment.testing)
+    debugImplementation(libs.androidx.test.monitor)
+    androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.hilt.android.testing)
+    kaptAndroidTest(libs.hilt.android.compiler)
     debugImplementation(project(":hilt:fragment-testing"))
 }
 
 detekt {
-    config = files("../../config/detekt/detekt.yml")
+    config.from(file("../../config/detekt/detekt.yml"))
     buildUponDefaultConfig  = true
 }

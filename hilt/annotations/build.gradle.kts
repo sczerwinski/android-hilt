@@ -1,7 +1,7 @@
 plugins {
-    kotlin("jvm")
-    id("io.gitlab.arturbosch.detekt") version "1.22.0"
-    id("org.jetbrains.dokka")
+    id(libs.plugins.kotlin.jvm.get().pluginId)
+    alias(libs.plugins.detekt)
+    id(libs.plugins.dokka.get().pluginId)
     `maven-publish`
     signing
 }
@@ -15,11 +15,11 @@ java.toolchain {
 }
 
 dependencies {
-    implementation("com.google.dagger:hilt-core:2.45")
+    implementation(libs.hilt.core)
 }
 
 detekt {
-    config = files("../../config/detekt/detekt.yml")
+    config.from(file("../../config/detekt/detekt.yml"))
     buildUponDefaultConfig  = true
 }
 
