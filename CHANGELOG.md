@@ -41,6 +41,8 @@
 ### Deprecated
 
 ### Removed
+- Kapt processor (artifact `it.czerwinski.android.hilt:hilt-processor`).
+  Use KSP processor (artifact `it.czerwinski.android.hilt:hilt-processor-ksp`) instead.
 
 ### Fixed
 
