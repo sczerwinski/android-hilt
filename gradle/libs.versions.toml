@@ -1,7 +1,7 @@
 [versions]
 android = "8.4.1"
 kotlin = "2.0.0"
-ksp = "2.0.0-1.0.21"
+ksp = "2.0.0-1.0.22"
 hilt = "2.51.1"
 javapoet = "1.13.0"
 kotlinpoet = "1.17.0"
